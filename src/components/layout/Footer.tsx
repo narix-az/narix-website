@@ -16,8 +16,8 @@ const companyLinks = [
 ];
 
 const contactLinks = [
-  { href: 'mailto:hello@narix.ai', label: 'hello@narix.ai' },
-  { href: 'tel:+1234567890', label: '+1 (234) 567-890' },
+  { href: 'mailto:info@narix', label: 'info@narix' },
+  { href: 'tel:+1234567890', label: '+994 51 560 06 25' },
   { href: '#', label: 'Privacy Policy' },
   { href: '#', label: 'Terms of Service' },
 ];
