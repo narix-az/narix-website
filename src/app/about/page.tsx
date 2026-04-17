@@ -10,7 +10,21 @@ import CTA from '@/components/sections/CTA';
 export const metadata: Metadata = {
   title: 'About Narix',
   description:
-    'Narix is a senior team of engineers, designers and AI specialists building AI systems that move real numbers — not theatrical demos.',
+    'Narix is a senior team of engineers, designers and AI specialists in Baku, Azerbaijan — building AI systems that move real numbers, not theatrical demos.',
+  alternates: {
+    canonical: 'https://narix.az/about',
+    languages: {
+      en: 'https://narix.az/about',
+      az: 'https://narix.az/about',
+      'x-default': 'https://narix.az/about',
+    },
+  },
+  openGraph: {
+    url: 'https://narix.az/about',
+    title: 'About Narix',
+    description:
+      'A senior team of engineers, designers and AI specialists building AI systems that move real numbers.',
+  },
 };
 
 export default function AboutPage() {

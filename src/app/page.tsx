@@ -13,9 +13,23 @@ import CTA from '@/components/sections/CTA';
 import styles from './home.module.css';
 
 export const metadata: Metadata = {
-  title: 'AI Systems That Run Your Business',
+  title: 'Narix — AI Systems That Run Your Business',
   description:
-    'Narix designs, builds and operates AI systems — workflow automation, AI agents, analytics and modern web platforms — for fast-moving teams.',
+    'Narix designs, builds and operates AI systems — workflow automation, AI agents, analytics and modern web platforms — for fast-moving teams in Azerbaijan and beyond.',
+  alternates: {
+    canonical: 'https://narix.az/',
+    languages: {
+      en: 'https://narix.az/',
+      az: 'https://narix.az/',
+      'x-default': 'https://narix.az/',
+    },
+  },
+  openGraph: {
+    url: 'https://narix.az/',
+    title: 'Narix — AI Systems That Run Your Business',
+    description:
+      'AI workflow automation, AI agents, analytics and modern software — built for fast-moving teams in Azerbaijan and beyond.',
+  },
 };
 
 export default function HomePage() {
