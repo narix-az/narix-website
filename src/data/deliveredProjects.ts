@@ -36,6 +36,7 @@ export const deliveredProjects: DeliveredProjectMeta[] = [
   {
     id: 'maliyye',
     logoUrl: 'https://api.iconify.design/mdi/calculator-variant.svg',
+    link: 'https://faizhesabla.az/',
     accent: 'blue',
   },
   {
