@@ -18,9 +18,9 @@
     box-shadow 0.4s var(--ease-out), padding 0.3s var(--ease-out);
 }
 
-/* Three equal-width flex columns → center column is mathematically centered */
+/* Left & right share equal elastic space; center sizes to its content and
+   stays centered because the two outer columns are mathematically equal. */
 .left,
-.center,
 .right {
   flex: 1 1 0;
   display: flex;
@@ -28,8 +28,14 @@
   min-width: 0;
 }
 
+.center {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .left { justify-content: flex-start; }
-.center { justify-content: center; }
 .right { justify-content: flex-end; gap: 10px; }
 
 .scrolled {
@@ -74,7 +80,11 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
+
+.navLinks li { flex-shrink: 0; }
 
 .link {
   position: relative;
@@ -85,6 +95,7 @@
   text-decoration: none;
   font-size: 0.88rem;
   font-weight: 500;
+  white-space: nowrap;
   transition: color 0.2s;
 }
 
