@@ -470,21 +470,21 @@ const en: Dictionary = {
       {
         text:
           'Narix shipped an AI workflow that replaced 3 full-time roles in our ops team. Six months in, ROI is north of 4×. Honestly the easiest agency we’ve ever worked with.',
-        author: 'Jenny W.',
+        author: 'Cəmilə Həsənova',
         role: 'Head of Operations',
         company: 'Fintech Startup',
       },
       {
         text:
           'Their AI chatbot handles 78% of inbound support automatically — and customers actually like talking to it. The setup was done in two weeks.',
-        author: 'Michael K.',
+        author: 'Kamran Əliyev',
         role: 'E-commerce Director',
         company: 'Retail Group',
       },
       {
         text:
           'We came in with vague ideas about “doing something with AI”. They left us with a roadmap and a working system. Real engineers. Real strategy.',
-        author: 'Thomas A.',
+        author: 'Elçin Mehdiyev',
         role: 'Founder',
         company: 'B2B SaaS',
       },
@@ -893,21 +893,21 @@ const az: Dictionary = {
       {
         text:
           'Narix əməliyyat komandamızda 3 tam-vaxt rolu əvəz edən AI iş axını çatdırdı. Altı ay sonra ROI 4×-dan yuxarıdır. Açığı, indiyə qədər işlədiyimiz ən rahat agentlikdir.',
-        author: 'Jenny W.',
+        author: 'Cəmilə Həsənova',
         role: 'Əməliyyatlar üzrə direktor',
         company: 'Fintex startap',
       },
       {
         text:
           'AI çatbotları daxil olan dəstəyin 78%-ni avtomatik idarə edir — və müştərilər onunla danışmağı sevir. Quraşdırma iki həftədə bitdi.',
-        author: 'Michael K.',
+        author: 'Kamran Əliyev',
         role: 'E-ticarət direktoru',
         company: 'Pərakəndə şirkət',
       },
       {
         text:
           '“AI ilə nəsə etmək” kimi qeyri-müəyyən fikirlərlə gəldik. Onlar bizə yol xəritəsi və işləyən sistem buraxdılar. Real mühəndislər. Real strategiya.',
-        author: 'Thomas A.',
+        author: 'Elçin Mehdiyev',
         role: 'Təsisçi',
         company: 'B2B SaaS',
       },
