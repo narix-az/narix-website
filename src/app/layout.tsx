@@ -132,9 +132,7 @@ export const metadata: Metadata = {
     apple: '/icon.svg',
   },
   verification: {
-    // TODO: Replace with your Google Search Console verification string.
-    // Get it from: https://search.google.com/search-console → Add property (narix.az) → HTML tag method → copy the content="..." value.
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+    google: 'zzQIK4SsofBP1Ihps46_HE26vWbs4KBgtTo_M9ezQAE',
   },
 };
 
