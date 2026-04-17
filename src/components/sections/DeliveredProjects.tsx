@@ -212,10 +212,12 @@ export default function DeliveredProjects({
                 <button
                   type="button"
                   onClick={() => setSelectedId(p.id)}
-                  className={`${styles.card} ${styles[`accentBorder-${p.accent ?? 'violet'}`]}`}
+                  className={`${styles.card} ${styles[`accentBorder-${p.accent ?? 'violet'}`]} u-conic-host u-hover-sheen`}
                 >
                   <span className={styles.cardGlow} aria-hidden />
                   <span className={styles.cardSpotlight} aria-hidden />
+                  <span className="u-conic-border" aria-hidden />
+                  <span className="u-sheen" aria-hidden />
 
                   <div className={styles.cardTop}>
                     <ProjectLogo meta={p} name={content.name} />

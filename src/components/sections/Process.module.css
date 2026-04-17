@@ -59,16 +59,45 @@
 }
 
 .step .card {
-  padding: 22px 26px;
+  position: relative;
+  padding: 24px 28px;
   border-radius: var(--radius-lg);
   background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.012)),
-    rgba(13, 18, 33, 0.55);
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.012)),
+    rgba(13, 18, 33, 0.6);
   border: 1px solid var(--border);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   max-width: 420px;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    transform 0.5s var(--ease-out),
+    border-color 0.5s var(--ease-out),
+    box-shadow 0.6s var(--ease-out);
 }
+
+.step .card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(140deg, rgba(255,255,255,0.14), transparent 45%, rgba(34, 211, 238, 0.10));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity 0.5s var(--ease-out);
+}
+
+.step .card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: 0 30px 80px -40px rgba(138, 92, 255, 0.55);
+}
+.step .card:hover::before { opacity: 1; }
 
 .left .card { justify-self: end; margin-right: 36px; text-align: right; }
 .right .card { justify-self: start; margin-left: 36px; }
@@ -126,12 +155,24 @@
   z-index: 2;
 }
 
+.dot::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(138, 92, 255, 0.45), transparent 65%);
+  animation: glowPulse 2.8s var(--ease-in-out) infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .dot span {
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--grad-brand);
   box-shadow: 0 0 14px rgba(138, 92, 255, 0.8);
+  animation: glowPulse 2.8s var(--ease-in-out) infinite;
 }
 
 /* Mobile: collapse to single column with rail on the left */

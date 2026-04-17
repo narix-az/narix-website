@@ -10,6 +10,7 @@ interface RevealProps {
   className?: string;
   once?: boolean;
   duration?: number;
+  blur?: boolean;
 }
 
 export default function Reveal({
@@ -19,13 +20,18 @@ export default function Reveal({
   className,
   once = true,
   duration = 0.7,
+  blur = true,
 }: RevealProps) {
   const reduced = useReducedMotion();
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: reduced ? 0 : y }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{
+        opacity: 0,
+        y: reduced ? 0 : y,
+        filter: !reduced && blur ? 'blur(10px)' : 'blur(0px)',
+      }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once, amount: 0.2 }}
       transition={{
         duration,

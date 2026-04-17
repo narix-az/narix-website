@@ -60,6 +60,8 @@ export default function Testimonials() {
               className={`${styles.card} ${styles[`accent-${accent}`]}`}
             >
               <span className={styles.borderOverlay} aria-hidden />
+              <span className={`u-orb ${styles.orbA}`} aria-hidden />
+              <span className={`u-orb ${styles.orbB}`} aria-hidden />
               <QuoteIcon />
               <blockquote className={styles.quote}>“{item.text}”</blockquote>
               <figcaption className={styles.author}>

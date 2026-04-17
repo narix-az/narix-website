@@ -15,7 +15,7 @@ export default function Footer() {
   ];
 
   const contactLinks = [
-    { href: 'mailto:hello@narix.ai', label: 'hello@narix.ai' },
+    { href: 'mailto:hello@narix.az', label: 'hello@narix.az' },
     { href: 'tel:+994515600625', label: '+994 51 560 06 25' },
   ];
 

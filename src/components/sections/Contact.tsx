@@ -31,7 +31,7 @@ export default function Contact() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
 
   const channels = [
-    { label: t.channels.email, value: 'hello@narix.ai', href: 'mailto:hello@narix.ai', icon: 'mail' },
+    { label: t.channels.email, value: 'hello@narix.az', href: 'mailto:hello@narix.az', icon: 'mail' },
     { label: t.channels.whatsapp, value: '+994 51 560 06 25', href: 'https://wa.me/994515600625', icon: 'whatsapp' },
     { label: t.channels.location, value: t.locationValue, href: '#', icon: 'pin' },
   ];

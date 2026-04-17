@@ -56,10 +56,17 @@ export default function Stats() {
       <div className="container">
         <Reveal>
           <div className={styles.bar}>
+            <span className={`u-orb ${styles.orbA}`} aria-hidden />
+            <span className={`u-orb ${styles.orbB}`} aria-hidden />
+            <span className={styles.runner} aria-hidden />
+
             {numerics.map((n, i) => {
               const labels = t[i];
               return (
                 <div key={i} className={styles.item} style={{ animationDelay: `${i * 0.1}s` }}>
+                  <span className={styles.itemIndex} aria-hidden>
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
                   <Counter stat={n} />
                   <div className={styles.label}>{labels?.label}</div>
                   {labels?.helper && <div className={styles.helper}>{labels.helper}</div>}

@@ -193,7 +193,7 @@ const en: Dictionary = {
     agentName: 'Narix Agent',
     online: 'online',
     statusLive: '● live',
-    botName: 'narix.ai',
+    botName: 'narix.az',
     userMessage: 'Generate this week’s sales report and email the team.',
     botMessage:
       'Pulled 1,284 orders from Shopify, computed 14 KPIs and drafted a summary. Sending now to 6 recipients...',
@@ -615,7 +615,7 @@ const az: Dictionary = {
     agentName: 'Narix Agent',
     online: 'onlayn',
     statusLive: '● aktiv',
-    botName: 'narix.ai',
+    botName: 'narix.az',
     userMessage:
       'Bu həftənin satış hesabatını hazırla və komandaya e-poçt göndər.',
     botMessage:

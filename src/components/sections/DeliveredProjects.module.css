@@ -77,8 +77,12 @@
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   border-color: var(--border-strong);
+}
+
+.card:hover .logo {
+  transform: scale(1.06) rotate(-3deg);
 }
 
 .cardGlow {
@@ -208,6 +212,7 @@
   color: #fff;
   border: 1px solid var(--border-strong);
   background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.55s var(--ease-out), box-shadow 0.55s var(--ease-out);
 }
 
 .logoImg {

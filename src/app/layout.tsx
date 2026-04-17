@@ -5,6 +5,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Orbs from '@/components/shared/Orbs';
 import SmoothScroll from '@/components/shared/SmoothScroll';
+import ScrollProgress from '@/components/shared/ScrollProgress';
 import { LanguageProvider } from '@/i18n/LanguageProvider';
 
 const manrope = Manrope({
@@ -21,7 +22,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://narix.ai'),
+  metadataBase: new URL('https://narix.az'),
   title: {
     default: 'Narix — AI Systems That Run Your Business',
     template: '%s · Narix',
@@ -72,6 +73,7 @@ export default function RootLayout({
       <body>
         <LanguageProvider>
           <SmoothScroll>
+            <ScrollProgress />
             <Orbs />
             <Navbar />
             <main>{children}</main>

@@ -64,7 +64,13 @@
 .channel:hover {
   background: rgba(255, 255, 255, 0.06);
   border-color: var(--border-strong);
-  transform: translateX(2px);
+  transform: translateX(4px);
+  box-shadow: 0 14px 40px -20px rgba(138, 92, 255, 0.45);
+}
+
+.channel:hover .channelIcon {
+  transform: scale(1.08) rotate(-6deg);
+  box-shadow: 0 0 24px rgba(138, 92, 255, 0.4);
 }
 
 .channelIcon {
@@ -77,6 +83,7 @@
   background: linear-gradient(135deg, rgba(138, 92, 255, 0.25), rgba(34, 211, 238, 0.10));
   border: 1px solid rgba(138, 92, 255, 0.35);
   color: #c4b5fd;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
 .channelIcon svg { width: 20px; height: 20px; }
 
@@ -122,6 +129,7 @@
   background: radial-gradient(circle, rgba(138, 92, 255, 0.3), transparent 60%);
   filter: blur(60px);
   pointer-events: none;
+  animation: glowPulse 9s var(--ease-in-out) infinite;
 }
 
 .formBorder {

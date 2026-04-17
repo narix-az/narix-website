@@ -13,6 +13,8 @@ export default function CTA() {
       <div className="container">
         <Reveal y={36}>
           <div className={styles.panel}>
+            <span className={styles.aurora} aria-hidden />
+            <span className={styles.grid} aria-hidden />
             <span className={styles.glowA} aria-hidden />
             <span className={styles.glowB} aria-hidden />
             <span className={styles.borderOverlay} aria-hidden />

@@ -55,9 +55,14 @@ export default function About() {
         <div className={styles.grid}>
           {t.pillars.map((p, i) => (
             <Reveal key={p.label} delay={i * 0.08} y={32}>
-              <div className={styles.card}>
+              <div className={`${styles.card} u-conic-host u-hover-sheen`}>
                 <span className={styles.borderOverlay} aria-hidden />
-                <div className={styles.icon}>{icons[iconKeys[i] ?? 'mission']}</div>
+                <span className="u-conic-border" aria-hidden />
+                <span className="u-sheen" aria-hidden />
+                <div className={styles.icon}>
+                  <span className={styles.iconGlow} aria-hidden />
+                  {icons[iconKeys[i] ?? 'mission']}
+                </div>
                 <span className={styles.label}>{p.label}</span>
                 <h3>{p.title}</h3>
                 <p>{p.desc}</p>

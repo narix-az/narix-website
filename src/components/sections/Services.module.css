@@ -52,7 +52,7 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 28px;
+  padding: 30px 28px 28px;
   border-radius: var(--radius-lg);
   background:
     linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.012)),
@@ -63,12 +63,19 @@
   isolation: isolate;
   overflow: hidden;
   height: 100%;
-  transition: transform 0.5s var(--ease-out), border-color 0.5s var(--ease-out);
+  transition:
+    transform 0.5s var(--ease-out),
+    border-color 0.5s var(--ease-out),
+    box-shadow 0.6s var(--ease-out);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   border-color: var(--border-strong);
+  box-shadow:
+    0 30px 80px -40px rgba(138, 92, 255, 0.6),
+    0 1px 0 rgba(255,255,255,0.04) inset;
 }
 
 .spot {
@@ -123,9 +130,72 @@
   transition: transform 0.4s var(--ease-out);
 }
 
-.card:hover .iconWrap { transform: scale(1.05) rotate(-3deg); }
+.card:hover .iconWrap {
+  transform: scale(1.08) rotate(-4deg);
+  border-color: rgba(255, 255, 255, 0.22);
+}
 
-.iconWrap svg { width: 26px; height: 26px; }
+.iconWrap { position: relative; overflow: visible; }
+.iconWrap svg { width: 26px; height: 26px; position: relative; z-index: 2; }
+
+.iconGlow {
+  position: absolute;
+  inset: -4px;
+  border-radius: 18px;
+  background: radial-gradient(circle, rgba(138, 92, 255, 0.55), transparent 70%);
+  filter: blur(14px);
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.5s var(--ease-out);
+}
+.card:hover .iconGlow { opacity: 1; }
+
+.accent-blue .iconGlow { background: radial-gradient(circle, rgba(77, 123, 255, 0.55), transparent 70%); }
+.accent-cyan .iconGlow { background: radial-gradient(circle, rgba(34, 211, 238, 0.55), transparent 70%); }
+
+/* Corner number badge */
+.numBadge {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-family: var(--font-head);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--muted-2);
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  transition: color 0.4s, background 0.4s, border-color 0.4s;
+}
+.card:hover .numBadge {
+  color: #fff;
+  background: linear-gradient(135deg, rgba(138, 92, 255, 0.18), rgba(34, 211, 238, 0.12));
+  border-color: rgba(138, 92, 255, 0.4);
+}
+
+/* Hover arrow */
+.arrow {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(138, 92, 255, 0.3), rgba(34, 211, 238, 0.2));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  transform: translate3d(-6px, 6px, 0) scale(0.8);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+}
+.arrow svg { width: 14px; height: 14px; }
+.card:hover .arrow { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 
 .accent-violet .iconWrap {
   background: linear-gradient(135deg, rgba(138, 92, 255, 0.25), rgba(77, 123, 255, 0.10));

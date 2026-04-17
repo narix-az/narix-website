@@ -76,17 +76,26 @@ function ServiceCard({
     el.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
   };
 
+  const numLabel = String(index + 1).padStart(2, '0');
+
   return (
     <Reveal delay={(index % 3) * 0.08} y={32}>
       <div
         ref={ref}
         onMouseMove={onMove}
-        className={`${styles.card} ${styles[`accent-${accent}`]}`}
+        className={`${styles.card} ${styles[`accent-${accent}`]} u-conic-host u-hover-sheen`}
       >
         <span className={styles.spot} aria-hidden />
         <span className={styles.borderOverlay} aria-hidden />
+        <span className="u-conic-border" aria-hidden />
+        <span className="u-sheen" aria-hidden />
 
-        <div className={styles.iconWrap}>{iconPaths[iconKey]}</div>
+        <span className={styles.numBadge} aria-hidden>{numLabel}</span>
+
+        <div className={styles.iconWrap}>
+          <span className={styles.iconGlow} aria-hidden />
+          {iconPaths[iconKey]}
+        </div>
         <h3 className={styles.cardTitle}>{service.title}</h3>
         <p className={styles.cardDesc}>{service.description}</p>
         <div className={styles.tags}>
@@ -94,6 +103,12 @@ function ServiceCard({
             <span key={tag} className={styles.tag}>{tag}</span>
           ))}
         </div>
+
+        <span className={styles.arrow} aria-hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M5 12h14M13 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
       </div>
     </Reveal>
   );
