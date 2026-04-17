@@ -1,173 +1,165 @@
 'use client';
 
-import { useRef, useEffect, useCallback, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { DeliveredProject } from '@/data/deliveredProjects';
+import type { DeliveredProjectMeta } from '@/data/deliveredProjects';
+import Reveal from '@/components/ui/Reveal';
+import { useT } from '@/i18n/LanguageProvider';
+import type { ProjectContent } from '@/i18n/types';
 import styles from './DeliveredProjects.module.css';
 
 interface DeliveredProjectsProps {
-  projects: DeliveredProject[];
+  projects: DeliveredProjectMeta[];
   title?: string;
+  eyebrow?: string;
+  description?: string;
 }
 
-function ProjectPlaceholder({ name }: { name: string }) {
+function ProjectLogo({
+  meta,
+  name,
+}: {
+  meta: DeliveredProjectMeta;
+  name: string;
+}) {
+  const [error, setError] = useState(false);
   const initials = name
     .split(' ')
     .map((w) => w[0])
     .join('')
     .slice(0, 2)
     .toUpperCase();
-  return <span className={styles.logoPlaceholder}>{initials}</span>;
-}
 
-function ProjectLogo({ project }: { project: DeliveredProject }) {
-  const [imgError, setImgError] = useState(false);
   return (
-    <div className={styles.logoWrap}>
-      {!imgError && (
+    <div className={`${styles.logo} ${styles[`accent-${meta.accent ?? 'violet'}`]}`}>
+      {!error ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
-          src={project.logoUrl}
-          alt={`${project.name} logo`}
+          src={meta.logoUrl}
+          alt=""
           className={styles.logoImg}
-          onError={() => setImgError(true)}
+          onError={() => setError(true)}
         />
+      ) : (
+        <span>{initials}</span>
       )}
-      {imgError && <ProjectPlaceholder name={project.name} />}
     </div>
   );
 }
 
-function ExternalIcon() {
-  return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
-      <polyline points="15 3 21 3 21 9" />
-      <line x1="10" y1="14" x2="21" y2="3" />
-    </svg>
-  );
-}
-
-function ChevronLeft() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <polyline points="15 18 9 12 15 6" />
-    </svg>
-  );
-}
-
-function ChevronRight() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <polyline points="9 18 15 12 9 6" />
-    </svg>
-  );
-}
-
-const backdropVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-  exit: { opacity: 0 },
-};
-
-const modalVariants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.95,
-    y: 8,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-  },
-  exit: {
-    opacity: 0,
-    scale: 0.95,
-    y: 8,
-  },
-};
-
 const transition = {
-  duration: 0.2,
-  ease: [0.25, 0.46, 0.45, 0.94],
+  duration: 0.35,
+  ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
 };
 
 function ProjectModal({
-  project,
+  meta,
+  content,
+  labels,
   onClose,
 }: {
-  project: DeliveredProject;
+  meta: DeliveredProjectMeta;
+  content: ProjectContent;
+  labels: { highlights: string; keyNumbers: string; visit: string; close: string };
   onClose: () => void;
 }) {
-  const backdropRef = useRef<HTMLDivElement>(null);
-
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === backdropRef.current) onClose();
-  };
-
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', handleKeyDown);
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
+    document.addEventListener('keydown', onKey);
     document.body.style.overflow = 'hidden';
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', onKey);
       document.body.style.overflow = '';
     };
   }, [onClose]);
 
   return (
     <motion.div
-      ref={backdropRef}
       className={styles.modalBackdrop}
-      onClick={handleBackdropClick}
+      onClick={onClose}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.25 }}
       role="dialog"
       aria-modal="true"
-      aria-labelledby="modal-title"
-      variants={backdropVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      transition={transition}
+      aria-labelledby="project-modal-title"
     >
       <motion.div
         className={styles.modal}
-        variants={modalVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        transition={transition}
         onClick={(e) => e.stopPropagation()}
+        initial={{ opacity: 0, scale: 0.96, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.96, y: 12 }}
+        transition={transition}
       >
         <button
           type="button"
           onClick={onClose}
           className={styles.modalClose}
-          aria-label="Close"
+          aria-label={labels.close}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
-        <div className={styles.modalLogoWrap}>
-          <ProjectLogo project={project} />
+
+        <div className={styles.modalHead}>
+          <ProjectLogo meta={meta} name={content.name} />
+          <div>
+            <span className={styles.modalCategory}>{content.category}</span>
+            <h2 id="project-modal-title" className={styles.modalTitle}>
+              {content.name}
+            </h2>
+          </div>
         </div>
-        <h2 id="modal-title" className={styles.modalTitle}>
-          {project.name}
-        </h2>
-        <p className={styles.modalDesc}>{project.description}</p>
-        {project.link && (
+
+        <p className={styles.modalDesc}>{content.description}</p>
+
+        {content.stats && content.stats.length > 0 && (
+          <div className={styles.modalSection}>
+            <h3 className={styles.modalSubtitle}>{labels.keyNumbers}</h3>
+            <div className={styles.statRow}>
+              {content.stats.map((s) => (
+                <div key={s.label} className={styles.statItem}>
+                  <span className={styles.statValue}>{s.value}</span>
+                  <span className={styles.statLabel}>{s.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className={styles.modalSection}>
+          <h3 className={styles.modalSubtitle}>{labels.highlights}</h3>
+          <ul className={styles.featureList}>
+            {content.features.map((f) => (
+              <li key={f}>
+                <CheckIcon />
+                <span>{f}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={styles.modalTags}>
+          {content.tags.map((t) => (
+            <span key={t} className={styles.tagPill}>
+              {t}
+            </span>
+          ))}
+        </div>
+
+        {meta.link && (
           <a
-            href={project.link}
+            href={meta.link}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.modalLink}
+            className={styles.modalCta}
           >
-            View project
+            {labels.visit}
             <ExternalIcon />
           </a>
         )}
@@ -178,110 +170,127 @@ function ProjectModal({
 
 export default function DeliveredProjects({
   projects,
-  title = "Projects We've Delivered",
+  title,
+  eyebrow,
+  description,
 }: DeliveredProjectsProps) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [selectedProject, setSelectedProject] = useState<DeliveredProject | null>(null);
-  const itemWidth = 200;
-  const gap = 24;
+  const t = useT();
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const close = useCallback(() => setSelectedId(null), []);
 
-  const scrollTo = useCallback(
-    (delta: number) => {
-      const track = trackRef.current;
-      if (!track) return;
-      const step = itemWidth + gap;
-      track.scrollBy({ left: delta * step, behavior: 'smooth' });
-    },
-    [itemWidth, gap]
-  );
+  const selected = useMemo(() => {
+    if (!selectedId) return null;
+    const meta = projects.find((p) => p.id === selectedId);
+    const content = t.delivered.projects[selectedId];
+    if (!meta || !content) return null;
+    return { meta, content };
+  }, [selectedId, projects, t.delivered.projects]);
 
-  const openModal = useCallback((project: DeliveredProject) => {
-    setSelectedProject(project);
-  }, []);
-
-  const closeModal = useCallback(() => {
-    setSelectedProject(null);
-  }, []);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track || projects.length === 0) return;
-
-    let animationId: number;
-    const scroll = () => {
-      const threshold = track.scrollWidth / 2;
-      if (track.scrollLeft >= threshold - 1) {
-        track.scrollLeft = 0;
-      } else {
-        track.scrollLeft += 0.25;
-      }
-      animationId = requestAnimationFrame(scroll);
-    };
-    animationId = requestAnimationFrame(scroll);
-    return () => cancelAnimationFrame(animationId);
-  }, [projects.length]);
-
-  const duplicated = [...projects, ...projects];
+  const readCase = t.common.readCase;
 
   return (
     <section id="delivered-projects" className={styles.section}>
       <div className="container">
-        <div className={styles.header}>
-          <h2 className={styles.title}>{title}</h2>
-          <div className={styles.arrows}>
-            <button
-              type="button"
-              onClick={() => scrollTo(-1)}
-              className={styles.arrow}
-              aria-label="Previous projects"
-            >
-              <ChevronLeft />
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollTo(1)}
-              className={styles.arrow}
-              aria-label="Next projects"
-            >
-              <ChevronRight />
-            </button>
-          </div>
-        </div>
-        <div className={styles.trackWrap}>
-          <div
-            ref={trackRef}
-            className={styles.track}
-            role="region"
-            aria-label="Delivered projects"
-          >
-            {duplicated.map((project, i) => (
-              <button
-                key={`${project.id}-${i}`}
-                type="button"
-                onClick={() => openModal(project)}
-                className={styles.card}
-                disabled={!!selectedProject}
-              >
-                <ProjectLogo project={project} />
-                <span className={styles.name}>{project.name}</span>
-              </button>
-            ))}
-          </div>
+        <header className={styles.header}>
+          <Reveal>
+            <span className="eyebrow">{eyebrow ?? t.delivered.eyebrow}</span>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className={styles.title}>{title ?? t.delivered.title}</h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className={styles.desc}>{description ?? t.delivered.desc}</p>
+          </Reveal>
+        </header>
+
+        <div className={styles.grid}>
+          {projects.map((p, i) => {
+            const content = t.delivered.projects[p.id];
+            if (!content) return null;
+            return (
+              <Reveal key={p.id} delay={(i % 3) * 0.08} y={36}>
+                <button
+                  type="button"
+                  onClick={() => setSelectedId(p.id)}
+                  className={`${styles.card} ${styles[`accentBorder-${p.accent ?? 'violet'}`]}`}
+                >
+                  <span className={styles.cardGlow} aria-hidden />
+                  <span className={styles.cardSpotlight} aria-hidden />
+
+                  <div className={styles.cardTop}>
+                    <ProjectLogo meta={p} name={content.name} />
+                    <span className={styles.cardCategory}>{content.category}</span>
+                  </div>
+
+                  <h3 className={styles.cardTitle}>{content.name}</h3>
+                  <p className={styles.cardDesc}>{content.shortDescription}</p>
+
+                  <div className={styles.cardFooter}>
+                    <div className={styles.cardTags}>
+                      {content.tags.slice(0, 2).map((tag) => (
+                        <span key={tag} className={styles.tagPill}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <span className={styles.cardCta}>
+                      {readCase}
+                      <ArrowIcon />
+                    </span>
+                  </div>
+                </button>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
+
       {typeof document !== 'undefined' &&
         createPortal(
-          <AnimatePresence mode="wait">
-            {selectedProject && (
+          <AnimatePresence>
+            {selected && (
               <ProjectModal
-                key={selectedProject.id}
-                project={selectedProject}
-                onClose={closeModal}
+                key={selected.meta.id}
+                meta={selected.meta}
+                content={selected.content}
+                labels={{
+                  highlights: t.delivered.highlights,
+                  keyNumbers: t.delivered.keyNumbers,
+                  visit: t.common.visitProject,
+                  close: t.common.close,
+                }}
+                onClose={close}
               />
             )}
           </AnimatePresence>,
           document.body
         )}
     </section>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+      <polyline points="20 6 9 17 4 12" />
+    </svg>
+  );
+}
+
+function ArrowIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+      <path d="M5 12h14M13 5l7 7-7 7" />
+    </svg>
+  );
+}
+
+function ExternalIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" />
+      <polyline points="15 3 21 3 21 9" />
+      <line x1="10" y1="14" x2="21" y2="3" />
+    </svg>
   );
 }

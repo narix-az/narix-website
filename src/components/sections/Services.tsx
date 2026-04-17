@@ -1,70 +1,52 @@
-import React from 'react';
+'use client';
+
+import React, { useRef, type MouseEvent } from 'react';
+import Reveal from '@/components/ui/Reveal';
+import { useT } from '@/i18n/LanguageProvider';
+import type { ServiceContent } from '@/i18n/types';
 import styles from './Services.module.css';
 
-const services = [
-  {
-    title: 'AI & Workflow Automation',
-    description:
-      'Streamline operations with intelligent automation. We design and deploy AI systems that eliminate repetitive tasks, optimize processes, and scale your business efficiently.',
-    tags: ['Automation', 'RPA', 'Workflows'],
-    icon: 'automation',
-  },
-  {
-    title: 'AI Chatbots & Customer Support',
-    description:
-      'Transform customer engagement with smart chatbots and AI-powered support systems. Deliver 24/7 assistance, reduce response times, and improve satisfaction.',
-    tags: ['Chatbot', 'NLP', 'LLM'],
-    icon: 'chatbot',
-  },
-  {
-    title: 'AI Content & Branding',
-    description:
-      'From design and visuals to ad campaigns, leverage AI for compelling content creation. We build brand assets, marketing materials, and creative solutions that resonate.',
-    tags: ['Design', 'Ads', 'Branding'],
-    icon: 'content',
-  },
-  {
-    title: 'Business Analytics & AI Insights',
-    description:
-      'Turn data into decisions. Our analytics and AI solutions uncover patterns, forecast trends, and deliver actionable insights that drive growth.',
-    tags: ['Analytics', 'ML', 'Forecasting'],
-    icon: 'analytics',
-  },
-  {
-    title: 'Web Development & Digital Solutions',
-    description:
-      'Modern, scalable web applications and digital platforms. From enterprise portals to customer-facing apps, we deliver solutions built for the future.',
-    tags: ['Web', 'API', 'Cloud'],
-    icon: 'web',
-  },
-];
+const iconKeys = ['automation', 'chatbot', 'analytics', 'web', 'content', 'strategy'] as const;
+const accentMap = ['violet', 'blue', 'cyan', 'violet', 'cyan', 'blue'] as const;
 
 const iconPaths: Record<string, React.ReactElement> = {
   automation: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <rect x="3" y="3" width="7" height="7" rx="1.5" />
+      <rect x="14" y="3" width="7" height="7" rx="1.5" />
+      <rect x="3" y="14" width="7" height="7" rx="1.5" />
+      <rect x="14" y="14" width="7" height="7" rx="1.5" />
+      <path d="M10 6.5h4M10 17.5h4M6.5 10v4M17.5 10v4" />
     </svg>
   ),
   chatbot: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <rect x="3" y="6" width="18" height="13" rx="3" />
+      <path d="M12 3v3M8 12h.01M16 12h.01M9 16h6" />
     </svg>
   ),
   content: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <rect x="2" y="3" width="20" height="14" rx="2" />
-      <path d="M8 21h8M12 17v4" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <path d="M12 2l2.4 5.4L20 9l-4 3.8.9 5.6L12 15.7 7.1 18.4 8 12.8 4 9l5.6-1.6L12 2z" />
     </svg>
   ),
   analytics: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M18 20V10M12 20V4M6 20v-6" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <path d="M3 17l6-6 4 4 8-8" />
+      <path d="M14 7h7v7" />
     </svg>
   ),
   web: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <circle cx="12" cy="12" r="10" />
-      <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <rect x="3" y="4" width="18" height="14" rx="2" />
+      <path d="M3 9h18M7 14h4" />
+    </svg>
+  ),
+  strategy: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
     </svg>
   ),
 };
@@ -73,38 +55,83 @@ interface ServicesProps {
   variant?: 'full' | 'preview';
 }
 
+function ServiceCard({
+  service,
+  iconKey,
+  accent,
+  index,
+}: {
+  service: ServiceContent;
+  iconKey: string;
+  accent: string;
+  index: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const onMove = (e: MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
+    el.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
+  };
+
+  return (
+    <Reveal delay={(index % 3) * 0.08} y={32}>
+      <div
+        ref={ref}
+        onMouseMove={onMove}
+        className={`${styles.card} ${styles[`accent-${accent}`]}`}
+      >
+        <span className={styles.spot} aria-hidden />
+        <span className={styles.borderOverlay} aria-hidden />
+
+        <div className={styles.iconWrap}>{iconPaths[iconKey]}</div>
+        <h3 className={styles.cardTitle}>{service.title}</h3>
+        <p className={styles.cardDesc}>{service.description}</p>
+        <div className={styles.tags}>
+          {service.tags.map((tag) => (
+            <span key={tag} className={styles.tag}>{tag}</span>
+          ))}
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
 export default function Services({ variant = 'full' }: ServicesProps) {
-  const displayServices = variant === 'preview' ? services.slice(0, 3) : services;
+  const t = useT();
+  const list = t.services.list;
+  const display = variant === 'preview' ? list.slice(0, 3) : list;
 
   return (
     <section id="services" className={styles.section}>
       <div className="container">
-        <div className={styles.header}>
-          <div className={styles.tag}>Services</div>
-          <h2 className={styles.title}>
-            AI-Powered Solutions for
-            <br />
-            Tomorrow&apos;s Business
-          </h2>
-          <p className={styles.desc}>
-            Custom AI solutions tailored to your needs — smarter decisions,
-            streamlined operations, and measurable growth.
-          </p>
-        </div>
+        <header className={styles.header}>
+          <Reveal>
+            <span className="eyebrow">{t.services.eyebrow}</span>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className={styles.title}>
+              {t.services.titleStart}
+              <br />
+              <span className="gradient-text">{t.services.titleAccent}</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className={styles.desc}>{t.services.desc}</p>
+          </Reveal>
+        </header>
+
         <div className={styles.grid}>
-          {displayServices.map((service) => (
-            <div key={service.title} className={styles.card}>
-              <div className={styles.icon}>{iconPaths[service.icon]}</div>
-              <h3>{service.title}</h3>
-              <p>{service.description}</p>
-              <div className={styles.tags}>
-                {service.tags.map((tag) => (
-                  <span key={tag} className={styles.tagItem}>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
+          {display.map((s, i) => (
+            <ServiceCard
+              key={s.title}
+              service={s}
+              iconKey={iconKeys[i] ?? 'automation'}
+              accent={accentMap[i] ?? 'violet'}
+              index={i}
+            />
           ))}
         </div>
       </div>

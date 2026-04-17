@@ -1,96 +1,152 @@
 .section {
-  padding: 100px 0;
-  background: var(--bg2);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
   position: relative;
-  z-index: 1;
+  padding: 120px 0;
+  z-index: 2;
 }
 
 .header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-}
-
-.tag {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 16px;
+  gap: 18px;
+  margin-bottom: 64px;
 }
 
 .title {
   font-family: var(--font-head);
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
+  font-weight: 700;
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
   line-height: 1.1;
-  letter-spacing: -0.02em;
-  color: var(--white);
-  margin-bottom: 20px;
+  letter-spacing: -0.035em;
+  color: #fff;
+  margin: 0;
+  max-width: 760px;
 }
 
-.steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+/* ---------- Timeline ---------- */
+.timeline {
   position: relative;
-  margin-top: 60px;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 20px 0;
 }
 
-.steps::before {
-  content: '';
+.rail {
   position: absolute;
-  top: 28px;
-  left: calc(12.5% + 16px);
-  right: calc(12.5% + 16px);
-  height: 1px;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  opacity: 0.3;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: linear-gradient(180deg, transparent, var(--border-strong) 8%, var(--border-strong) 92%, transparent);
+  transform: translateX(-50%);
 }
 
-.stepItem {
-  text-align: center;
+.railFill {
+  display: block;
+  width: 100%;
+  background: var(--grad-brand);
+  border-radius: 999px;
+  box-shadow: 0 0 18px rgba(138, 92, 255, 0.6);
 }
 
-.stepNum {
-  width: 56px;
-  height: 56px;
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  margin: 36px 0;
+}
+
+.step .card {
+  padding: 22px 26px;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.012)),
+    rgba(13, 18, 33, 0.55);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  max-width: 420px;
+}
+
+.left .card { justify-self: end; margin-right: 36px; text-align: right; }
+.right .card { justify-self: start; margin-left: 36px; }
+
+.left .cardHead { justify-content: flex-end; }
+
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.num {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  color: transparent;
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.cardHead h3 {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: var(--text-soft);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Dot on the rail */
+.dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  background: var(--card);
-  border: 1px solid rgba(79, 124, 255, 0.3);
+  background: rgba(11, 15, 25, 0.95);
+  border: 1px solid var(--border-strong);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-head);
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--accent);
-  margin: 0 auto 24px;
-  position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-.stepItem h3 {
-  font-family: var(--font-head);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 10px;
+.dot span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--grad-brand);
+  box-shadow: 0 0 14px rgba(138, 92, 255, 0.8);
 }
 
-.stepItem p {
-  font-size: 0.85rem;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
+/* Mobile: collapse to single column with rail on the left */
 @media (max-width: 768px) {
-  .steps {
-    grid-template-columns: repeat(2, 1fr);
+  .section { padding: 80px 0; }
+  .timeline { padding-left: 32px; }
+  .rail { left: 0; transform: none; }
+  .step { grid-template-columns: 1fr; margin: 28px 0; }
+  .left .card,
+  .right .card {
+    justify-self: stretch;
+    margin: 0;
+    text-align: left;
+    max-width: none;
   }
-
-  .steps::before {
-    display: none;
-  }
+  .left .cardHead { justify-content: flex-start; }
+  .dot { left: 0; }
 }

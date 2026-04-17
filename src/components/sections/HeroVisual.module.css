@@ -1,0 +1,313 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glow {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(
+    closest-side,
+    rgba(138, 92, 255, 0.35),
+    rgba(34, 211, 238, 0.12) 50%,
+    transparent 75%
+  );
+  filter: blur(30px);
+  z-index: 0;
+}
+
+/* ---------- Agent card ---------- */
+.agent {
+  position: relative;
+  z-index: 2;
+  width: min(420px, 100%);
+  padding: 18px;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015)),
+    rgba(13, 18, 33, 0.78);
+  border: 1px solid var(--border-strong);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  box-shadow:
+    0 30px 80px -20px rgba(138, 92, 255, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: float 6s var(--ease-in-out) infinite;
+}
+
+.agentHead {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.dot {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--grad-brand);
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+  box-shadow: 0 0 18px rgba(138, 92, 255, 0.55);
+}
+
+.agentTitle {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  line-height: 1.2;
+}
+.agentTitle strong { color: #fff; font-size: 0.92rem; }
+.agentTitle span { color: #5eead4; font-size: 0.7rem; }
+
+.statusPill {
+  font-size: 0.65rem;
+  color: #5eead4;
+  background: rgba(94, 234, 212, 0.1);
+  border: 1px solid rgba(94, 234, 212, 0.25);
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.bubble {
+  font-size: 0.86rem;
+  padding: 10px 14px;
+  border-radius: 14px;
+  line-height: 1.5;
+  max-width: 86%;
+}
+
+.user {
+  align-self: flex-end;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-soft);
+  border: 1px solid var(--border);
+  border-bottom-right-radius: 4px;
+}
+
+.bot {
+  align-self: flex-start;
+  background: linear-gradient(180deg, rgba(138, 92, 255, 0.18), rgba(34, 211, 238, 0.10));
+  border: 1px solid rgba(138, 92, 255, 0.25);
+  color: #fff;
+  border-bottom-left-radius: 4px;
+}
+
+.botName {
+  display: block;
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+  margin-bottom: 4px;
+}
+
+.steps {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.steps span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--text-soft);
+}
+
+.steps i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #5eead4;
+  box-shadow: 0 0 8px #5eead4;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  font-size: 0.82rem;
+}
+
+.cursor {
+  color: #fff;
+  font-weight: 700;
+  animation: blink 1.1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.placeholder {
+  flex: 1;
+  color: var(--muted-2);
+}
+
+.send {
+  width: 26px;
+  height: 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--grad-brand);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ---------- Metric chip ---------- */
+.metric {
+  position: absolute;
+  top: 4%;
+  right: -4%;
+  z-index: 3;
+  width: 200px;
+  padding: 14px 16px;
+  border-radius: var(--radius);
+  background: rgba(13, 18, 33, 0.85);
+  border: 1px solid var(--border-strong);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px -15px rgba(34, 211, 238, 0.35);
+  animation: float 7s var(--ease-in-out) infinite;
+  animation-delay: -2s;
+}
+
+.metricLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+
+.metricValue {
+  font-family: var(--font-head);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin-top: 4px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.metricValue span {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #5eead4;
+}
+
+.spark {
+  display: block;
+  width: 100%;
+  height: 36px;
+  margin-top: 8px;
+}
+
+/* ---------- Workflow chip ---------- */
+.workflow {
+  position: absolute;
+  bottom: 4%;
+  left: -6%;
+  z-index: 3;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  background: rgba(13, 18, 33, 0.85);
+  border: 1px solid var(--border-strong);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 50px -15px rgba(138, 92, 255, 0.35);
+  animation: float 8s var(--ease-in-out) infinite;
+  animation-delay: -4s;
+}
+
+.flowTitle {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  margin-bottom: 10px;
+}
+
+.flowChain {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.node {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.nodeOk {
+  background: rgba(94, 234, 212, 0.15);
+  border-color: rgba(94, 234, 212, 0.4);
+  color: #5eead4;
+}
+
+.line {
+  width: 18px;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--violet), var(--cyan));
+  position: relative;
+}
+
+.line::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: -3px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid var(--cyan);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+@media (max-width: 1024px) {
+  .wrap { min-height: 460px; }
+  .metric { right: 2%; }
+  .workflow { left: 2%; }
+}
+
+@media (max-width: 560px) {
+  .wrap { min-height: 420px; }
+  .agent { width: 100%; }
+  .metric { width: 160px; right: -8px; top: -16px; }
+  .workflow { left: -8px; bottom: -10px; padding: 10px 12px; }
+  .node { padding: 5px 9px; font-size: 0.66rem; }
+}

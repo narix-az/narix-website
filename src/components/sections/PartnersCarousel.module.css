@@ -1,90 +1,105 @@
 .wrapper {
   width: 100%;
-  margin-top: 48px;
 }
 
 .title {
   font-family: var(--font-head);
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--white);
-  margin: 0 0 8px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
 }
 
 .subtitle {
-  font-size: 0.85rem;
+  text-align: center;
+  font-size: 0.95rem;
   color: var(--muted);
-  margin: 0 0 24px;
-  line-height: 1.6;
+  margin: 0 0 36px;
 }
 
 .trackWrap {
+  position: relative;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
+          mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 12%,
+    #000 88%,
+    transparent 100%
+  );
 }
 
 .track {
   display: flex;
-  gap: 48px;
   align-items: center;
-  overflow-x: auto;
-  scroll-behavior: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  touch-action: pan-x;
+  gap: 64px;
+  width: max-content;
+  animation: marquee 40s linear infinite;
 }
 
-.track::-webkit-scrollbar {
-  display: none;
-}
+.bare .track { animation-duration: 50s; }
+
+.track:hover { animation-play-state: paused; }
 
 .slide {
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  flex: 0 0 auto;
 }
 
 .logoWrap {
   width: 120px;
-  height: 56px;
-  display: flex;
+  height: 44px;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border);
-  border-radius: 12px;
 }
 
 .logoImg {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 8px;
+  max-width: 100%;
+  max-height: 100%;
+  filter: brightness(0) invert(1);
+  opacity: 0.55;
+  transition: opacity 0.3s var(--ease-out), filter 0.3s var(--ease-out),
+    transform 0.4s var(--ease-out);
+}
+
+.slide:hover .logoImg {
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 .placeholder {
   font-family: var(--font-head);
-  font-size: 1rem;
   font-weight: 700;
-  color: var(--muted);
-  letter-spacing: 0.05em;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.04em;
 }
 
 .companyName {
-  font-size: 0.75rem;
-  color: var(--muted);
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: -0.01em;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100% / 3)); }
 }
 
 @media (max-width: 768px) {
-  .logoWrap {
-    width: 100px;
-    height: 48px;
-  }
-
-  .track {
-    gap: 32px;
-  }
+  .track { gap: 44px; }
+  .logoWrap { width: 100px; height: 36px; }
 }

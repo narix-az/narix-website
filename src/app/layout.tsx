@@ -1,33 +1,56 @@
 import type { Metadata } from 'next';
-import { Syne, DM_Sans } from 'next/font/google';
+import { Manrope, Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import Orbs from '@/components/shared/Orbs';
+import SmoothScroll from '@/components/shared/SmoothScroll';
+import { LanguageProvider } from '@/i18n/LanguageProvider';
 
-const syne = Syne({
-  subsets: ['latin'],
-  variable: '--font-syne',
+const manrope = Manrope({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-manrope',
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
 });
 
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  variable: '--font-dm-sans',
+const inter = Inter({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-inter',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://narix.ai'),
   title: {
-    default: 'Narix – AI Business Solutions',
-    template: '%s | Narix',
+    default: 'Narix — AI Systems That Run Your Business',
+    template: '%s · Narix',
   },
   description:
-    'Narix delivers AI-powered business solutions: workflow automation, chatbots, content & branding, analytics, and web development.',
-  keywords: ['AI', 'business solutions', 'automation', 'chatbots', 'analytics'],
+    'Narix is an AI automation studio. We design, build, and operate AI workflows, agents, analytics and modern software for fast-moving teams.',
+  keywords: [
+    'AI automation',
+    'AI agency',
+    'AI agents',
+    'workflow automation',
+    'AI chatbots',
+    'business intelligence',
+    'web development',
+    'Narix',
+  ],
+  authors: [{ name: 'Narix' }],
   openGraph: {
-    title: 'Narix – AI Business Solutions',
-    description: 'Transform your business with AI-powered solutions.',
+    type: 'website',
+    title: 'Narix — AI Systems That Run Your Business',
+    description:
+      'AI workflow automation, AI agents, analytics and modern software — built for fast-moving teams.',
+    siteName: 'Narix',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Narix — AI Systems That Run Your Business',
+    description:
+      'AI workflow automation, AI agents, analytics and modern software — built for fast-moving teams.',
   },
 };
 
@@ -37,12 +60,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${dmSans.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${inter.variable}`} suppressHydrationWarning>
+      <head>
+        {/* Sync the document.lang attribute with the user's saved language as early as possible */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{var l=localStorage.getItem('narix-lang');if(l==='az'||l==='en'){document.documentElement.lang=l;}}catch(e){}`,
+          }}
+        />
+      </head>
       <body>
-        <Orbs />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <SmoothScroll>
+            <Orbs />
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+          </SmoothScroll>
+        </LanguageProvider>
       </body>
     </html>
   );

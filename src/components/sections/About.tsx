@@ -1,63 +1,95 @@
-import Link from 'next/link';
+'use client';
+
+import type { ReactElement } from 'react';
+import Reveal from '@/components/ui/Reveal';
+import Button from '@/components/ui/Button';
+import { useT } from '@/i18n/LanguageProvider';
 import styles from './About.module.css';
 
-const features = [
-  'Strategic AI roadmap tailored to your business goals',
-  'Clear implementation path from discovery to deployment',
-  'Custom solutions aligned with your workflows',
-  'Ethical, transparent, and responsible AI design',
-];
+const iconKeys = ['mission', 'vision', 'team'] as const;
+
+const icons: Record<string, ReactElement> = {
+  mission: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
+    </svg>
+  ),
+  vision: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  ),
+  team: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13A4 4 0 0116 11" />
+    </svg>
+  ),
+};
 
 export default function About() {
+  const t = useT().about;
+
   return (
     <section id="about" className={styles.section}>
       <div className="container">
+        <header className={styles.header}>
+          <Reveal>
+            <span className="eyebrow">{t.eyebrow}</span>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 className={styles.title}>
+              {t.titleStart}{' '}
+              <span className="gradient-text">{t.titleAccent}</span>
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className={styles.desc}>{t.desc}</p>
+          </Reveal>
+        </header>
+
         <div className={styles.grid}>
-          <div className={styles.visual}>
-            <div className={styles.cardMain}>
-              <div className={styles.iconCenter}>
-                <AIIcon />
+          {t.pillars.map((p, i) => (
+            <Reveal key={p.label} delay={i * 0.08} y={32}>
+              <div className={styles.card}>
+                <span className={styles.borderOverlay} aria-hidden />
+                <div className={styles.icon}>{icons[iconKeys[i] ?? 'mission']}</div>
+                <span className={styles.label}>{p.label}</span>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
               </div>
-            </div>
-            <div className={`${styles.chip} ${styles.chip1}`}>✦ Seamless Integration</div>
-            <div className={`${styles.chip} ${styles.chip2}`}>298+ Projects Delivered</div>
-            <div className={`${styles.chip} ${styles.chip3}`}>AI-Powered Solutions</div>
-          </div>
-          <div className={styles.content}>
-            <div className={styles.tag}>About Us</div>
-            <h2 className={styles.title}>Where Technology Meets Strategy</h2>
-            <p className={styles.desc}>
-              Our team of data scientists, engineers, and designers turns complex
-              challenges into simple, AI-powered solutions that drive real results.
-            </p>
-            <ul className={styles.featureList}>
-              {features.map((f) => (
-                <li key={f}>{f}</li>
-              ))}
-            </ul>
-            <div className={styles.cta}>
-              <Link href="/services" className={styles.btn}>
-                View Our Services
-              </Link>
-            </div>
-          </div>
+            </Reveal>
+          ))}
         </div>
+
+        <Reveal delay={0.15}>
+          <div className={styles.ctaRow}>
+            <Button href="/services" variant="ghost" size="md">
+              {t.ctaServices}
+            </Button>
+            <Button
+              href="/contact"
+              variant="gradient"
+              size="md"
+              iconRight={<ArrowIcon />}
+            >
+              {t.ctaWork}
+            </Button>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-function AIIcon() {
+function ArrowIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="url(#grad1)" strokeWidth="1.5">
-      <defs>
-        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#4f7cff" />
-          <stop offset="100%" stopColor="#00e5c9" />
-        </linearGradient>
-      </defs>
-      <circle cx="12" cy="12" r="3" />
-      <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+      <path d="M5 12h14M13 5l7 7-7 7" />
     </svg>
   );
 }

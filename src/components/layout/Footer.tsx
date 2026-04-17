@@ -1,106 +1,125 @@
+'use client';
+
 import Link from 'next/link';
+import { useT } from '@/i18n/LanguageProvider';
 import styles from './Footer.module.css';
 
-const serviceLinks = [
-  { href: '/services', label: 'AI & Workflow Automation' },
-  { href: '/services', label: 'AI Chatbots & Support' },
-  { href: '/services', label: 'AI Content & Branding' },
-  { href: '/services', label: 'Business Analytics' },
-  { href: '/services', label: 'Web Development' },
-];
-
-const companyLinks = [
-  { href: '/about', label: 'About Us' },
-  { href: '/services', label: 'Services' },
-  { href: '/contact', label: 'Contact' },
-];
-
-const contactLinks = [
-  { href: 'mailto:info@narix', label: 'info@narix' },
-  { href: 'tel:+1234567890', label: '+994 51 560 06 25' },
-  { href: '#', label: 'Privacy Policy' },
-  { href: '#', label: 'Terms of Service' },
-];
-
 export default function Footer() {
+  const t = useT();
+  const year = new Date().getFullYear();
+
+  const companyLinks = [
+    { href: '/about', label: t.nav.about },
+    { href: '/services', label: t.nav.services },
+    { href: '/contact', label: t.nav.contact },
+  ];
+
+  const contactLinks = [
+    { href: 'mailto:hello@narix.ai', label: 'hello@narix.ai' },
+    { href: 'tel:+994515600625', label: '+994 51 560 06 25' },
+  ];
+
+  const legalLinks = [
+    { href: '#', label: t.footer.legal.privacy },
+    { href: '#', label: t.footer.legal.terms },
+  ];
+
   return (
     <footer className={styles.footer}>
+      <div className={styles.glow} aria-hidden />
       <div className="container">
-        <div className={styles.footerGrid}>
-          <div className={styles.footerBrand}>
+        <div className={styles.top}>
+          <div className={styles.brand}>
             <Link href="/" className={styles.logo}>
-              Nari<span>x</span>
+              <span className={styles.logoMark} aria-hidden />
+              <span>
+                Nari<span className={styles.logoAccent}>x</span>
+              </span>
             </Link>
-            <p>
-              Narix combines AI and creativity to deliver intelligent, personalized,
-              and future-ready business solutions that drive growth and innovation.
-            </p>
+            <p>{t.footer.tagline}</p>
+            <div className={styles.socials}>
+              <SocialLink href="https://twitter.com" label="Twitter">
+                <TwitterIcon />
+              </SocialLink>
+              <SocialLink href="https://linkedin.com" label="LinkedIn">
+                <LinkedInIcon />
+              </SocialLink>
+              <SocialLink href="https://github.com" label="GitHub">
+                <GitHubIcon />
+              </SocialLink>
+            </div>
           </div>
-          <div className={styles.footerCol}>
-            <h4>Services</h4>
+
+          <div className={styles.col}>
+            <h4>{t.footer.columns.services}</h4>
             <ul>
-              {serviceLinks.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href}>{link.label}</Link>
+              {t.footer.serviceLinks.map((label) => (
+                <li key={label}>
+                  <Link href="/services">{label}</Link>
                 </li>
               ))}
             </ul>
           </div>
-          <div className={styles.footerCol}>
-            <h4>Company</h4>
+
+          <div className={styles.col}>
+            <h4>{t.footer.columns.company}</h4>
             <ul>
-              {companyLinks.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href}>{link.label}</Link>
+              {companyLinks.map((l) => (
+                <li key={l.label}>
+                  <Link href={l.href}>{l.label}</Link>
                 </li>
               ))}
             </ul>
           </div>
-          <div className={styles.footerCol}>
-            <h4>Contact</h4>
+
+          <div className={styles.col}>
+            <h4>{t.footer.columns.contact}</h4>
             <ul>
-              {contactLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href}>{link.label}</a>
+              {contactLinks.map((l) => (
+                <li key={l.label}>
+                  <a href={l.href}>{l.label}</a>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-        <div className={styles.footerBottom}>
-          <span>© 2026 Narix. All rights reserved.</span>
-          <div className={styles.socials}>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialBtn}
-              aria-label="Twitter"
-            >
-              <TwitterIcon />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialBtn}
-              aria-label="LinkedIn"
-            >
-              <LinkedInIcon />
-            </a>
-            <a
-              href="https://github.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.socialBtn}
-              aria-label="GitHub"
-            >
-              <GitHubIcon />
-            </a>
-          </div>
+
+        <div className={styles.bottom}>
+          <span>© {year} Narix. {t.footer.rights}</span>
+          <ul className={styles.legal}>
+            {legalLinks.map((l) => (
+              <li key={l.label}>
+                <a href={l.href}>{l.label}</a>
+              </li>
+            ))}
+          </ul>
         </div>
+
+        <div className={styles.bigMark} aria-hidden>narix</div>
       </div>
     </footer>
+  );
+}
+
+function SocialLink({
+  href,
+  label,
+  children,
+}: {
+  href: string;
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={styles.socialBtn}
+      aria-label={label}
+    >
+      {children}
+    </a>
   );
 }
 
@@ -111,7 +130,6 @@ function TwitterIcon() {
     </svg>
   );
 }
-
 function LinkedInIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -120,7 +138,6 @@ function LinkedInIcon() {
     </svg>
   );
 }
-
 function GitHubIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

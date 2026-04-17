@@ -1,48 +1,59 @@
-export interface DeliveredProject {
+// Non-translatable project metadata. All text (name, category, description,
+// features, tags, stats) lives in `src/i18n/translations.ts` under
+// `delivered.projects[id]` so it can be localized.
+
+export interface DeliveredProjectMeta {
   id: string;
-  name: string;
   logoUrl: string;
-  description: string;
   link?: string;
+  accent?: 'violet' | 'blue' | 'cyan';
 }
 
-export const deliveredProjects: DeliveredProject[] = [
+export const deliveredProjects: DeliveredProjectMeta[] = [
   {
-    id: '1',
-    name: 'Fintechauto',
-    logoUrl: 'https://api.iconify.design/mdi/car.svg',
-    description: 'Auto leasing platform with streamlined application flow, payment management, and vehicle catalog. Delivered a modern web application for the fintech and automotive sector.',
+    id: 'chamanly',
+    logoUrl: 'https://api.iconify.design/mdi/home-group.svg',
+    link: 'https://chamanly.az/',
+    accent: 'violet',
+  },
+  {
+    id: 'meta-sushi',
+    logoUrl: 'https://api.iconify.design/mdi/silverware-fork-knife.svg',
+    accent: 'cyan',
+  },
+  {
+    id: 'fintechauto',
+    logoUrl: 'https://api.iconify.design/mdi/car-electric.svg',
     link: 'https://fintechauto.az/',
+    accent: 'blue',
   },
   {
-    id: '2',
-    name: 'Go Sushi',
-    logoUrl: 'https://api.iconify.design/mdi/bowl.svg',
-    description: 'Restaurant ordering and delivery web application. Built with responsive design, menu management, and seamless ordering experience.',
+    id: 'go-sushi',
+    logoUrl: 'https://api.iconify.design/mdi/bowl-mix.svg',
     link: 'https://go-sushi.pages.dev/',
+    accent: 'violet',
   },
   {
-    id: '3',
-    name: 'Maliyyə hesablayıcı',
-    logoUrl: 'https://api.iconify.design/mdi/calculator.svg',
-    description: 'A financial calculator platform for the Azerbaijani market, enabling users to calculate mortgage and consumer loans with real-time results. The project includes interactive sliders, multi-language support, and clear breakdowns of monthly payments, total interest, and repayment schedules to improve user decision-making.',
+    id: 'maliyye',
+    logoUrl: 'https://api.iconify.design/mdi/calculator-variant.svg',
+    accent: 'blue',
   },
   {
-    id: '4',
-    name: 'Reservation Automation',
+    id: 'reservation',
     logoUrl: 'https://api.iconify.design/mdi/calendar-check.svg',
-    description: 'An automated hotel reservation system that streamlines room booking, availability management, and guest communication. The platform centralizes reservations, reduces manual operations, and improves response time through automated workflows and real-time updates.',
+    accent: 'cyan',
   },
   {
-    id: '5',
-    name: 'AI Call Center Agent',
+    id: 'ai-call-center',
     logoUrl: 'https://api.iconify.design/mdi/headset.svg',
-    description: 'An AI-powered call center agent designed to automate inbound and outbound customer calls, handle common requests, and route complex cases to human operators. The system improves response times, reduces operational costs, and ensures consistent customer support through natural language understanding and automated workflows.',
+    accent: 'violet',
   },
   {
-    id: '6',
-    name: 'Daily Sales AI Analytics',
-    logoUrl: 'https://api.iconify.design/mdi/chart-line.svg',
-    description: 'An AI-powered system for daily sales analysis that tracks performance, detects trends, and highlights anomalies in real time. The solution helps businesses make data-driven decisions by providing clear insights, forecasts, and automated reports based on sales data.',
+    id: 'sales-ai',
+    logoUrl: 'https://api.iconify.design/mdi/chart-line-variant.svg',
+    accent: 'cyan',
   },
 ];
+
+// Type preserved for component props / convenience.
+export type DeliveredProject = DeliveredProjectMeta;

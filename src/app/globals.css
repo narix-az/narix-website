@@ -2,45 +2,142 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   NARIX — DESIGN TOKENS
+   ============================================================ */
 :root {
-  --bg: #050810;
-  --bg2: #0a0f1e;
-  --card: #0d1428;
-  --border: rgba(255, 255, 255, 0.07);
-  --accent: #4f7cff;
-  --accent2: #00e5c9;
-  --text: #e8ecf4;
-  --muted: #7a85a0;
-  --white: #ffffff;
-  --font-head: var(--font-syne), 'Syne', sans-serif;
-  --font-body: var(--font-dm-sans), 'DM Sans', sans-serif;
+  /* Surfaces */
+  --bg: #0b0f19;
+  --bg-2: #0e1424;
+  --bg-3: #121a30;
+  --surface: rgba(255, 255, 255, 0.03);
+  --surface-strong: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+
+  /* Text */
+  --text: #eef1f7;
+  --text-soft: #c8cfdc;
+  --muted: #a0a8b8;
+  --muted-2: #7a849b;
+
+  /* Brand accent gradient: violet → blue → cyan */
+  --violet: #8a5cff;
+  --blue: #4d7bff;
+  --cyan: #22d3ee;
+  --neon: #5eead4;
+
+  --grad-brand: linear-gradient(135deg, #8a5cff 0%, #4d7bff 50%, #22d3ee 100%);
+  --grad-brand-soft: linear-gradient(
+    135deg,
+    rgba(138, 92, 255, 0.18) 0%,
+    rgba(77, 123, 255, 0.16) 50%,
+    rgba(34, 211, 238, 0.14) 100%
+  );
+  --grad-radial: radial-gradient(
+    1200px 600px at 50% -10%,
+    rgba(138, 92, 255, 0.18),
+    transparent 60%
+  );
+
+  /* Shadows / glow */
+  --glow-violet: 0 0 60px rgba(138, 92, 255, 0.35);
+  --glow-blue: 0 0 60px rgba(77, 123, 255, 0.35);
+  --glow-cyan: 0 0 60px rgba(34, 211, 238, 0.3);
+
+  /* Layout */
+  --radius-sm: 10px;
+  --radius: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --container: 1240px;
+
+  /* Fonts */
+  --font-head: var(--font-manrope), 'Manrope', system-ui, sans-serif;
+  --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
+
+  /* Easings */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+* {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--bg);
 }
 
 body {
-  background: var(--bg);
+  margin: 0;
+  background:
+    radial-gradient(1200px 700px at 80% -10%, rgba(138, 92, 255, 0.10), transparent 60%),
+    radial-gradient(900px 600px at -10% 30%, rgba(34, 211, 238, 0.08), transparent 60%),
+    var(--bg);
   color: var(--text);
   font-family: var(--font-body);
+  font-feature-settings: 'cv11', 'ss01';
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.65;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Optical adjustments for Azerbaijani extended-Latin glyphs (ə, ğ, ş, ı, ü, ö, ç) */
+html[lang="az"] body {
+  font-feature-settings: 'ss01', 'cv11';
+  letter-spacing: -0.005em;
+}
+
+html[lang="az"] h1,
+html[lang="az"] h2,
+html[lang="az"] h3,
+html[lang="az"] h4,
+html[lang="az"] h5,
+html[lang="az"] h6 {
+  letter-spacing: -0.018em;
+}
+
+::selection {
+  background: rgba(138, 92, 255, 0.35);
+  color: #fff;
+}
+
+/* Subtle grain across the whole page */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
   pointer-events: none;
-  z-index: 0;
-  opacity: 0.4;
+  z-index: 1;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
 }
 
+main {
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================================
+   LAYOUT HELPERS
+   ============================================================ */
 .container {
-  max-width: 1200px;
+  max-width: var(--container);
   margin: 0 auto;
   padding: 0 40px;
 }
@@ -51,24 +148,102 @@ body::before {
   }
 }
 
+/* ============================================================
+   TYPOGRAPHY HELPERS
+   ============================================================ */
+.gradient-text {
+  background: var(--grad-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(138, 92, 255, 0.08);
+  border: 1px solid rgba(138, 92, 255, 0.25);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+  backdrop-filter: blur(10px);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--violet);
+  box-shadow: 0 0 12px rgba(138, 92, 255, 0.9);
+  animation: pulse 2.4s var(--ease-in-out) infinite;
+}
+
+/* ============================================================
+   LEGACY HELPERS (still used in a few places)
+   ============================================================ */
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.3); }
+  50% { opacity: 0.55; transform: scale(1.35); }
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shine {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .fade-up {
   opacity: 0;
-  animation: fadeUp 0.7s ease forwards;
+  animation: fadeUp 0.7s var(--ease-out) forwards;
 }
-
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.3s; }
 .delay-4 { animation-delay: 0.4s; }
 .delay-5 { animation-delay: 0.5s; }
 .delay-6 { animation-delay: 0.6s; }
+
+/* ============================================================
+   FOCUS RING
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
