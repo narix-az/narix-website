@@ -40,6 +40,12 @@ export const deliveredProjects: DeliveredProjectMeta[] = [
     accent: 'blue',
   },
   {
+    id: 'bircv',
+    logoUrl: 'https://api.iconify.design/mdi/file-account-outline.svg',
+    link: 'https://bircv.az/',
+    accent: 'violet',
+  },
+  {
     id: 'reservation',
     logoUrl: 'https://api.iconify.design/mdi/calendar-check.svg',
     accent: 'cyan',

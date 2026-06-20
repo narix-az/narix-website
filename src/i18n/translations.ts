@@ -296,6 +296,20 @@ const en: Dictionary = {
         ],
         tags: ['Fintech', 'Tools', 'i18n'],
       },
+      bircv: {
+        name: 'BirCV',
+        category: 'AI CV builder',
+        shortDescription:
+          'AI-powered platform for creating professional CVs online.',
+        description:
+          'BirCV is an online platform that lets users build a professional CV with the help of AI. By using the platform, users agree to its terms of use.',
+        features: [
+          'AI-assisted CV generation',
+          'Professional templates',
+          'Fast online builder',
+        ],
+        tags: ['AI', 'Career', 'Tools'],
+      },
       reservation: {
         name: 'Reservation Automation',
         category: 'Hotel automation',
@@ -718,6 +732,20 @@ const az: Dictionary = {
           'Detallı amortizasiya cədvəli',
         ],
         tags: ['Fintex', 'Alətlər', 'Çoxdilli'],
+      },
+      bircv: {
+        name: 'BirCV',
+        category: 'Süni intellekt ilə CV qurucu',
+        shortDescription:
+          'Süni intellekt vasitəsilə peşəkar CV hazırlamağa imkan verən onlayn platforma.',
+        description:
+          'BirCV süni intellekt vasitəsilə peşəkar CV hazırlamağa imkan verən onlayn platformadır. Platformadan istifadə edərək istifadəçilər bu şərtləri qəbul etmiş sayılırlar.',
+        features: [
+          'Süni intellekt ilə CV yaratma',
+          'Peşəkar şablonlar',
+          'Sürətli onlayn qurucu',
+        ],
+        tags: ['Süni intellekt', 'Karyera', 'Alətlər'],
       },
       reservation: {
         name: 'Rezervasiya Avtomatlaşdırması',
