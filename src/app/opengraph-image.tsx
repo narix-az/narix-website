@@ -17,11 +17,12 @@ export default async function OpengraphImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '72px 80px',
-          backgroundColor: '#0b0f19',
+          backgroundColor: '#faf8f5',
           backgroundImage:
-            'radial-gradient(1200px 600px at 80% -10%, rgba(138,92,255,0.35), transparent 60%),' +
-            'radial-gradient(900px 500px at -10% 110%, rgba(34,211,238,0.25), transparent 60%)',
-          color: '#ffffff',
+            'radial-gradient(700px 500px at 95% -10%, rgba(255,46,126,0.35), transparent 60%),' +
+            'radial-gradient(600px 450px at 70% 0%, rgba(255,91,31,0.30), transparent 60%),' +
+            'radial-gradient(700px 500px at 100% 110%, rgba(122,60,255,0.30), transparent 60%)',
+          color: '#0f0f14',
           fontFamily: 'sans-serif',
         }}
       >
@@ -30,8 +31,8 @@ export default async function OpengraphImage() {
             style={{
               width: 56,
               height: 56,
-              borderRadius: 14,
-              background: 'linear-gradient(135deg, #8a5cff 0%, #4d7bff 50%, #22d3ee 100%)',
+              borderRadius: 16,
+              background: 'linear-gradient(135deg, #ff5b1f 0%, #ff2e7e 50%, #7a3cff 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -44,7 +45,7 @@ export default async function OpengraphImage() {
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ fontSize: 26, fontWeight: 700, letterSpacing: -0.5 }}>Narix</div>
-            <div style={{ fontSize: 18, color: '#a0a8b8' }}>narix.az</div>
+            <div style={{ fontSize: 18, color: '#5e5e6b' }}>narix.az</div>
           </div>
         </div>
 
@@ -56,9 +57,9 @@ export default async function OpengraphImage() {
               alignSelf: 'flex-start',
               padding: '8px 18px',
               borderRadius: 999,
-              background: 'rgba(138, 92, 255, 0.14)',
-              border: '1px solid rgba(138, 92, 255, 0.4)',
-              color: '#c4b5fd',
+              background: '#ffffff',
+              border: '1px solid rgba(15, 15, 20, 0.1)',
+              color: '#2b2b35',
               fontSize: 18,
               letterSpacing: 3,
               textTransform: 'uppercase',
@@ -82,7 +83,7 @@ export default async function OpengraphImage() {
             <span
               style={{
                 backgroundImage:
-                  'linear-gradient(90deg, #8a5cff 0%, #4d7bff 50%, #22d3ee 100%)',
+                  'linear-gradient(90deg, #f04a0f 0%, #e81e72 45%, #6a2bf0 100%)',
                 backgroundClip: 'text',
                 color: 'transparent',
               }}
@@ -90,7 +91,7 @@ export default async function OpengraphImage() {
               Run Your Business
             </span>
           </div>
-          <div style={{ fontSize: 28, color: '#c8cfdc', maxWidth: 960 }}>
+          <div style={{ fontSize: 28, color: '#2b2b35', maxWidth: 960 }}>
             AI workflow automation, AI agents, analytics and modern web platforms —
             built for fast-moving teams in Azerbaijan and beyond.
           </div>
@@ -102,7 +103,7 @@ export default async function OpengraphImage() {
             justifyContent: 'space-between',
             alignItems: 'center',
             fontSize: 22,
-            color: '#a0a8b8',
+            color: '#5e5e6b',
           }}
         >
           <div style={{ display: 'flex', gap: 28 }}>
@@ -114,7 +115,7 @@ export default async function OpengraphImage() {
             <span style={{ opacity: 0.4 }}>·</span>
             <span>Web Development</span>
           </div>
-          <div style={{ color: '#ffffff', fontWeight: 600 }}>narix.az</div>
+          <div style={{ color: '#0f0f14', fontWeight: 700 }}>narix.az</div>
         </div>
       </div>
     ),

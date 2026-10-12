@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss";
 
+// Mirrors the CSS tokens in src/app/globals.css — see /DESIGN.md.
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -9,30 +10,27 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        head: ["var(--font-manrope)", "system-ui", "sans-serif"],
+        head: ["var(--font-jakarta)", "system-ui", "sans-serif"],
         body: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
       colors: {
-        bg: "#0b0f19",
-        bg2: "#0e1424",
-        bg3: "#121a30",
-        violet: "#8a5cff",
-        blue: "#4d7bff",
-        cyan: "#22d3ee",
-        neon: "#5eead4",
-        muted: "#a0a8b8",
+        bg: "#faf8f5",
+        bg2: "#f3f0ea",
+        ink: "#0f0f14",
+        muted: "#5e5e6b",
+        orange: "#ff5b1f",
+        pink: "#ff2e7e",
+        violet: "#7a3cff",
+        blue: "#2d6bff",
+        lime: "#b8f23a",
+        yellow: "#ffc53d",
       },
       backgroundImage: {
-        "grad-brand":
-          "linear-gradient(135deg, #8a5cff 0%, #4d7bff 50%, #22d3ee 100%)",
-      },
-      boxShadow: {
-        "glow-violet": "0 0 60px rgba(138, 92, 255, 0.35)",
-        "glow-blue": "0 0 60px rgba(77, 123, 255, 0.35)",
-        "glow-cyan": "0 0 60px rgba(34, 211, 238, 0.3)",
+        "grad-vivid":
+          "linear-gradient(100deg, #ff5b1f 0%, #ff2e7e 48%, #7a3cff 100%)",
       },
       borderRadius: {
-        xl2: "22px",
+        xl2: "28px",
       },
     },
   },

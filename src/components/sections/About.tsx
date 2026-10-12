@@ -7,6 +7,7 @@ import { useT } from '@/i18n/LanguageProvider';
 import styles from './About.module.css';
 
 const iconKeys = ['mission', 'vision', 'team'] as const;
+const tones = ['orange', 'pink', 'violet'] as const;
 
 const icons: Record<string, ReactElement> = {
   mission: (
@@ -37,32 +38,26 @@ export default function About() {
   return (
     <section id="about" className={styles.section}>
       <div className="container">
-        <header className={styles.header}>
+        <header className="sec-head">
           <Reveal>
             <span className="eyebrow">{t.eyebrow}</span>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className={styles.title}>
+            <h2 className="sec-title">
               {t.titleStart}{' '}
               <span className="gradient-text">{t.titleAccent}</span>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className={styles.desc}>{t.desc}</p>
+            <p className="sec-desc">{t.desc}</p>
           </Reveal>
         </header>
 
         <div className={styles.grid}>
           {t.pillars.map((p, i) => (
             <Reveal key={p.label} delay={i * 0.08} y={32}>
-              <div className={`${styles.card} u-conic-host u-hover-sheen`}>
-                <span className={styles.borderOverlay} aria-hidden />
-                <span className="u-conic-border" aria-hidden />
-                <span className="u-sheen" aria-hidden />
-                <div className={styles.icon}>
-                  <span className={styles.iconGlow} aria-hidden />
-                  {icons[iconKeys[i] ?? 'mission']}
-                </div>
+              <div className={`${styles.card} ${styles[tones[i % tones.length]]}`}>
+                <div className={styles.icon}>{icons[iconKeys[i] ?? 'mission']}</div>
                 <span className={styles.label}>{p.label}</span>
                 <h3>{p.title}</h3>
                 <p>{p.desc}</p>
@@ -73,13 +68,13 @@ export default function About() {
 
         <Reveal delay={0.15}>
           <div className={styles.ctaRow}>
-            <Button href="/services" variant="ghost" size="md">
+            <Button href="/services" variant="ghost" size="lg">
               {t.ctaServices}
             </Button>
             <Button
               href="/contact"
-              variant="gradient"
-              size="md"
+              variant="primary"
+              size="lg"
               iconRight={<ArrowIcon />}
             >
               {t.ctaWork}

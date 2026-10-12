@@ -41,8 +41,8 @@ export default function HomePage() {
           <PartnersCarousel items={partners} />
         </div>
       </section>
-      <DeliveredProjects projects={deliveredProjects} />
       <Stats />
+      <DeliveredProjects projects={deliveredProjects} />
       <Services />
       <Process />
       <About />

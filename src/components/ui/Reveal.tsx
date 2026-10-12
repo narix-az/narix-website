@@ -29,7 +29,7 @@ export default function Reveal({
       initial={{
         opacity: 0,
         y: reduced ? 0 : y,
-        filter: !reduced && blur ? 'blur(10px)' : 'blur(0px)',
+        filter: !reduced && blur ? 'blur(6px)' : 'blur(0px)',
       }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
       viewport={{ once, amount: 0.2 }}

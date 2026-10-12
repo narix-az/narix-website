@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import HeroVisual from './HeroVisual';
+import { darkAccents, deliveredProjects } from '@/data/deliveredProjects';
 import { useT } from '@/i18n/LanguageProvider';
 import styles from './Hero.module.css';
 
@@ -14,18 +15,28 @@ interface HeroProps {
   eyebrow?: string;
 }
 
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number];
+
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.85,
-      delay: i * 0.08,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-    },
+    transition: { duration: 0.85, delay: i * 0.08, ease },
   }),
 };
+
+function Mesh() {
+  return (
+    <div className={styles.mesh} aria-hidden>
+      <span className={`${styles.blob} ${styles.blobOrange}`} />
+      <span className={`${styles.blob} ${styles.blobPink}`} />
+      <span className={`${styles.blob} ${styles.blobViolet}`} />
+      <span className={`${styles.blob} ${styles.blobLime}`} />
+      <span className={styles.dots} />
+    </div>
+  );
+}
 
 export default function Hero({
   variant = 'home',
@@ -40,7 +51,7 @@ export default function Hero({
   if (variant === 'page') {
     return (
       <section className={styles.heroPage}>
-        <div className={styles.spotlight} aria-hidden />
+        <Mesh />
         <div className="container">
           <div className={styles.pageInner}>
             <motion.span
@@ -55,7 +66,7 @@ export default function Hero({
               className={styles.pageTitle}
               initial={{ opacity: 0, y: reduced ? 0 : 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.85, delay: 0.08, ease }}
             >
               {title}
             </motion.h1>
@@ -64,7 +75,7 @@ export default function Hero({
                 className={styles.pageDesc}
                 initial={{ opacity: 0, y: reduced ? 0 : 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.85, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                transition={{ duration: 0.85, delay: 0.18, ease }}
               >
                 {subtitle ?? description}
               </motion.p>
@@ -75,9 +86,11 @@ export default function Hero({
     );
   }
 
+  const trustProjects = deliveredProjects.slice(0, 4);
+
   return (
     <section id="hero" className={styles.hero}>
-      <div className={styles.spotlight} aria-hidden />
+      <Mesh />
       <div className="container">
         <div className={styles.layout}>
           <div className={styles.copy}>
@@ -100,7 +113,7 @@ export default function Hero({
             >
               {t.hero.titleStart}{' '}
               <span className={styles.titleAccent}>
-                {t.hero.titleAccent}
+                <span className="gradient-text">{t.hero.titleAccent}</span>
                 <svg
                   className={styles.underline}
                   viewBox="0 0 320 14"
@@ -109,20 +122,20 @@ export default function Hero({
                 >
                   <defs>
                     <linearGradient id="heroLine" x1="0" x2="1" y1="0" y2="0">
-                      <stop offset="0%" stopColor="#8a5cff" />
-                      <stop offset="50%" stopColor="#4d7bff" />
-                      <stop offset="100%" stopColor="#22d3ee" />
+                      <stop offset="0%" stopColor="#ff5b1f" />
+                      <stop offset="50%" stopColor="#ff2e7e" />
+                      <stop offset="100%" stopColor="#7a3cff" />
                     </linearGradient>
                   </defs>
                   <motion.path
                     d="M2 9 C 80 2, 240 2, 318 9"
                     stroke="url(#heroLine)"
-                    strokeWidth="3"
+                    strokeWidth="4"
                     strokeLinecap="round"
                     fill="none"
                     initial={{ pathLength: 0, opacity: 0 }}
                     animate={{ pathLength: 1, opacity: 1 }}
-                    transition={{ duration: 1.2, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 1.2, delay: 0.6, ease }}
                   />
                 </svg>
               </span>{' '}
@@ -146,10 +159,10 @@ export default function Hero({
               initial="hidden"
               animate="visible"
             >
-              <Button href="/contact" variant="gradient" size="lg" iconRight={<ArrowIcon />}>
+              <Button href="/contact" variant="primary" size="lg" iconRight={<ArrowIcon />}>
                 {t.hero.ctaPrimary}
               </Button>
-              <Button href="#delivered-projects" variant="ghost" size="lg" iconLeft={<PlayIcon />}>
+              <Button href="#delivered-projects" variant="ghost" size="lg">
                 {t.hero.ctaSecondary}
               </Button>
             </motion.div>
@@ -161,10 +174,16 @@ export default function Hero({
               initial="hidden"
               animate="visible"
             >
-              <div className={styles.avatars}>
-                {['JK', 'MA', 'TS', 'EL'].map((a, i) => (
-                  <span key={a} className={styles.avatar} style={{ zIndex: 4 - i }}>
-                    {a}
+              <div className={styles.projectStack} aria-hidden>
+                {trustProjects.map((p, i) => (
+                  <span
+                    key={p.id}
+                    className={styles.projectChip}
+                    data-dark={darkAccents.has(p.accent) || undefined}
+                    style={{ background: `var(--${p.accent})`, zIndex: trustProjects.length - i }}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.logoUrl} alt="" />
                   </span>
                 ))}
               </div>
@@ -178,10 +197,6 @@ export default function Hero({
           <HeroVisual />
         </div>
       </div>
-
-      <a href="#delivered-projects" className={styles.scrollCue} aria-label={t.hero.scroll}>
-        <span />
-      </a>
     </section>
   );
 }
@@ -190,14 +205,6 @@ function ArrowIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
       <path d="M5 12h14M13 5l7 7-7 7" />
-    </svg>
-  );
-}
-
-function PlayIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <polygon points="5 3 19 12 5 21 5 3" fill="currentColor" />
     </svg>
   );
 }

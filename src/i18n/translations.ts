@@ -27,6 +27,8 @@ export interface Dictionary {
     visitProject: string;
     learnMore: string;
     close: string;
+    live: string;
+    newBadge: string;
   };
   hero: {
     eyebrow: string;
@@ -126,7 +128,6 @@ export interface Dictionary {
       message: string;
       messagePh: string;
       submit: string;
-      submitting: string;
       sent: string;
       note: string;
     };
@@ -140,7 +141,6 @@ export interface Dictionary {
     };
     serviceLinks: string[];
     rights: string;
-    legal: { privacy: string; terms: string };
   };
   pages: {
     about: { eyebrow: string; title: string; desc: string };
@@ -175,6 +175,8 @@ const en: Dictionary = {
     visitProject: 'Visit live project',
     learnMore: 'Learn more',
     close: 'Close',
+    live: 'Live',
+    newBadge: 'New',
   },
   hero: {
     eyebrow: 'AI Business Solutions',
@@ -217,6 +219,22 @@ const en: Dictionary = {
     highlights: 'Highlights',
     keyNumbers: 'Key numbers',
     projects: {
+      inji: {
+        name: 'inji',
+        category: 'Productivity app',
+        shortDescription:
+          'A gamified productivity app: kanban boards, habits, Pomodoro and a jar that fills with a pearl for every finished task.',
+        description:
+          'inji is a productivity app built around one simple reward: every task you complete drops a pearl ("inci") into your jar. Work and personal boards, daily and weekly goals, a built-in Pomodoro timer, habit tracking, statistics, a calendar, planning and notes live in one clean, bilingual (AZ/EN) workspace — with streaks that keep you coming back.',
+        features: [
+          'Kanban boards for work & personal',
+          'Pearl jar rewards + daily / weekly goals',
+          'Built-in Pomodoro focus timer',
+          'Habits, statistics, calendar & notes',
+          'Streaks and AZ / EN interface',
+        ],
+        tags: ['Productivity', 'Gamification', 'Web app'],
+      },
       chamanly: {
         name: 'Chamanly.az',
         category: 'Rural tourism marketplace',
@@ -538,8 +556,7 @@ const en: Dictionary = {
       message: 'Project brief',
       messagePh: 'What are you trying to build, automate or fix?',
       submit: 'Send Message',
-      submitting: 'Sending…',
-      sent: 'Sent! We’ll be in touch',
+      sent: 'Opening your email app…',
       note: 'We typically reply in under 6 hours.',
     },
   },
@@ -559,7 +576,6 @@ const en: Dictionary = {
       'Branding & Content',
     ],
     rights: 'All rights reserved.',
-    legal: { privacy: 'Privacy', terms: 'Terms' },
   },
   pages: {
     about: {
@@ -610,6 +626,8 @@ const az: Dictionary = {
     visitProject: 'Layihəni aç',
     learnMore: 'Daha çox',
     close: 'Bağla',
+    live: 'Canlı',
+    newBadge: 'Yeni',
   },
   hero: {
     eyebrow: 'AI biznes həlləri',
@@ -654,6 +672,22 @@ const az: Dictionary = {
     highlights: 'Əsas xüsusiyyətlər',
     keyNumbers: 'Əsas rəqəmlər',
     projects: {
+      inji: {
+        name: 'inji',
+        category: 'Məhsuldarlıq tətbiqi',
+        shortDescription:
+          'Geymifikasiyalı məhsuldarlıq tətbiqi: kanban lövhələr, vərdişlər, Pomodoro və hər bitən tapşırıq üçün bankaya düşən inci.',
+        description:
+          'inji sadə bir mükafat üzərində qurulub: tamamladığınız hər tapşırıq bankanıza bir inci əlavə edir. İş və şəxsi lövhələr, günlük və həftəlik hədəflər, daxili Pomodoro taymeri, vərdiş izləmə, statistika, təqvim, plan və qeydlər — hamısı bir səliqəli, iki dilli (AZ/EN) iş məkanında, sizi geri qaytaran ardıcıllıq seriyaları ilə.',
+        features: [
+          'İş və şəxsi kanban lövhələr',
+          'İnci bankası + günlük / həftəlik hədəflər',
+          'Daxili Pomodoro fokus taymeri',
+          'Vərdişlər, statistika, təqvim və qeydlər',
+          'Ardıcıllıq seriyaları və AZ / EN interfeys',
+        ],
+        tags: ['Məhsuldarlıq', 'Geymifikasiya', 'Veb tətbiq'],
+      },
       chamanly: {
         name: 'Chamanly.az',
         category: 'Kənd turizmi platforması',
@@ -975,8 +1009,7 @@ const az: Dictionary = {
       message: 'Layihə xülasəsi',
       messagePh: 'Nə qurmaq, avtomatlaşdırmaq və ya düzəltmək istəyirsiniz?',
       submit: 'Mesajı göndər',
-      submitting: 'Göndərilir…',
-      sent: 'Göndərildi! Tezliklə əlaqə saxlayacağıq',
+      sent: 'E-poçt tətbiqiniz açılır…',
       note: 'Adətən 6 saatdan az müddətdə cavab veririk.',
     },
   },
@@ -996,7 +1029,6 @@ const az: Dictionary = {
       'Brendinq və kontent',
     ],
     rights: 'Bütün hüquqlar qorunur.',
-    legal: { privacy: 'Məxfilik', terms: 'Şərtlər' },
   },
   pages: {
     about: {

@@ -1,9 +1,5 @@
 .partners {
   position: relative;
-  padding: 40px 0 80px;
+  padding: 8px 0 24px;
   z-index: 2;
-}
-
-@media (max-width: 768px) {
-  .partners { padding: 24px 0 48px; }
 }

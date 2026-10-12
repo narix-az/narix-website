@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Logo from '@/components/ui/Logo';
 import { useT } from '@/i18n/LanguageProvider';
 import styles from './Footer.module.css';
 
@@ -19,33 +20,19 @@ export default function Footer() {
     { href: 'tel:+994515600625', label: '+994 51 560 06 25' },
   ];
 
-  const legalLinks = [
-    { href: '#', label: t.footer.legal.privacy },
-    { href: '#', label: t.footer.legal.terms },
-  ];
-
   return (
     <footer className={styles.footer}>
-      <div className={styles.glow} aria-hidden />
       <div className="container">
         <div className={styles.top}>
           <div className={styles.brand}>
-            <Link href="/" className={styles.logo}>
-              <span className={styles.logoMark} aria-hidden />
-              <span>
-                Nari<span className={styles.logoAccent}>x</span>
-              </span>
-            </Link>
+            <Logo size="lg" />
             <p>{t.footer.tagline}</p>
             <div className={styles.socials}>
-              <SocialLink href="https://twitter.com" label="Twitter">
-                <TwitterIcon />
+              <SocialLink href="https://wa.me/994515600625" label="WhatsApp">
+                <WhatsAppIcon />
               </SocialLink>
-              <SocialLink href="https://linkedin.com" label="LinkedIn">
-                <LinkedInIcon />
-              </SocialLink>
-              <SocialLink href="https://github.com" label="GitHub">
-                <GitHubIcon />
+              <SocialLink href="mailto:hello@narix.az" label="Email">
+                <MailIcon />
               </SocialLink>
             </div>
           </div>
@@ -86,13 +73,7 @@ export default function Footer() {
 
         <div className={styles.bottom}>
           <span>© {year} Narix. {t.footer.rights}</span>
-          <ul className={styles.legal}>
-            {legalLinks.map((l) => (
-              <li key={l.label}>
-                <a href={l.href}>{l.label}</a>
-              </li>
-            ))}
-          </ul>
+          <span>{t.contact.locationValue}</span>
         </div>
 
         <div className={styles.bigMark} aria-hidden>narix</div>
@@ -110,38 +91,32 @@ function SocialLink({
   label: string;
   children: React.ReactNode;
 }) {
+  const external = href.startsWith('http');
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
       className={styles.socialBtn}
       aria-label={label}
+      {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
     >
       {children}
     </a>
   );
 }
 
-function TwitterIcon() {
+function WhatsAppIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <path d="M21 11.5a8.5 8.5 0 01-12.7 7.4L3 21l2.2-5.1A8.5 8.5 0 1121 11.5z" />
     </svg>
   );
 }
-function LinkedInIcon() {
+
+function MailIcon() {
   return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
-function GitHubIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M3 7l9 7 9-7" />
     </svg>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type ReactElement } from 'react';
+import { useState, type FormEvent, type ReactElement } from 'react';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 import { useT } from '@/i18n/LanguageProvider';
@@ -28,19 +28,31 @@ const icons: Record<string, ReactElement> = {
 
 export default function Contact() {
   const t = useT().contact;
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+  const [status, setStatus] = useState<'idle' | 'sent'>('idle');
 
   const channels = [
     { label: t.channels.email, value: 'hello@narix.az', href: 'mailto:hello@narix.az', icon: 'mail' },
     { label: t.channels.whatsapp, value: '+994 51 560 06 25', href: 'https://wa.me/994515600625', icon: 'whatsapp' },
-    { label: t.channels.location, value: t.locationValue, href: '#', icon: 'pin' },
+    {
+      label: t.channels.location,
+      value: t.locationValue,
+      href: 'https://maps.google.com/?q=Baku,Azerbaijan',
+      icon: 'pin',
+    },
   ];
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // There is no backend yet, so hand the brief to the visitor's email client
+  // instead of pretending it was sent.
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus('submitting');
-    await new Promise((r) => setTimeout(r, 1100));
-    setStatus('success');
+    const data = new FormData(e.currentTarget);
+    const get = (k: string) => String(data.get(k) ?? '').trim();
+    const company = get('company');
+    const subject = `Project brief — ${get('name')}${company ? ` (${company})` : ''}`;
+    const body = `${get('message')}\n\n—\n${get('name')}\n${get('email')}${company ? `\n${company}` : ''}`;
+    window.location.href = `mailto:hello@narix.az?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus('sent');
+    window.setTimeout(() => setStatus('idle'), 5000);
   };
 
   return (
@@ -51,8 +63,7 @@ export default function Contact() {
             <div className={styles.info}>
               <span className="eyebrow">{t.eyebrow}</span>
               <h2 className={styles.title}>
-                {t.titleStart}
-                <br />
+                {t.titleStart}{' '}
                 <span className="gradient-text">{t.titleAccent}</span>
               </h2>
               <p className={styles.desc}>{t.desc}</p>
@@ -60,7 +71,13 @@ export default function Contact() {
               <ul className={styles.channels}>
                 {channels.map((c) => (
                   <li key={c.label}>
-                    <a href={c.href} className={styles.channel}>
+                    <a
+                      href={c.href}
+                      className={styles.channel}
+                      {...(c.href.startsWith('http')
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : {})}
+                    >
                       <span className={styles.channelIcon}>{icons[c.icon]}</span>
                       <span>
                         <span className={styles.channelLabel}>{c.label}</span>
@@ -75,9 +92,6 @@ export default function Contact() {
 
           <Reveal delay={0.1}>
             <form onSubmit={handleSubmit} className={styles.form}>
-              <span className={styles.formGlow} aria-hidden />
-              <span className={styles.formBorder} aria-hidden />
-
               <div className={styles.row}>
                 <Field id="name" label={t.form.name} type="text" required placeholder={t.form.namePh} />
                 <Field id="email" label={t.form.email} type="email" required placeholder={t.form.emailPh} />
@@ -86,18 +100,8 @@ export default function Contact() {
               <Field id="message" label={t.form.message} multiline required placeholder={t.form.messagePh} />
 
               <div className={styles.submitRow}>
-                <Button
-                  type="submit"
-                  variant="gradient"
-                  size="lg"
-                  iconRight={<ArrowIcon />}
-                  disabled={status !== 'idle'}
-                >
-                  {status === 'submitting'
-                    ? t.form.submitting
-                    : status === 'success'
-                      ? t.form.sent
-                      : t.form.submit}
+                <Button type="submit" variant="primary" size="lg" iconRight={<ArrowIcon />}>
+                  {status === 'sent' ? t.form.sent : t.form.submit}
                 </Button>
                 <span className={styles.submitNote}>{t.form.note}</span>
               </div>

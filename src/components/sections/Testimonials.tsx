@@ -6,8 +6,6 @@ import Reveal from '@/components/ui/Reveal';
 import { useT } from '@/i18n/LanguageProvider';
 import styles from './Testimonials.module.css';
 
-const accents = ['violet', 'blue', 'cyan'] as const;
-
 function avatarOf(name: string) {
   return name
     .split(' ')
@@ -22,6 +20,7 @@ export default function Testimonials() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
+    if (t.list.length < 2) return;
     const id = setInterval(() => setActive((v) => (v + 1) % t.list.length), 7000);
     return () => clearInterval(id);
   }, [t.list.length]);
@@ -32,17 +31,16 @@ export default function Testimonials() {
   }, [t.list.length]);
 
   const item = t.list[active];
-  const accent = accents[active % accents.length];
 
   return (
     <section id="testimonials" className={styles.section}>
       <div className="container">
-        <header className={styles.header}>
+        <header className="sec-head">
           <Reveal>
             <span className="eyebrow">{t.eyebrow}</span>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className={styles.title}>
+            <h2 className="sec-title">
               {t.titleStart} <span className="gradient-text">{t.titleAccent}</span>
               {t.titleEnd}
             </h2>
@@ -57,11 +55,8 @@ export default function Testimonials() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className={`${styles.card} ${styles[`accent-${accent}`]}`}
+              className={styles.card}
             >
-              <span className={styles.borderOverlay} aria-hidden />
-              <span className={`u-orb ${styles.orbA}`} aria-hidden />
-              <span className={`u-orb ${styles.orbB}`} aria-hidden />
               <QuoteIcon />
               <blockquote className={styles.quote}>“{item.text}”</blockquote>
               <figcaption className={styles.author}>
@@ -76,19 +71,21 @@ export default function Testimonials() {
             </motion.figure>
           </AnimatePresence>
 
-          <div className={styles.dots} role="tablist" aria-label="Testimonials">
-            {t.list.map((tt, i) => (
-              <button
-                key={`${tt.author}-${i}`}
-                type="button"
-                role="tab"
-                aria-selected={active === i}
-                aria-label={`Show testimonial ${i + 1}`}
-                onClick={() => setActive(i)}
-                className={`${styles.dot} ${active === i ? styles.dotActive : ''}`}
-              />
-            ))}
-          </div>
+          {t.list.length > 1 && (
+            <div className={styles.dots} role="tablist" aria-label="Testimonials">
+              {t.list.map((tt, i) => (
+                <button
+                  key={`${tt.author}-${i}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={active === i}
+                  aria-label={`Show testimonial ${i + 1}`}
+                  onClick={() => setActive(i)}
+                  className={`${styles.dot} ${active === i ? styles.dotActive : ''}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

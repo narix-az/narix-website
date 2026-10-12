@@ -14,7 +14,7 @@ export default function NotFound() {
           <h1 className={styles.title}>{t.title}</h1>
           <p className={styles.desc}>{t.desc}</p>
           <div className={styles.actions}>
-            <Button href="/" variant="gradient" size="lg">
+            <Button href="/" variant="primary" size="lg">
               {t.home}
             </Button>
             <Button href="/contact" variant="ghost" size="lg">

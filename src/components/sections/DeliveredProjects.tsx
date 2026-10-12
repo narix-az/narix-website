@@ -1,9 +1,9 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import type { DeliveredProjectMeta } from '@/data/deliveredProjects';
+import { darkAccents, type DeliveredProjectMeta } from '@/data/deliveredProjects';
 import Reveal from '@/components/ui/Reveal';
 import { useT } from '@/i18n/LanguageProvider';
 import type { ProjectContent } from '@/i18n/types';
@@ -32,7 +32,7 @@ function ProjectLogo({
     .toUpperCase();
 
   return (
-    <div className={`${styles.logo} ${styles[`accent-${meta.accent ?? 'violet'}`]}`}>
+    <div className={styles.logo} data-dark={darkAccents.has(meta.accent) || undefined}>
       {!error ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
@@ -46,6 +46,14 @@ function ProjectLogo({
       )}
     </div>
   );
+}
+
+function accentVars(meta: DeliveredProjectMeta) {
+  return {
+    '--accent': `var(--${meta.accent})`,
+    '--accent-soft': `var(--${meta.accent}-soft)`,
+    '--accent-ink': `var(--${meta.accent}-ink)`,
+  } as CSSProperties;
 }
 
 const transition = {
@@ -88,6 +96,7 @@ function ProjectModal({
     >
       <motion.div
         className={styles.modal}
+        style={accentVars(meta)}
         onClick={(e) => e.stopPropagation()}
         initial={{ opacity: 0, scale: 0.96, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -191,15 +200,15 @@ export default function DeliveredProjects({
   return (
     <section id="delivered-projects" className={styles.section}>
       <div className="container">
-        <header className={styles.header}>
+        <header className="sec-head">
           <Reveal>
             <span className="eyebrow">{eyebrow ?? t.delivered.eyebrow}</span>
           </Reveal>
           <Reveal delay={0.05}>
-            <h2 className={styles.title}>{title ?? t.delivered.title}</h2>
+            <h2 className="sec-title">{title ?? t.delivered.title}</h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className={styles.desc}>{description ?? t.delivered.desc}</p>
+            <p className="sec-desc">{description ?? t.delivered.desc}</p>
           </Reveal>
         </header>
 
@@ -208,37 +217,60 @@ export default function DeliveredProjects({
             const content = t.delivered.projects[p.id];
             if (!content) return null;
             return (
-              <Reveal key={p.id} delay={(i % 3) * 0.08} y={36}>
+              <Reveal
+                key={p.id}
+                delay={(i % 3) * 0.08}
+                y={36}
+                className={p.featured ? styles.featured : undefined}
+              >
                 <button
                   type="button"
                   onClick={() => setSelectedId(p.id)}
-                  className={`${styles.card} ${styles[`accentBorder-${p.accent ?? 'violet'}`]} u-conic-host u-hover-sheen`}
+                  className={styles.card}
+                  style={accentVars(p)}
                 >
-                  <span className={styles.cardGlow} aria-hidden />
-                  <span className={styles.cardSpotlight} aria-hidden />
-                  <span className="u-conic-border" aria-hidden />
-                  <span className="u-sheen" aria-hidden />
-
-                  <div className={styles.cardTop}>
+                  <div className={styles.cover}>
+                    <span className={styles.coverBlob} aria-hidden />
                     <ProjectLogo meta={p} name={content.name} />
-                    <span className={styles.cardCategory}>{content.category}</span>
+                    <div className={styles.badges}>
+                      {p.isNew && <span className={styles.badgeNew}>{t.common.newBadge}</span>}
+                      {p.link && (
+                        <span className={styles.badgeLive}>
+                          <i aria-hidden /> {t.common.live}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
-                  <h3 className={styles.cardTitle}>{content.name}</h3>
-                  <p className={styles.cardDesc}>{content.shortDescription}</p>
+                  <div className={styles.body}>
+                    <span className={styles.cardCategory}>{content.category}</span>
+                    <h3 className={styles.cardTitle}>{content.name}</h3>
+                    <p className={styles.cardDesc}>{content.shortDescription}</p>
 
-                  <div className={styles.cardFooter}>
-                    <div className={styles.cardTags}>
-                      {content.tags.slice(0, 2).map((tag) => (
-                        <span key={tag} className={styles.tagPill}>
-                          {tag}
-                        </span>
-                      ))}
+                    {p.featured && (
+                      <ul className={styles.cardFeatures}>
+                        {content.features.slice(0, 3).map((f) => (
+                          <li key={f}>
+                            <CheckIcon />
+                            {f}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    <div className={styles.cardFooter}>
+                      <div className={styles.cardTags}>
+                        {content.tags.slice(0, 2).map((tag) => (
+                          <span key={tag} className={styles.tagPill}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <span className={styles.cardCta}>
+                        {readCase}
+                        <ArrowIcon />
+                      </span>
                     </div>
-                    <span className={styles.cardCta}>
-                      {readCase}
-                      <ArrowIcon />
-                    </span>
                   </div>
                 </button>
               </Reveal>

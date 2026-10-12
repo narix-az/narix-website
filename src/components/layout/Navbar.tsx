@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Logo from '@/components/ui/Logo';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -49,12 +50,7 @@ export default function Navbar() {
         className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}
       >
         <div className={styles.left}>
-          <Link href="/" className={styles.logo} aria-label="Narix">
-            <span className={styles.logoMark} aria-hidden />
-            <span>
-              Nari<span className={styles.logoAccent}>x</span>
-            </span>
-          </Link>
+          <Logo />
         </div>
 
         <div className={styles.center}>
@@ -84,6 +80,11 @@ export default function Navbar() {
 
         <div className={styles.right}>
           <LanguageSwitcher />
+          <span className={styles.cta}>
+            <Button href="/contact" variant="primary" size="md">
+              {t.nav.cta}
+            </Button>
+          </span>
           <button
             type="button"
             aria-label={open ? t.nav.menuClose : t.nav.menuOpen}

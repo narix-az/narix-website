@@ -1,17 +1,17 @@
 import type { Metadata } from 'next';
-import { Manrope, Inter } from 'next/font/google';
+import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import Orbs from '@/components/shared/Orbs';
 import SmoothScroll from '@/components/shared/SmoothScroll';
 import ScrollProgress from '@/components/shared/ScrollProgress';
 import { LanguageProvider } from '@/i18n/LanguageProvider';
 
-const manrope = Manrope({
+// Plus Jakarta Sans covers the full Azerbaijani alphabet, including capital Ə.
+const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin', 'latin-ext'],
-  variable: '--font-manrope',
-  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-jakarta',
+  weight: ['500', '600', '700', '800'],
   display: 'swap',
 });
 
@@ -212,7 +212,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${manrope.variable} ${inter.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${jakarta.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         {/* Sync the document.lang attribute with the user's saved language as early as possible */}
         <script
@@ -230,7 +230,6 @@ export default function RootLayout({
         <LanguageProvider>
           <SmoothScroll>
             <ScrollProgress />
-            <Orbs />
             <Navbar />
             <main>{children}</main>
             <Footer />

@@ -4,113 +4,125 @@
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  border: 1px solid transparent;
-  font-family: var(--font-body);
-  font-weight: 600;
-  letter-spacing: -0.005em;
-  cursor: pointer;
+  font-family: var(--font-head);
+  font-weight: 700;
+  letter-spacing: -0.01em;
   text-decoration: none;
-  user-select: none;
+  cursor: pointer;
+  border: 0;
   isolation: isolate;
-  transition: box-shadow 0.4s var(--ease-out), background 0.3s var(--ease-out),
-    border-color 0.3s var(--ease-out), color 0.2s;
-  will-change: transform;
+  overflow: hidden;
+  transition:
+    transform 0.35s var(--ease-out),
+    box-shadow 0.35s var(--ease-out),
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:active {
+  transform: scale(0.97);
 }
 
 .btn:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
+  cursor: default;
+  opacity: 0.7;
 }
 
 .inner {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: transform 0.35s var(--ease-out);
-  will-change: transform;
   position: relative;
   z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.3s var(--ease-out);
 }
 
 .icon {
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  width: 18px;
+  height: 18px;
+  transition: transform 0.35s var(--ease-out);
 }
 
-.icon > svg {
-  width: 16px;
-  height: 16px;
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.btn:hover .icon:last-child {
+  transform: translateX(3px);
 }
 
 /* Sizes */
 .md {
-  padding: 12px 22px;
-  font-size: 0.92rem;
+  height: 46px;
+  padding: 0 22px;
+  font-size: 0.95rem;
 }
+
 .lg {
-  padding: 16px 30px;
-  font-size: 1rem;
+  height: 56px;
+  padding: 0 28px;
+  font-size: 1.02rem;
 }
 
-/* ---------- Primary (solid violet) ---------- */
+/* Variants */
 .primary {
-  background: #fff;
-  color: #0b0f19;
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.12);
-}
-.primary:hover:not(:disabled) {
-  box-shadow: 0 15px 50px rgba(255, 255, 255, 0.22);
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 8px 20px -8px rgba(15, 15, 20, 0.5);
 }
 
-/* ---------- Gradient (violet → blue → cyan) ---------- */
-.gradient {
-  color: #fff;
-  background: var(--grad-brand);
-  background-size: 200% 200%;
-  animation: gradientShift 8s ease infinite;
-  box-shadow:
-    0 10px 30px rgba(138, 92, 255, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+.primary:hover {
+  box-shadow: 0 14px 30px -10px rgba(15, 15, 20, 0.55);
 }
-.gradient:hover:not(:disabled) {
-  box-shadow:
-    0 14px 50px rgba(138, 92, 255, 0.55),
-    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+
+.gradient {
+  background: var(--grad-vivid);
+  color: #fff;
+  box-shadow: 0 10px 28px -10px rgba(255, 46, 126, 0.65);
+}
+
+.gradient:hover {
+  box-shadow: 0 16px 36px -10px rgba(255, 46, 126, 0.75);
+}
+
+/* Dark text-shadow keeps white label readable on the orange end of the gradient */
+.gradient .inner {
+  text-shadow: 0 1px 2px rgba(120, 20, 40, 0.35);
+}
+
+.ghost {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.ghost:hover {
+  border-color: var(--ink);
 }
 
 .shine {
   position: absolute;
-  inset: 0;
-  border-radius: 999px;
-  background: linear-gradient(
-    100deg,
-    transparent 30%,
-    rgba(255, 255, 255, 0.35) 50%,
-    transparent 70%
-  );
-  background-size: 200% 100%;
-  background-position: -200% 0;
+  top: -20%;
+  bottom: -20%;
+  left: 0;
+  width: 40%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: translateX(-120%) skewX(-16deg);
   pointer-events: none;
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.gradient:hover .shine {
-  opacity: 1;
-  animation: shine 1.4s var(--ease-out);
 }
 
-/* ---------- Ghost ---------- */
-.ghost {
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text);
-  border-color: var(--border);
-  backdrop-filter: blur(10px);
+.btn:hover .shine {
+  animation: shine 0.9s var(--ease-out);
 }
-.ghost:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: var(--border-strong);
-  color: #fff;
+
+@media (max-width: 480px) {
+  .lg {
+    height: 52px;
+    padding: 0 22px;
+    font-size: 0.98rem;
+  }
 }
