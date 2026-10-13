@@ -27,24 +27,8 @@ export default async function OpengraphImage() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 16,
-              background: 'linear-gradient(135deg, #ff5b1f 0%, #ff2e7e 50%, #7a3cff 100%)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 32,
-              fontWeight: 800,
-              color: '#fff',
-            }}
-          >
-            N
-          </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ fontSize: 26, fontWeight: 700, letterSpacing: -0.5 }}>Narix</div>
+            <div style={{ fontSize: 40, fontWeight: 800, letterSpacing: -1.8 }}>narix</div>
             <div style={{ fontSize: 18, color: '#5e5e6b' }}>narix.az</div>
           </div>
         </div>
