@@ -7,7 +7,7 @@ import type { ServiceContent } from '@/i18n/types';
 import type { Accent } from '@/data/deliveredProjects';
 import styles from './Services.module.css';
 
-const iconKeys = ['automation', 'chatbot', 'analytics', 'web', 'content', 'strategy'] as const;
+const iconKeys = ['automation', 'app', 'devops', 'web', 'content', 'qa'] as const;
 type IconKey = (typeof iconKeys)[number];
 
 const accentMap: Accent[] = ['orange', 'pink', 'violet', 'blue', 'lime', 'yellow'];
@@ -25,10 +25,22 @@ const iconPaths: Record<IconKey, React.ReactElement> = {
       <path d="M10 6.5h4M10 17.5h4M6.5 10v4M17.5 10v4" />
     </svg>
   ),
-  chatbot: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <rect x="3" y="6" width="18" height="13" rx="3" />
-      <path d="M12 3v3M8 12h.01M16 12h.01M9 16h6" />
+  app: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
+      <rect x="6.5" y="2.5" width="11" height="19" rx="2.5" />
+      <path d="M10.5 18.5h3" />
+    </svg>
+  ),
+  devops: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 18a4.5 4.5 0 01-.6-8.96A6 6 0 0118 10.5a3.75 3.75 0 01-.5 7.5z" />
+      <path d="M9.5 14l2 2 3.5-3.5" />
+    </svg>
+  ),
+  qa: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z" />
+      <path d="M9 12l2.2 2.2L15.5 10" />
     </svg>
   ),
   content: (
@@ -36,23 +48,10 @@ const iconPaths: Record<IconKey, React.ReactElement> = {
       <path d="M12 2l2.4 5.4L20 9l-4 3.8.9 5.6L12 15.7 7.1 18.4 8 12.8 4 9l5.6-1.6L12 2z" />
     </svg>
   ),
-  analytics: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M3 17l6-6 4 4 8-8" />
-      <path d="M14 7h7v7" />
-    </svg>
-  ),
   web: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
       <rect x="3" y="4" width="18" height="14" rx="2" />
       <path d="M3 9h18M7 14h4" />
-    </svg>
-  ),
-  strategy: (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <circle cx="12" cy="12" r="9" />
-      <circle cx="12" cy="12" r="5" />
-      <circle cx="12" cy="12" r="1.5" fill="currentColor" />
     </svg>
   ),
 };

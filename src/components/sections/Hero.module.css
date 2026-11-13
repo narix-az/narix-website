@@ -284,3 +284,7 @@
     align-items: center;
   }
 }
+
+/* chips hold inline SVG icons: ink on light fills, white on violet / blue */
+.projectChip { color: var(--ink); }
+.projectChip[data-dark] { color: #fff; }

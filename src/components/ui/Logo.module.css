@@ -1,13 +1,19 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  font-family: var(--font-head);
-  font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 1;
-  color: var(--ink);
-  text-decoration: none;
+  flex-shrink: 0;
+  line-height: 0;
+  border-radius: 8px;
 }
 
-.md { font-size: 1.5rem; }
-.lg { font-size: 1.9rem; }
+.logo img {
+  display: block;
+  height: auto;
+}
+
+.md img { width: 135px; }
+.lg img { width: 162px; }
+
+@media (max-width: 480px) {
+  .md img { width: 118px; }
+}

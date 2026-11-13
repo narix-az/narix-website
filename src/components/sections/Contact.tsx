@@ -28,7 +28,7 @@ const icons: Record<string, ReactElement> = {
 
 export default function Contact() {
   const t = useT().contact;
-  const [status, setStatus] = useState<'idle' | 'sent'>('idle');
+  const [status, setStatus] = useState<'idle' | 'email' | 'whatsapp'>('idle');
 
   const channels = [
     { label: t.channels.email, value: 'hello@narix.az', href: 'mailto:hello@narix.az', icon: 'mail' },
@@ -41,18 +41,28 @@ export default function Contact() {
     },
   ];
 
-  // There is no backend yet, so hand the brief to the visitor's email client
-  // instead of pretending it was sent.
+  // There is no backend, so the brief is handed to an app the visitor already
+  // has: their email client, or WhatsApp (which needs no setup on a phone).
+  // The status line says what actually happened — an app was opened — rather
+  // than claiming the message was sent.
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const via = ((e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null)?.value === 'whatsapp' ? 'whatsapp' : 'email';
     const data = new FormData(e.currentTarget);
     const get = (k: string) => String(data.get(k) ?? '').trim();
     const company = get('company');
-    const subject = `Project brief — ${get('name')}${company ? ` (${company})` : ''}`;
-    const body = `${get('message')}\n\n—\n${get('name')}\n${get('email')}${company ? `\n${company}` : ''}`;
-    window.location.href = `mailto:hello@narix.az?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus('sent');
-    window.setTimeout(() => setStatus('idle'), 5000);
+    const signature = `${get('name')}\n${get('email')}${company ? `\n${company}` : ''}`;
+
+    if (via === 'whatsapp') {
+      const text = `${get('message')}\n\n${signature}`;
+      window.open(`https://wa.me/994515600625?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    } else {
+      const subject = `Project brief — ${get('name')}${company ? ` (${company})` : ''}`;
+      const body = `${get('message')}\n\n—\n${signature}`;
+      window.location.href = `mailto:hello@narix.az?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+    setStatus(via);
+    window.setTimeout(() => setStatus('idle'), 8000);
   };
 
   return (
@@ -100,11 +110,16 @@ export default function Contact() {
               <Field id="message" label={t.form.message} multiline required placeholder={t.form.messagePh} />
 
               <div className={styles.submitRow}>
-                <Button type="submit" variant="primary" size="lg" iconRight={<ArrowIcon />}>
-                  {status === 'sent' ? t.form.sent : t.form.submit}
+                <Button type="submit" value="email" variant="primary" size="lg" iconRight={<ArrowIcon />}>
+                  {t.form.submit}
                 </Button>
-                <span className={styles.submitNote}>{t.form.note}</span>
+                <Button type="submit" value="whatsapp" variant="ghost" size="lg" iconLeft={icons.whatsapp}>
+                  {t.form.whatsapp}
+                </Button>
               </div>
+              <p className={styles.submitNote} role="status" aria-live="polite">
+                {status === 'email' ? t.form.sent : status === 'whatsapp' ? t.form.sentWhatsapp : t.form.note}
+              </p>
             </form>
           </Reveal>
         </div>

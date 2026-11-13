@@ -3,7 +3,7 @@
 import Hero from './Hero';
 import { useT } from '@/i18n/LanguageProvider';
 
-type PageKey = 'about' | 'services' | 'contact';
+type PageKey = 'about' | 'services' | 'projects' | 'contact';
 
 export default function PageHero({ page }: { page: PageKey }) {
   const t = useT();

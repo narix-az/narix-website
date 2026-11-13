@@ -474,3 +474,47 @@
     padding: 26px 22px;
   }
 }
+
+/* ---------- Projects page: two labelled groups ---------- */
+.sectionAll {
+  padding-top: clamp(24px, 4vw, 48px);
+}
+
+.groupHead {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+.groupTitle {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.groupDesc {
+  max-width: 56ch;
+  color: var(--muted);
+}
+
+.groupGap {
+  height: clamp(56px, 8vw, 104px);
+}
+
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(28px, 4vw, 44px);
+}
+
+/* icons are inline SVG now and take the tile's text colour */
+.logo svg {
+  width: 28px;
+  height: 28px;
+}

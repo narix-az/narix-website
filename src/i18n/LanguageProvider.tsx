@@ -1,59 +1,41 @@
 'use client';
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from 'react';
+import { createContext, useContext, useMemo, type ReactNode } from 'react';
 import { dictionaries, type Dictionary } from './translations';
+import { DEFAULT_LANG, localePath } from './routes';
 import type { Lang } from './types';
 
 interface LanguageContextValue {
   lang: Lang;
-  setLang: (lang: Lang) => void;
   t: Dictionary;
+  /** Turns a site path into the right URL for the current language. */
+  href: (path: string) => string;
+  /**
+   * True on pages that exist once for all languages (the 404 page): the
+   * language switcher then links to each language's home page instead of to
+   * a translated copy of an address that does not exist.
+   */
+  standalone: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-const STORAGE_KEY = 'narix-lang';
-
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Server + first client render: always 'en' to avoid hydration mismatch.
-  const [lang, setLangState] = useState<Lang>('en');
-
-  // After mount, hydrate from localStorage.
-  useEffect(() => {
-    try {
-      const saved = window.localStorage.getItem(STORAGE_KEY);
-      if (saved === 'en' || saved === 'az') {
-        setLangState(saved);
-        document.documentElement.lang = saved;
-      }
-    } catch {
-      /* ignore */
-    }
-  }, []);
-
-  const setLang = useCallback((next: Lang) => {
-    setLangState(next);
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-      document.documentElement.lang = next;
-    } catch {
-      /* ignore */
-    }
-  }, []);
-
+// The language comes from the URL (see routes.ts), not from browser storage:
+// every page is rendered on the server in its own language, so there is no
+// flash of the wrong one and search engines see both.
+export function LanguageProvider({
+  lang,
+  standalone = false,
+  children,
+}: {
+  lang: Lang;
+  standalone?: boolean;
+  children: ReactNode;
+}) {
   const value = useMemo<LanguageContextValue>(
-    () => ({ lang, setLang, t: dictionaries[lang] }),
-    [lang, setLang]
+    () => ({ lang, t: dictionaries[lang], href: (path) => localePath(lang, path), standalone }),
+    [lang, standalone]
   );
-
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 
@@ -61,7 +43,12 @@ export function useLanguage(): LanguageContextValue {
   const ctx = useContext(LanguageContext);
   if (!ctx) {
     // Safe fallback when consumed outside the provider (e.g. tests).
-    return { lang: 'en', setLang: () => {}, t: dictionaries.en };
+    return {
+      lang: DEFAULT_LANG,
+      t: dictionaries[DEFAULT_LANG],
+      href: (path) => localePath(DEFAULT_LANG, path),
+      standalone: false,
+    };
   }
   return ctx;
 }

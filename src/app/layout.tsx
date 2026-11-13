@@ -1,11 +1,7 @@
 import type { Metadata } from 'next';
 import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import './globals.css';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
-import SmoothScroll from '@/components/shared/SmoothScroll';
-import ScrollProgress from '@/components/shared/ScrollProgress';
-import { LanguageProvider } from '@/i18n/LanguageProvider';
+import { SITE_URL } from '@/i18n/routes';
 
 // Plus Jakarta Sans covers the full Azerbaijani alphabet, including capital Ə.
 const jakarta = Plus_Jakarta_Sans({
@@ -21,98 +17,24 @@ const inter = Inter({
   display: 'swap',
 });
 
-const SITE_URL = 'https://narix.az';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  // Each page sets its own title, description and language alternates
+  // (see src/lib/seo.ts); these are the site-wide defaults.
   title: {
-    default: 'Narix — AI Systems That Run Your Business',
+    default: 'Narix — tətbiqlər, veb saytlar və AI sistemləri',
     template: '%s · Narix',
   },
   description:
-    'Narix — AI avtomatlaşdırma agentliyi. Biznesiniz üçün AI iş axınları, AI agentlər, çatbotlar, analitika və müasir veb sistemlər hazırlayırıq. Bakı, Azərbaycan.',
+    'Narix veb saytlar, mobil və veb tətbiqlər, AI avtomatlaşdırma və DevOps infrastrukturu qurur. Bakı, Azərbaycan.',
   applicationName: 'Narix',
-  generator: 'Next.js',
   referrer: 'origin-when-cross-origin',
-  keywords: [
-    // EN
-    'Narix',
-    'Narix AI',
-    'Narix Azerbaijan',
-    'AI automation agency',
-    'AI agency Azerbaijan',
-    'AI automation Baku',
-    'AI agents',
-    'AI chatbots',
-    'workflow automation',
-    'business process automation',
-    'AI analytics',
-    'web development Azerbaijan',
-    'custom software Azerbaijan',
-    'AI consulting Baku',
-    'OpenAI integration',
-    'n8n automation',
-    'Make.com automation',
-    'Zapier automation',
-    // AZ
-    'süni intellekt',
-    'AI avtomatlaşdırma',
-    'biznes avtomatlaşdırma',
-    'AI agentlər',
-    'çatbot hazırlanması',
-    'AI çatbot',
-    'veb sayt hazırlanması',
-    'veb sayt hazırlanması Bakı',
-    'süni intellekt Azərbaycan',
-    'AI həlləri Azərbaycan',
-    'avtomatlaşdırma Bakı',
-    'AI analitika',
-    'maliyyə hesablayıcı',
-    'online satış avtomatlaşdırma',
-    'Narix.az',
-  ],
   authors: [{ name: 'Narix', url: SITE_URL }],
   creator: 'Narix',
   publisher: 'Narix',
   category: 'technology',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  alternates: {
-    canonical: SITE_URL,
-    languages: {
-      en: SITE_URL,
-      az: SITE_URL,
-      'x-default': SITE_URL,
-    },
-  },
-  openGraph: {
-    type: 'website',
-    url: SITE_URL,
-    title: 'Narix — AI Systems That Run Your Business',
-    description:
-      'AI workflow automation, AI agents, analytics and modern software — built for fast-moving teams in Azerbaijan and beyond.',
-    siteName: 'Narix',
-    locale: 'en_US',
-    alternateLocale: ['az_AZ'],
-    images: [
-      {
-        url: '/opengraph-image',
-        width: 1200,
-        height: 630,
-        alt: 'Narix — AI Systems That Run Your Business',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Narix — AI Systems That Run Your Business',
-    description:
-      'AI workflow automation, AI agents, analytics and modern software — built for fast-moving teams.',
-    images: ['/opengraph-image'],
-  },
+  formatDetection: { email: false, address: false, telephone: false },
   robots: {
     index: true,
     follow: true,
@@ -124,13 +46,7 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  icons: {
-    icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-    ],
-    shortcut: '/icon.svg',
-    apple: '/icon.svg',
-  },
+  // favicon.ico, icon.png and apple-icon.png in this folder are picked up by Next.js
   verification: {
     google: 'zzQIK4SsofBP1Ihps46_HE26vWbs4KBgtTo_M9ezQAE',
   },
@@ -142,13 +58,13 @@ const jsonLd = [
     '@type': 'Organization',
     '@id': `${SITE_URL}/#organization`,
     name: 'Narix',
-    alternateName: 'Narix AI',
+    alternateName: 'Narix.az',
     url: SITE_URL,
-    logo: `${SITE_URL}/icon.svg`,
+    logo: `${SITE_URL}/brand/narix-icon-512.png`,
     email: 'hello@narix.az',
     telephone: '+994 51 560 06 25',
     description:
-      'Narix is an AI automation studio based in Baku, Azerbaijan. We design, build and operate AI workflows, agents, analytics and modern web platforms.',
+      'Narix is a product and engineering studio based in Baku, Azerbaijan. We build websites, mobile and web apps, AI automation and DevOps infrastructure.',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Baku',
@@ -176,15 +92,15 @@ const jsonLd = [
     url: SITE_URL,
     name: 'Narix',
     description:
-      'AI automation, AI agents, analytics and modern web platforms for fast-moving teams.',
-    inLanguage: ['en', 'az'],
+      'Websites, mobile and web apps, AI automation and DevOps infrastructure.',
+    inLanguage: ['az', 'en'],
     publisher: { '@id': `${SITE_URL}/#organization` },
   },
   {
     '@context': 'https://schema.org',
     '@type': 'ProfessionalService',
     '@id': `${SITE_URL}/#service`,
-    name: 'Narix — AI Automation Studio',
+    name: 'Narix',
     url: SITE_URL,
     image: `${SITE_URL}/opengraph-image`,
     priceRange: '$$',
@@ -197,11 +113,12 @@ const jsonLd = [
     },
     areaServed: ['Azerbaijan', 'Turkey', 'Europe', 'United States'],
     serviceType: [
-      'AI Workflow Automation',
-      'AI Chatbots & Agents',
-      'AI Analytics',
-      'Web & System Development',
-      'AI Strategy & Audits',
+      'Website Development',
+      'Mobile and Web App Development',
+      'AI Automation and Agents',
+      'DevOps and Cloud Infrastructure',
+      'Product Design and Branding',
+      'Software Testing and QA',
     ],
   },
 ];
@@ -212,12 +129,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${inter.variable}`} suppressHydrationWarning>
+    // Azerbaijani is the default language; the pages under /en are English.
+    // The <html> tag is shared, so its lang is corrected for /en before paint.
+    <html lang="az" className={`${jakarta.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
-        {/* Sync the document.lang attribute with the user's saved language as early as possible */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var l=localStorage.getItem('narix-lang');if(l==='az'||l==='en'){document.documentElement.lang=l;}}catch(e){}`,
+            __html: "var p=location.pathname;if(p==='/en'||p.indexOf('/en/')===0||p.indexOf('/en.')===0){document.documentElement.lang='en'}",
           }}
         />
         {/* Structured data (JSON-LD) for Google: Organization, WebSite, ProfessionalService */}
@@ -226,16 +144,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body>
-        <LanguageProvider>
-          <SmoothScroll>
-            <ScrollProgress />
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-          </SmoothScroll>
-        </LanguageProvider>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

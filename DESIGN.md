@@ -13,7 +13,8 @@ ink-black type, and saturated orange → pink → violet energy used deliberatel
    Mix bento grids, wide feature cards, a dark CTA band and coloured stat tiles.
 3. **Motion explains, never decorates.** Animate entrances, data flowing,
    progress. Everything respects `prefers-reduced-motion`.
-4. **Real proof only.** No invented avatars, ratings or logos. Show real projects.
+4. **Real proof only.** No invented avatars, ratings or logos. Show real projects, and
+   link only to the ones that are publicly reachable.
 5. **AZ first-class.** Every font must render `Ə ə Ğ ğ Ş ş I ı İ i Ç ç Ö ö Ü ü`.
 
 ## 2. Colour tokens (`src/app/globals.css`)
@@ -69,6 +70,12 @@ Vivid palette — fills, gradients, icon tiles, large display text only:
 - **Icon tiles:** 48px rounded squares filled with a vivid colour; icon in ink or white per §2.
 - **Bento grids:** 3 columns desktop, 2 tablet, 1 mobile. Featured items span 2 columns.
 - **Dark band:** exactly one per page (the CTA) — ink background with vivid blurred blobs.
+- **Logo:** the horizontal Narix Flow logo (`public/brand/narix-logo.png`) in the navbar and
+  footer, 30px / 36px high. Its blue → violet ribbon is the brand mark; it sits beside the
+  vivid palette, it does not replace it. Use `narix-logo-light.png` on dark backgrounds.
+  Never recolour, stretch or redraw it.
+- **Project icons:** inline line icons from `ProjectIcon.tsx` on an accent tile — never
+  remote images.
 
 ## 6. Motion
 
