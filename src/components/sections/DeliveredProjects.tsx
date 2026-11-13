@@ -3,47 +3,32 @@
 import { useCallback, useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { darkAccents, type DeliveredProjectMeta } from '@/data/deliveredProjects';
+import {
+  clientProjects,
+  darkAccents,
+  deliveredProjects,
+  ecosystemProjects,
+  type DeliveredProjectMeta,
+} from '@/data/deliveredProjects';
 import Reveal from '@/components/ui/Reveal';
+import Button from '@/components/ui/Button';
+import ProjectIcon from '@/components/ui/ProjectIcon';
 import { useT } from '@/i18n/LanguageProvider';
 import type { ProjectContent } from '@/i18n/types';
 import styles from './DeliveredProjects.module.css';
 
 interface DeliveredProjectsProps {
-  projects: DeliveredProjectMeta[];
-  title?: string;
-  eyebrow?: string;
-  description?: string;
+  /**
+   * `home` shows the Narix ecosystem with a link to the full list;
+   * `all` (the Projects page) shows the ecosystem and client work as two groups.
+   */
+  variant?: 'home' | 'all';
 }
 
-function ProjectLogo({
-  meta,
-  name,
-}: {
-  meta: DeliveredProjectMeta;
-  name: string;
-}) {
-  const [error, setError] = useState(false);
-  const initials = name
-    .split(' ')
-    .map((w) => w[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
-
+function ProjectLogo({ meta }: { meta: DeliveredProjectMeta }) {
   return (
     <div className={styles.logo} data-dark={darkAccents.has(meta.accent) || undefined}>
-      {!error ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={meta.logoUrl}
-          alt=""
-          className={styles.logoImg}
-          onError={() => setError(true)}
-        />
-      ) : (
-        <span>{initials}</span>
-      )}
+      <ProjectIcon name={meta.icon} />
     </div>
   );
 }
@@ -116,7 +101,7 @@ function ProjectModal({
         </button>
 
         <div className={styles.modalHead}>
-          <ProjectLogo meta={meta} name={content.name} />
+          <ProjectLogo meta={meta} />
           <div>
             <span className={styles.modalCategory}>{content.category}</span>
             <h2 id="project-modal-title" className={styles.modalTitle}>
@@ -177,106 +162,130 @@ function ProjectModal({
   );
 }
 
-export default function DeliveredProjects({
-  projects,
-  title,
-  eyebrow,
-  description,
-}: DeliveredProjectsProps) {
+export default function DeliveredProjects({ variant = 'home' }: DeliveredProjectsProps) {
   const t = useT();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const close = useCallback(() => setSelectedId(null), []);
 
   const selected = useMemo(() => {
     if (!selectedId) return null;
-    const meta = projects.find((p) => p.id === selectedId);
+    const meta = deliveredProjects.find((p) => p.id === selectedId);
     const content = t.delivered.projects[selectedId];
     if (!meta || !content) return null;
     return { meta, content };
-  }, [selectedId, projects, t.delivered.projects]);
+  }, [selectedId, t.delivered.projects]);
 
-  const readCase = t.common.readCase;
+  const grid = (projects: DeliveredProjectMeta[]) => (
+    <div className={styles.grid}>
+      {projects.map((p, i) => {
+        const content = t.delivered.projects[p.id];
+        if (!content) return null;
+        return (
+          <Reveal
+            key={p.id}
+            delay={(i % 3) * 0.08}
+            y={36}
+            className={p.featured ? styles.featured : undefined}
+          >
+            <button
+              type="button"
+              onClick={() => setSelectedId(p.id)}
+              className={styles.card}
+              style={accentVars(p)}
+            >
+              <div className={styles.cover}>
+                <span className={styles.coverBlob} aria-hidden />
+                <ProjectLogo meta={p} />
+                <div className={styles.badges}>
+                  {p.isNew && <span className={styles.badgeNew}>{t.common.newBadge}</span>}
+                  {p.link && (
+                    <span className={styles.badgeLive}>
+                      <i aria-hidden /> {t.common.live}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className={styles.body}>
+                <span className={styles.cardCategory}>{content.category}</span>
+                <h3 className={styles.cardTitle}>{content.name}</h3>
+                <p className={styles.cardDesc}>{content.shortDescription}</p>
+                {p.featured && (
+                  <ul className={styles.cardFeatures}>
+                    {content.features.slice(0, 3).map((f) => (
+                      <li key={f}>
+                        <CheckIcon />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <div className={styles.cardFooter}>
+                  <div className={styles.cardTags}>
+                    {content.tags.slice(0, 2).map((tag) => (
+                      <span key={tag} className={styles.tagPill}>
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <span className={styles.cardCta}>
+                    {t.common.readCase}
+                    <ArrowIcon />
+                  </span>
+                </div>
+              </div>
+            </button>
+          </Reveal>
+        );
+      })}
+    </div>
+  );
+
+  const groupHead = (eyebrow: string, title: string, desc: string) => (
+    <header className={styles.groupHead}>
+      <Reveal>
+        <span className="eyebrow">{eyebrow}</span>
+      </Reveal>
+      <Reveal delay={0.05}>
+        <h2 className={styles.groupTitle}>{title}</h2>
+      </Reveal>
+      <Reveal delay={0.1}>
+        <p className={styles.groupDesc}>{desc}</p>
+      </Reveal>
+    </header>
+  );
 
   return (
-    <section id="delivered-projects" className={styles.section}>
+    <section id="delivered-projects" className={`${styles.section} ${variant === 'all' ? styles.sectionAll : ''}`}>
       <div className="container">
-        <header className="sec-head">
-          <Reveal>
-            <span className="eyebrow">{eyebrow ?? t.delivered.eyebrow}</span>
-          </Reveal>
-          <Reveal delay={0.05}>
-            <h2 className="sec-title">{title ?? t.delivered.title}</h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="sec-desc">{description ?? t.delivered.desc}</p>
-          </Reveal>
-        </header>
-
-        <div className={styles.grid}>
-          {projects.map((p, i) => {
-            const content = t.delivered.projects[p.id];
-            if (!content) return null;
-            return (
-              <Reveal
-                key={p.id}
-                delay={(i % 3) * 0.08}
-                y={36}
-                className={p.featured ? styles.featured : undefined}
-              >
-                <button
-                  type="button"
-                  onClick={() => setSelectedId(p.id)}
-                  className={styles.card}
-                  style={accentVars(p)}
-                >
-                  <div className={styles.cover}>
-                    <span className={styles.coverBlob} aria-hidden />
-                    <ProjectLogo meta={p} name={content.name} />
-                    <div className={styles.badges}>
-                      {p.isNew && <span className={styles.badgeNew}>{t.common.newBadge}</span>}
-                      {p.link && (
-                        <span className={styles.badgeLive}>
-                          <i aria-hidden /> {t.common.live}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className={styles.body}>
-                    <span className={styles.cardCategory}>{content.category}</span>
-                    <h3 className={styles.cardTitle}>{content.name}</h3>
-                    <p className={styles.cardDesc}>{content.shortDescription}</p>
-
-                    {p.featured && (
-                      <ul className={styles.cardFeatures}>
-                        {content.features.slice(0, 3).map((f) => (
-                          <li key={f}>
-                            <CheckIcon />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-
-                    <div className={styles.cardFooter}>
-                      <div className={styles.cardTags}>
-                        {content.tags.slice(0, 2).map((tag) => (
-                          <span key={tag} className={styles.tagPill}>
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <span className={styles.cardCta}>
-                        {readCase}
-                        <ArrowIcon />
-                      </span>
-                    </div>
-                  </div>
-                </button>
+        {variant === 'home' ? (
+          <>
+            <header className="sec-head">
+              <Reveal>
+                <span className="eyebrow">{t.delivered.eyebrow}</span>
               </Reveal>
-            );
-          })}
-        </div>
+              <Reveal delay={0.05}>
+                <h2 className="sec-title">{t.delivered.title}</h2>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <p className="sec-desc">{t.delivered.desc}</p>
+              </Reveal>
+            </header>
+            {grid(ecosystemProjects)}
+            <Reveal className={styles.more}>
+              <Button href="/projects" variant="ghost" size="lg" iconRight={<ArrowIcon />}>
+                {t.common.allProjects}
+              </Button>
+            </Reveal>
+          </>
+        ) : (
+          <>
+            {groupHead(t.delivered.ecosystemEyebrow, t.delivered.ecosystemTitle, t.delivered.ecosystemDesc)}
+            {grid(ecosystemProjects)}
+            <div className={styles.groupGap} />
+            {groupHead(t.delivered.clientsEyebrow, t.delivered.clientsTitle, t.delivered.clientsDesc)}
+            {grid(clientProjects)}
+          </>
+        )}
       </div>
 
       {typeof document !== 'undefined' &&

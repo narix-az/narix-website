@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import HeroVisual from './HeroVisual';
 import { darkAccents, deliveredProjects } from '@/data/deliveredProjects';
+import ProjectIcon from '@/components/ui/ProjectIcon';
 import { useT } from '@/i18n/LanguageProvider';
 import styles from './Hero.module.css';
 
@@ -182,8 +183,7 @@ export default function Hero({
                     data-dark={darkAccents.has(p.accent) || undefined}
                     style={{ background: `var(--${p.accent})`, zIndex: trustProjects.length - i }}
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.logoUrl} alt="" />
+                    <ProjectIcon name={p.icon} size={20} />
                   </span>
                 ))}
               </div>

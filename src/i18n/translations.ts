@@ -16,6 +16,7 @@ export interface Dictionary {
     home: string;
     about: string;
     services: string;
+    projects: string;
     contact: string;
     cta: string;
     languageLabel: string;
@@ -29,6 +30,7 @@ export interface Dictionary {
     close: string;
     live: string;
     newBadge: string;
+    allProjects: string;
   };
   hero: {
     eyebrow: string;
@@ -67,6 +69,12 @@ export interface Dictionary {
     desc: string;
     highlights: string;
     keyNumbers: string;
+    ecosystemEyebrow: string;
+    ecosystemTitle: string;
+    ecosystemDesc: string;
+    clientsEyebrow: string;
+    clientsTitle: string;
+    clientsDesc: string;
     projects: Record<string, ProjectContent>;
   };
   services: {
@@ -128,7 +136,9 @@ export interface Dictionary {
       message: string;
       messagePh: string;
       submit: string;
+      whatsapp: string;
       sent: string;
+      sentWhatsapp: string;
       note: string;
     };
   };
@@ -145,6 +155,7 @@ export interface Dictionary {
   pages: {
     about: { eyebrow: string; title: string; desc: string };
     services: { eyebrow: string; title: string; desc: string };
+    projects: { eyebrow: string; title: string; desc: string };
     contact: { eyebrow: string; title: string; desc: string };
   };
   notFound: {
@@ -158,12 +169,13 @@ export interface Dictionary {
 const en: Dictionary = {
   meta: {
     description:
-      'Narix designs, builds and operates AI systems — workflow automation, AI agents, analytics and modern web platforms — for fast-moving teams.',
+      'Narix builds websites, mobile and web apps, AI automation and DevOps infrastructure — one team from idea to a running product.',
   },
   nav: {
     home: 'Home',
     about: 'About',
     services: 'Services',
+    projects: 'Projects',
     contact: 'Contact',
     cta: 'Book a Call',
     languageLabel: 'Language',
@@ -176,16 +188,23 @@ const en: Dictionary = {
     learnMore: 'Learn more',
     close: 'Close',
     live: 'Live',
+    allProjects: 'All projects',
     newBadge: 'New',
   },
   hero: {
-    eyebrow: 'AI Business Solutions',
-    titleStart: 'We Build',
-    titleAccent: 'AI Systems',
-    titleEnd: 'That Run Your Business',
-    desc: 'Narix designs, builds, and operates intelligent automation — workflows, AI agents, and analytics that turn manual work into compound growth.',
+    eyebrow:
+      'Product & engineering studio',
+    titleStart:
+      'We build',
+    titleAccent:
+      'apps, websites',
+    titleEnd:
+      'and AI systems',
+    desc:
+      'From the first idea to a product running in production: websites, mobile and web apps, AI automation and the DevOps infrastructure underneath them.',
     ctaPrimary: 'Get Free Consultation',
-    ctaSecondary: 'View Case Studies',
+    ctaSecondary:
+      'See our projects',
     trustStrong: '20+ teams',
     trustRest: 'automated with Narix',
     trustStars: '★★★★★ 4.9/5 satisfaction',
@@ -207,18 +226,95 @@ const en: Dictionary = {
     flowNodes: { trigger: 'Trigger', ai: 'AI', crm: 'CRM' },
   },
   partners: {
-    title: 'Powered by the best AI stack',
-    subtitle:
-      'We build on the same platforms trusted by the world’s top product teams.',
+    title: 'Built on technology you can rely on',
+    subtitle: 'The AI models, automation platforms and cloud tools we work with every day.',
   },
   delivered: {
-    eyebrow: 'Case Studies',
-    title: 'Real projects. Real impact.',
+    eyebrow: 'Projects',
+    title: 'Products we build and run.',
     desc:
-      'A selection of recent products and AI systems we’ve shipped for clients across e-commerce, fintech, hospitality and operations.',
+      'The Narix ecosystem: our own products, live and used every day. What we learn running them goes into the work we do for clients.',
     highlights: 'Highlights',
     keyNumbers: 'Key numbers',
+    ecosystemEyebrow: 'Narix ecosystem',
+    ecosystemTitle: 'Our own products',
+    ecosystemDesc: 'Products and brands we design, build and operate ourselves.',
+    clientsEyebrow: 'Client work',
+    clientsTitle: 'Built for clients',
+    clientsDesc: 'Platforms, automation and AI systems delivered for businesses.',
     projects: {
+      academy: {
+        name: 'Narix Academy',
+        category: 'Learning platform',
+        shortDescription:
+          'An interactive platform for learning manual QA and test automation through short lessons and real tasks.',
+        description:
+          'Narix Academy is our learning platform for software testing. Students move from manual QA to test automation with Playwright in short lessons, each followed by a practical task, and pick up where they left off. Teachers add students to the platform and follow their progress.',
+        features: [
+          'Courses from manual QA to Playwright automation',
+          'Short lessons with hands-on tasks',
+          'Progress saved per student',
+          'Students are enrolled by their teacher',
+        ],
+        tags: ['Education', 'QA', 'Web app'],
+      },
+      aimonitor: {
+        name: 'AI Monitor',
+        category: 'Infrastructure monitoring',
+        shortDescription:
+          'Self-hosted monitoring for servers, GPUs, containers and security, with a built-in AI assistant.',
+        description:
+          'AI Monitor shows what your infrastructure is doing in real time from a single self-hosted dashboard: servers, GPU workloads, containers and security. A built-in AI assistant helps read the metrics. It runs on your own machines, with no cloud dependency and no vendor lock-in.',
+        features: [
+          'Servers, GPU workloads and containers in one dashboard',
+          'Real-time metrics',
+          'Built-in AI assistant',
+          'Self-hosted: no cloud, no vendor lock-in',
+        ],
+        tags: ['DevOps', 'Monitoring', 'AI'],
+      },
+      narcode: {
+        name: 'nar.code',
+        category: 'QA education brand',
+        shortDescription:
+          'An education brand for software QA and test engineering.',
+        description:
+          'nar.code is our education brand for software quality assurance and test engineering. It brings together teaching material and practice for people starting or growing a career in testing.',
+        features: [
+          'Software QA and test engineering',
+          'Teaching built on real testing practice',
+          'Works together with Narix Academy',
+        ],
+        tags: ['Education', 'QA', 'Testing'],
+      },
+      danisir: {
+        name: 'danisir.ai',
+        category: 'AI & technology content',
+        shortDescription:
+          'Content about artificial intelligence and technology, in clear language.',
+        description:
+          'danisir.ai is our content brand about artificial intelligence and technology: what is new, how it works and how it can be used, explained in clear language.',
+        features: [
+          'Artificial intelligence explained simply',
+          'Technology news and how-tos',
+          'Content in Azerbaijani',
+        ],
+        tags: ['Content', 'AI', 'Media'],
+      },
+      narmelody: {
+        name: 'narmelody',
+        category: 'Personalised AI music',
+        shortDescription:
+          'Songs created with AI and personalised for a person or an occasion.',
+        description:
+          'narmelody creates personalised music with the help of AI: a song made for one person, one story or one occasion.',
+        features: [
+          'Music generated with AI',
+          'Personalised to the person and the occasion',
+          'A gift that is made once, for one listener',
+        ],
+        tags: ['Music', 'AI', 'Personalisation'],
+      },
       inji: {
         name: 'inji',
         category: 'Productivity app',
@@ -377,84 +473,79 @@ const en: Dictionary = {
   },
   services: {
     eyebrow: 'What we do',
-    titleStart: 'Every part of your business,',
-    titleAccent: 'working together.',
+    titleStart: 'Everything a digital product needs,',
+    titleAccent: 'from one team.',
     desc:
-      'We design AI systems and modern software that compress operations, accelerate growth and remove the busywork from your team.',
+      'We design it, build it, automate it and keep it running. One team for the whole path, so nothing gets lost between suppliers.',
     list: [
       {
-        title: 'AI Workflow Automation',
+        title: 'AI automation & agents',
         description:
-          'Stop doing what software should do. We design and operate end-to-end AI workflows that eliminate repetitive ops and ship results 24/7.',
-        tags: ['n8n', 'Make', 'Zapier', 'APIs'],
+          'Workflows that take repetitive work off your team, chatbots and voice agents that answer customers, and analytics that turn raw data into decisions.',
+        tags: ['n8n', 'LLM', 'RAG', 'Analytics'],
       },
       {
-        title: 'AI Chatbots & Agents',
+        title: 'Mobile & web apps',
         description:
-          'Custom GPT-class agents and chatbots — for support, sales, internal ops — fully integrated with your tools and tone of voice.',
-        tags: ['LLM', 'RAG', 'Voice', 'Slack'],
+          'Applications for iOS, Android and the browser: marketplaces, SaaS products, internal tools. Built to be fast and pleasant to use.',
+        tags: ['iOS', 'Android', 'React', 'PWA'],
       },
       {
-        title: 'AI Analytics Systems',
+        title: 'DevOps & cloud infrastructure',
         description:
-          'Turn raw data into decisions. We ship dashboards, anomaly detection and forecasting models tailored to your KPIs.',
-        tags: ['Analytics', 'Forecast', 'BI'],
+          'Servers, CI/CD, containers, monitoring and security set up properly, so releases are routine and downtime is rare.',
+        tags: ['CI/CD', 'Docker', 'Cloud', 'Monitoring'],
       },
       {
-        title: 'Web & System Development',
+        title: 'Websites & platforms',
         description:
-          'Production-grade web apps, internal tools and platforms — built on modern stacks, designed for scale and speed.',
-        tags: ['Next.js', 'TypeScript', 'Cloud'],
+          'Company sites, landing pages, online shops and multi-language platforms: quick to load, easy to find on Google and simple to manage.',
+        tags: ['Next.js', 'SEO', 'E-commerce'],
       },
       {
-        title: 'Branding & Content',
+        title: 'Product design & branding',
         description:
-          'Identity, brand systems and AI-augmented content production — from launch campaigns to evergreen marketing assets.',
-        tags: ['Brand', 'Design', 'Content'],
+          'Interfaces people understand at first glance, and the logo, colours and voice that make a product recognisable.',
+        tags: ['UX/UI', 'Brand', 'Design system'],
       },
       {
-        title: 'AI Strategy & Audits',
+        title: 'Testing & quality assurance',
         description:
-          'A clear, no-fluff roadmap for where AI can move your numbers — what to automate, what to ignore, what to build first.',
-        tags: ['Roadmap', 'Audit', 'ROI'],
+          'Manual and automated testing that finds problems before your users do: functional, API, performance and release checks.',
+        tags: ['Manual QA', 'Playwright', 'API', 'Performance'],
       },
     ],
   },
   process: {
     eyebrow: 'How it works',
-    titleStart: 'From workflow audit to',
-    titleAccent: 'live AI system',
-    titleEnd: 'in five focused steps.',
+    titleStart: 'From an idea to',
+    titleAccent: 'a product in production',
+    titleEnd: 'in five clear steps.',
     steps: [
       {
         num: '01',
-        title: 'Discovery',
-        desc:
-          'We dig into your operations to map workflows, surface bottlenecks, and identify the highest-leverage AI opportunities.',
+        title: 'Discover',
+        desc: 'We listen, look at how things work today and agree on what the product has to achieve.',
       },
       {
         num: '02',
-        title: 'Strategy',
-        desc:
-          'A clear, opinionated roadmap: what to automate first, expected ROI, the right tools, and the smallest path to value.',
+        title: 'Plan',
+        desc: 'A clear scope, timeline and price: what gets built first, with which technology, and why.',
       },
       {
         num: '03',
-        title: 'Development',
-        desc:
-          'We build production-grade AI systems and interfaces — not prototypes. Modular, observable, easy to extend.',
+        title: 'Design & build',
+        desc: 'Design and development in short cycles. You see working results every week, not at the end.',
       },
       {
         num: '04',
-        title: 'Integration',
-        desc:
-          'We plug into your stack — CRM, billing, comms, data — and roll out with hand-holding for your team.',
+        title: 'Test & launch',
+        desc: 'We test on real devices, set up the infrastructure and release without surprises.',
       },
       {
         num: '05',
-        title: 'Optimization',
-        desc:
-          'Monitoring, evaluation and continuous tuning. Your AI stack gets smarter and cheaper every month.',
+        title: 'Support & grow',
+        desc: 'Monitoring, fixes and new features after launch. The product keeps getting better.',
       },
     ],
   },
@@ -466,10 +557,10 @@ const en: Dictionary = {
   ],
   about: {
     eyebrow: 'About Narix',
-    titleStart: 'We’re a small team building the',
-    titleAccent: 'operating system for AI-native businesses.',
+    titleStart: 'A small team that builds',
+    titleAccent: 'products people actually use.',
     desc:
-      'Engineers, designers, and AI specialists who care about shipping. We bring strategy, design and serious code under one roof — and stay with you after launch.',
+      'Engineers, designers and AI specialists under one roof. We run our own products, so we know what it takes to launch one and to keep it alive afterwards.',
     pillars: [
       {
         label: 'Mission',
@@ -523,15 +614,15 @@ const en: Dictionary = {
     ],
   },
   cta: {
-    eyebrow: 'Ready when you are',
-    titleStart: 'Let AI work for you —',
-    titleAccent: 'not the other way around.',
+    eyebrow: 'When you are ready',
+    titleStart: "Let's build your next product —",
+    titleAccent: 'together.',
     desc:
-      'Tell us what you’re trying to fix, scale or replace. We’ll come back with a clear plan, a price and the people who’ll actually build it.',
-    book: 'Book a Call',
-    start: 'Start a Project',
-    metaResponse: 'Average response < 6h',
-    metaCall: 'Free 30-min strategy call',
+      'Tell us what you want to build, automate or fix. We come back with a clear plan, a price and the people who will actually do the work.',
+    book: 'Book a call',
+    start: 'Start a project',
+    metaResponse: 'Reply within 24 hours',
+    metaCall: 'Free 30-minute first call',
     metaProposal: 'No-pressure proposal',
   },
   contact: {
@@ -556,45 +647,53 @@ const en: Dictionary = {
       message: 'Project brief',
       messagePh: 'What are you trying to build, automate or fix?',
       submit: 'Send Message',
-      sent: 'Opening your email app…',
+      whatsapp: 'Send via WhatsApp',
+      sent: 'Your email app is opening with the message…',
+      sentWhatsapp: 'WhatsApp is opening with the message…',
       note: 'We typically reply in under 6 hours.',
     },
   },
   footer: {
     tagline:
-      'Narix builds AI systems and modern software that quietly run the operations of fast-moving teams.',
+      'Narix builds websites, apps, AI automation and the infrastructure that keeps them running.',
     columns: {
       services: 'Services',
       company: 'Company',
       contact: 'Contact',
     },
     serviceLinks: [
-      'AI Workflow Automation',
-      'AI Chatbots & Agents',
-      'AI Analytics',
-      'Web Development',
-      'Branding & Content',
+      'Websites & platforms',
+      'Mobile & web apps',
+      'AI automation & agents',
+      'DevOps & cloud',
+      'Testing & QA',
     ],
     rights: 'All rights reserved.',
   },
   pages: {
     about: {
-      eyebrow: 'About us',
-      title: 'Builders for the AI-native era.',
+      eyebrow: 'About',
+      title: 'Builders who run their own products.',
       desc:
-        'A small senior team of engineers, designers and AI nerds. We design, build and operate AI systems for fast-moving teams — and we own the work end-to-end.',
+        'A small, experienced team of engineers, designers and AI specialists in Baku. We design, build and operate digital products, our own and our clients’.',
     },
     services: {
       eyebrow: 'Services',
-      title: 'What we design, build and operate.',
+      title: 'What we design, build and keep running.',
       desc:
-        "From end-to-end automation to AI agents, analytics and modern web apps — we cover the whole stack so you don't have to wrangle five vendors.",
+        'Websites, apps, AI automation, infrastructure, design and testing. The whole path of a digital product, covered by one team.',
+    },
+    projects: {
+      eyebrow: 'Projects',
+      title: 'The Narix ecosystem and client work.',
+      desc:
+        'Our own products, live and used every day, and the platforms and automation we have built for clients.',
     },
     contact: {
       eyebrow: 'Contact',
-      title: 'Let’s talk about what to automate first.',
+      title: "Let's talk about what you want to build.",
       desc:
-        'Email, WhatsApp or the form below — pick whichever is easiest. We respond within 24 hours with concrete next steps.',
+        'Email, WhatsApp or the form below, whichever suits you. We reply within 24 hours with concrete next steps.',
     },
   },
   notFound: {
@@ -609,12 +708,13 @@ const en: Dictionary = {
 const az: Dictionary = {
   meta: {
     description:
-      'Narix sürətli komandalar üçün AI sistemləri qurur və idarə edir — iş axınlarının avtomatlaşdırılması, AI agentlər, analitika və müasir veb platformalar.',
+      'Narix veb saytlar, mobil və veb tətbiqlər, AI avtomatlaşdırma və DevOps infrastrukturu qurur — ideyadan işlək məhsula qədər bir komanda.',
   },
   nav: {
     home: 'Ana səhifə',
     about: 'Haqqımızda',
     services: 'Xidmətlər',
+    projects: 'Layihələr',
     contact: 'Əlaqə',
     cta: 'Görüş təyin et',
     languageLabel: 'Dil',
@@ -627,17 +727,23 @@ const az: Dictionary = {
     learnMore: 'Daha çox',
     close: 'Bağla',
     live: 'Canlı',
+    allProjects: 'Bütün layihələr',
     newBadge: 'Yeni',
   },
   hero: {
-    eyebrow: 'AI biznes həlləri',
-    titleStart: 'Biznesinizi idarə edən',
-    titleAccent: 'AI sistemləri',
-    titleEnd: 'qururuq',
+    eyebrow:
+      'Məhsul və mühəndislik studiyası',
+    titleStart:
+      'Sizin üçün',
+    titleAccent:
+      'tətbiqlər, saytlar',
+    titleEnd:
+      'və AI sistemləri qururuq',
     desc:
-      'Narix iş axınlarınızı avtomatlaşdıran AI agentlər, analitika sistemləri və müasir proqram həlləri ilə əl işini davamlı böyüməyə çevirir.',
+      'İlk ideyadan canlı işləyən məhsula qədər: veb saytlar, mobil və veb tətbiqlər, AI avtomatlaşdırma və bunların altındakı DevOps infrastrukturu.',
     ctaPrimary: 'Pulsuz konsultasiya',
-    ctaSecondary: 'Layihələrə bax',
+    ctaSecondary:
+      'Layihələrə bax',
     trustStrong: '20+ komanda',
     trustRest: 'Narix ilə avtomatlaşdırıldı',
     trustStars: '★★★★★ 4.9 / 5 məmnuniyyət',
@@ -660,18 +766,95 @@ const az: Dictionary = {
     flowNodes: { trigger: 'Tetik', ai: 'AI', crm: 'CRM' },
   },
   partners: {
-    title: 'Ən güclü AI platformaları üzərində',
-    subtitle:
-      'Dünyanın aparıcı məhsul komandalarının istifadə etdiyi platformalar üzərində qururuq.',
+    title: 'Etibarlı texnologiyalar üzərində qururuq',
+    subtitle: 'Hər gün işlətdiyimiz AI modelləri, avtomatlaşdırma platformaları və bulud alətləri.',
   },
   delivered: {
     eyebrow: 'Layihələr',
-    title: 'Real layihələr. Real nəticələr.',
+    title: 'Qurduğumuz və idarə etdiyimiz məhsullar.',
     desc:
-      'E-ticarət, fintex, qonaqpərvərlik və əməliyyat sahələrində müştərilər üçün təhvil verdiyimiz seçilmiş məhsul və AI sistemləri.',
+      'Narix ekosistemi: öz məhsullarımız, canlıdır və hər gün istifadə olunur. Onları idarə edərkən öyrəndiklərimizi müştəri layihələrinə gətiririk.',
     highlights: 'Əsas xüsusiyyətlər',
     keyNumbers: 'Əsas rəqəmlər',
+    ecosystemEyebrow: 'Narix ekosistemi',
+    ecosystemTitle: 'Öz məhsullarımız',
+    ecosystemDesc: 'Özümüz dizayn etdiyimiz, qurduğumuz və idarə etdiyimiz məhsul və brendlər.',
+    clientsEyebrow: 'Müştəri layihələri',
+    clientsTitle: 'Müştərilər üçün qurduqlarımız',
+    clientsDesc: 'Bizneslər üçün təhvil verdiyimiz platformalar, avtomatlaşdırma və AI sistemləri.',
     projects: {
+      academy: {
+        name: 'Narix Academy',
+        category: 'Tədris platforması',
+        shortDescription:
+          'Manual QA və test avtomatlaşdırmasını qısa dərslər və real tapşırıqlarla öyrədən interaktiv platforma.',
+        description:
+          'Narix Academy proqram təminatının testi üzrə tədris platformamızdır. Tələbələr manual QA-dan Playwright ilə avtomatlaşdırmaya qədər qısa dərslərlə irəliləyir, hər dərsdən sonra praktiki tapşırıq yerinə yetirir və qaldığı yerdən davam edir. Tələbələri platformaya müəllim əlavə edir və irəliləyişi izləyir.',
+        features: [
+          'Manual QA-dan Playwright avtomatlaşdırmasına qədər kurslar',
+          'Qısa dərslər və praktiki tapşırıqlar',
+          'Hər tələbənin irəliləyişi yadda qalır',
+          'Tələbələri platformaya müəllim əlavə edir',
+        ],
+        tags: ['Təhsil', 'QA', 'Veb tətbiq'],
+      },
+      aimonitor: {
+        name: 'AI Monitor',
+        category: 'İnfrastruktur monitorinqi',
+        shortDescription:
+          'Serverlər, GPU, konteynerlər və təhlükəsizlik üçün öz serverinizdə işləyən monitorinq, daxili AI köməkçi ilə.',
+        description:
+          'AI Monitor infrastrukturunuzun nə etdiyini real vaxtda, öz serverinizdə işləyən tək paneldən göstərir: serverlər, GPU yükləri, konteynerlər və təhlükəsizlik. Daxili AI köməkçi göstəriciləri oxumağa kömək edir. Öz maşınlarınızda işləyir: buluddan asılılıq və təchizatçıya bağlılıq yoxdur.',
+        features: [
+          'Serverlər, GPU yükləri və konteynerlər bir paneldə',
+          'Real vaxt göstəriciləri',
+          'Daxili AI köməkçi',
+          'Öz serverinizdə: buludsuz, təchizatçıya bağlılıq olmadan',
+        ],
+        tags: ['DevOps', 'Monitorinq', 'AI'],
+      },
+      narcode: {
+        name: 'nar.code',
+        category: 'QA təhsil brendi',
+        shortDescription:
+          'Software QA və test mühəndisliyi üzrə təhsil brendi.',
+        description:
+          'nar.code proqram təminatının keyfiyyət təminatı və test mühəndisliyi üzrə təhsil brendimizdir. Test sahəsində karyeraya başlayan və ya onu inkişaf etdirən insanlar üçün tədris materialını və praktikanı bir araya gətirir.',
+        features: [
+          'Software QA və test mühəndisliyi',
+          'Real test təcrübəsinə əsaslanan tədris',
+          'Narix Academy ilə birlikdə işləyir',
+        ],
+        tags: ['Təhsil', 'QA', 'Test'],
+      },
+      danisir: {
+        name: 'danisir.ai',
+        category: 'AI və texnologiya məzmunu',
+        shortDescription:
+          'Süni intellekt və texnologiya haqqında aydın dildə məzmun.',
+        description:
+          'danisir.ai süni intellekt və texnologiya haqqında məzmun brendimizdir: nə yenilik var, necə işləyir və necə istifadə etmək olar, aydın dildə izah olunur.',
+        features: [
+          'Süni intellekt sadə dildə',
+          'Texnologiya xəbərləri və bələdçilər',
+          'Azərbaycan dilində məzmun',
+        ],
+        tags: ['Məzmun', 'AI', 'Media'],
+      },
+      narmelody: {
+        name: 'narmelody',
+        category: 'Fərdiləşdirilmiş AI musiqi',
+        shortDescription:
+          'AI vasitəsilə yaradılan, insana və ya hadisəyə görə fərdiləşdirilmiş mahnılar.',
+        description:
+          'narmelody süni intellektin köməyi ilə fərdiləşdirilmiş musiqi yaradır: bir insan, bir hekayə və ya bir hadisə üçün hazırlanmış mahnı.',
+        features: [
+          'AI ilə yaradılan musiqi',
+          'İnsana və hadisəyə görə fərdiləşdirmə',
+          'Bir dəfə, bir dinləyici üçün hazırlanan hədiyyə',
+        ],
+        tags: ['Musiqi', 'AI', 'Fərdiləşdirmə'],
+      },
       inji: {
         name: 'inji',
         category: 'Məhsuldarlıq tətbiqi',
@@ -830,84 +1013,79 @@ const az: Dictionary = {
   },
   services: {
     eyebrow: 'Nə edirik',
-    titleStart: 'Biznesinizin hər hissəsi',
-    titleAccent: 'birgə işləyir.',
+    titleStart: 'Rəqəmsal məhsula lazım olan hər şey,',
+    titleAccent: 'bir komandadan.',
     desc:
-      'Əməliyyatları sıxlaşdıran, böyüməni sürətləndirən və komandanızı təkrar işdən azad edən AI sistemləri və müasir proqramlar dizayn edirik.',
+      'Dizayn edirik, qururuq, avtomatlaşdırırıq və işlək vəziyyətdə saxlayırıq. Bütün yol üçün bir komanda, təchizatçılar arasında heç nə itmir.',
     list: [
       {
-        title: 'AI iş axını avtomatlaşdırması',
+        title: 'AI avtomatlaşdırma və agentlər',
         description:
-          'Proqramın etməli olduğu işləri etməyi dayandırın. Təkrarlanan əməliyyatları aradan qaldıran və 24/7 nəticə verən AI iş axınları qururuq.',
-        tags: ['n8n', 'Make', 'Zapier', 'API'],
+          'Komandanızı təkrarlanan işdən azad edən iş axınları, müştərilərə cavab verən çatbot və səs agentləri, xam məlumatı qərara çevirən analitika.',
+        tags: ['n8n', 'LLM', 'RAG', 'Analitika'],
       },
       {
-        title: 'AI çatbotlar və agentlər',
+        title: 'Mobil və veb tətbiqlər',
         description:
-          'Dəstək, satış və daxili əməliyyatlar üçün GPT səviyyəli xüsusi agentlər və çatbotlar — sizin alət və ton-stilinizə tam inteqrasiya olunmuş.',
-        tags: ['LLM', 'RAG', 'Səs', 'Slack'],
+          'iOS, Android və brauzer üçün tətbiqlər: marketplace, SaaS məhsulları, daxili alətlər. Sürətli və istifadəsi rahat.',
+        tags: ['iOS', 'Android', 'React', 'PWA'],
       },
       {
-        title: 'AI analitika sistemləri',
+        title: 'DevOps və bulud infrastrukturu',
         description:
-          'Xam verini qərara çevirin. KPI-larınıza uyğun panellər, anomaliya aşkarlama və proqnoz modelləri qururuq.',
-        tags: ['Analitika', 'Proqnoz', 'BI'],
+          'Serverlər, CI/CD, konteynerlər, monitorinq və təhlükəsizlik düzgün qurulur: buraxılışlar adi işə çevrilir, dayanmalar nadir olur.',
+        tags: ['CI/CD', 'Docker', 'Bulud', 'Monitorinq'],
       },
       {
-        title: 'Veb və sistem inkişafı',
+        title: 'Veb saytlar və platformalar',
         description:
-          'Modern stek üzərində qurulmuş istehsalat səviyyəli veb tətbiqlər, daxili alətlər və platformalar — miqyas və sürət üçün dizayn edilib.',
-        tags: ['Next.js', 'TypeScript', 'Bulud'],
+          'Korporativ saytlar, landing səhifələr, onlayn mağazalar və çoxdilli platformalar: tez açılır, Google-da asan tapılır, idarəsi sadədir.',
+        tags: ['Next.js', 'SEO', 'E-ticarət'],
       },
       {
-        title: 'Brendinq və kontent',
+        title: 'Məhsul dizaynı və brendinq',
         description:
-          'Kimlik, brend sistemləri və AI dəstəkli kontent istehsalı — startdan davamlı marketinq aktivlərinə qədər.',
-        tags: ['Brend', 'Dizayn', 'Kontent'],
+          'İlk baxışda başa düşülən interfeyslər və məhsulu tanınan edən loqo, rəng və üslub.',
+        tags: ['UX/UI', 'Brend', 'Dizayn sistemi'],
       },
       {
-        title: 'AI strategiya və auditlər',
+        title: 'Test və keyfiyyət təminatı',
         description:
-          'AI-ın rəqəmlərinizi hara hərəkət etdirə biləcəyi haqqında aydın yol xəritəsi — nəyi avtomatlaşdırmaq, nəyi atlamaq, ilk olaraq nə qurmaq.',
-        tags: ['Strategiya', 'Audit', 'ROI'],
+          'Problemləri istifadəçilərinizdən əvvəl tapan manual və avtomatlaşdırılmış test: funksional, API, performans və buraxılış yoxlamaları.',
+        tags: ['Manual QA', 'Playwright', 'API', 'Performans'],
       },
     ],
   },
   process: {
     eyebrow: 'Necə işləyir',
-    titleStart: 'İş axını auditindən',
-    titleAccent: 'aktiv AI sistemə',
-    titleEnd: 'qədər beş fokuslu addım.',
+    titleStart: 'İdeyadan',
+    titleAccent: 'canlı işləyən məhsula',
+    titleEnd: 'qədər beş aydın addım.',
     steps: [
       {
         num: '01',
         title: 'Kəşf',
-        desc:
-          'İş axınlarınızı, darboğazları və ən təsirli AI imkanlarını üzə çıxarmaq üçün əməliyyatlarınızı dərindən araşdırırıq.',
+        desc: 'Dinləyirik, işlərin bu gün necə getdiyinə baxırıq və məhsulun nəyə nail olmalı olduğunu razılaşdırırıq.',
       },
       {
         num: '02',
-        title: 'Strategiya',
-        desc:
-          'Aydın və konkret yol xəritəsi: nəyi əvvəl avtomatlaşdırmaq, gözlənilən ROI, doğru alətlər və dəyərə ən qısa yol.',
+        title: 'Plan',
+        desc: 'Aydın həcm, müddət və qiymət: əvvəl nə qurulur, hansı texnologiya ilə və niyə.',
       },
       {
         num: '03',
-        title: 'İnkişaf',
-        desc:
-          'Prototip yox, istehsalat səviyyəli AI sistemləri və interfeyslər qururuq. Modulyar, izlənilə bilən və genişlənməsi asan.',
+        title: 'Dizayn və inkişaf',
+        desc: 'Dizayn və proqramlaşdırma qısa dövrlərlə gedir. İşlək nəticəni sonda yox, hər həftə görürsünüz.',
       },
       {
         num: '04',
-        title: 'İnteqrasiya',
-        desc:
-          'Stekiniz ilə birləşirik — CRM, faktura, ünsiyyət, veri — və komandanıza dəstək olaraq başlatırıq.',
+        title: 'Test və buraxılış',
+        desc: 'Real cihazlarda test edirik, infrastrukturu qururuq və sürprizsiz buraxırıq.',
       },
       {
         num: '05',
-        title: 'Optimallaşdırma',
-        desc:
-          'Monitorinq, qiymətləndirmə və davamlı tənzimləmə. AI stekiniz hər ay daha ağıllı və daha sərfəli olur.',
+        title: 'Dəstək və inkişaf',
+        desc: 'Buraxılışdan sonra monitorinq, düzəlişlər və yeni funksiyalar. Məhsul yaxşılaşmağa davam edir.',
       },
     ],
   },
@@ -919,10 +1097,10 @@ const az: Dictionary = {
   ],
   about: {
     eyebrow: 'Narix haqqında',
-    titleStart: 'Biz – AI mərkəzli bizneslər üçün',
-    titleAccent: 'əməliyyat sistemini quran kiçik komandayıq.',
+    titleStart: 'İnsanların həqiqətən istifadə etdiyi',
+    titleAccent: 'məhsullar quran kiçik komandayıq.',
     desc:
-      'Mühəndislər, dizaynerlər və AI mütəxəssisləri – təhvil verməyə əhəmiyyət verən bir komanda. Strategiya, dizayn və ciddi kodu bir damı altında birləşdiririk — və start sonrası da yanınızdayıq.',
+      'Mühəndislər, dizaynerlər və AI mütəxəssisləri bir dam altında. Öz məhsullarımızı idarə edirik, ona görə bir məhsulu buraxmağın və sonra yaşatmağın nə tələb etdiyini bilirik.',
     pillars: [
       {
         label: 'Missiya',
@@ -977,14 +1155,14 @@ const az: Dictionary = {
   },
   cta: {
     eyebrow: 'Hazır olduqda',
-    titleStart: 'Qoy AI sizin üçün işləsin —',
-    titleAccent: 'tərsi yox.',
+    titleStart: 'Növbəti məhsulunuzu',
+    titleAccent: 'birlikdə quraq.',
     desc:
-      'Düzəltmək, miqyasını artırmaq və ya əvəz etmək istədiyiniz şeyi bizə deyin. Aydın plan, qiymət və layihəni real quracaq adamlarla qayıdırıq.',
+      'Nə qurmaq, avtomatlaşdırmaq və ya düzəltmək istədiyinizi yazın. Aydın plan, qiymət və işi həqiqətən görəcək insanlarla qayıdırıq.',
     book: 'Görüş təyin et',
     start: 'Layihəyə başla',
-    metaResponse: 'Orta cavab vaxtı < 6 saat',
-    metaCall: '30 dəq pulsuz strategiya zəngi',
+    metaResponse: '24 saat ərzində cavab',
+    metaCall: '30 dəqiqəlik pulsuz ilk görüş',
     metaProposal: 'Təzyiqsiz təklif',
   },
   contact: {
@@ -1009,45 +1187,53 @@ const az: Dictionary = {
       message: 'Layihə xülasəsi',
       messagePh: 'Nə qurmaq, avtomatlaşdırmaq və ya düzəltmək istəyirsiniz?',
       submit: 'Mesajı göndər',
-      sent: 'E-poçt tətbiqiniz açılır…',
+      whatsapp: 'WhatsApp ilə göndər',
+      sent: 'E-poçt tətbiqiniz mesajla birlikdə açılır…',
+      sentWhatsapp: 'WhatsApp mesajla birlikdə açılır…',
       note: 'Adətən 6 saatdan az müddətdə cavab veririk.',
     },
   },
   footer: {
     tagline:
-      'Narix sürətli komandaların əməliyyatlarını sakit şəkildə idarə edən AI sistemləri və müasir proqramlar qurur.',
+      'Narix veb saytlar, tətbiqlər, AI avtomatlaşdırma və onları işlək saxlayan infrastruktur qurur.',
     columns: {
       services: 'Xidmətlər',
       company: 'Şirkət',
       contact: 'Əlaqə',
     },
     serviceLinks: [
-      'AI iş axını avtomatlaşdırması',
-      'AI çatbotlar və agentlər',
-      'AI analitika',
-      'Veb inkişaf',
-      'Brendinq və kontent',
+      'Veb saytlar və platformalar',
+      'Mobil və veb tətbiqlər',
+      'AI avtomatlaşdırma və agentlər',
+      'DevOps və bulud',
+      'Test və QA',
     ],
     rights: 'Bütün hüquqlar qorunur.',
   },
   pages: {
     about: {
       eyebrow: 'Haqqımızda',
-      title: 'AI mərkəzli dövr üçün qurucular.',
+      title: 'Öz məhsullarını idarə edən qurucular.',
       desc:
-        'Mühəndislər, dizaynerlər və AI həvəskarlarından ibarət kiçik təcrübəli komanda. Sürətli komandalar üçün AI sistemləri dizayn edir, qurur və idarə edirik — işin sahibliyini sona qədər daşıyırıq.',
+        'Bakıda mühəndis, dizayner və AI mütəxəssislərindən ibarət kiçik, təcrübəli komanda. Rəqəmsal məhsulları dizayn edir, qurur və idarə edirik: həm özümüzünküləri, həm müştərilərimizinkiləri.',
     },
     services: {
       eyebrow: 'Xidmətlər',
-      title: 'Dizayn etdiyimiz, qurduğumuz və idarə etdiyimiz işlər.',
+      title: 'Dizayn etdiyimiz, qurduğumuz və işlək saxladığımız işlər.',
       desc:
-        'Tam əməliyyat avtomatlaşdırmasından AI agentlərə, analitikaya və müasir veb tətbiqlərə qədər — beş ayrı təchizatçı ilə işləməyəsiniz deyə bütün steki əhatə edirik.',
+        'Veb saytlar, tətbiqlər, AI avtomatlaşdırma, infrastruktur, dizayn və test. Rəqəmsal məhsulun bütün yolu bir komandada.',
+    },
+    projects: {
+      eyebrow: 'Layihələr',
+      title: 'Narix ekosistemi və müştəri layihələri.',
+      desc:
+        'Canlı olan və hər gün istifadə edilən öz məhsullarımız, həmçinin müştərilər üçün qurduğumuz platformalar və avtomatlaşdırma.',
     },
     contact: {
       eyebrow: 'Əlaqə',
-      title: 'Birinci nəyi avtomatlaşdırmaq haqqında danışaq.',
+      title: 'Nə qurmaq istədiyiniz haqqında danışaq.',
       desc:
-        'E-poçt, WhatsApp və ya aşağıdakı forma — sizə daha rahat olanı seçin. 24 saat ərzində konkret addımlarla cavab veririk.',
+        'E-poçt, WhatsApp və ya aşağıdakı forma: sizə rahat olanı seçin. 24 saat ərzində konkret addımlarla cavab veririk.',
     },
   },
   notFound: {

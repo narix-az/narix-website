@@ -2,17 +2,18 @@
 
 import Link from 'next/link';
 import Logo from '@/components/ui/Logo';
-import { useT } from '@/i18n/LanguageProvider';
+import { useLanguage } from '@/i18n/LanguageProvider';
 import styles from './Footer.module.css';
 
 export default function Footer() {
-  const t = useT();
+  const { t, href } = useLanguage();
   const year = new Date().getFullYear();
 
   const companyLinks = [
-    { href: '/about', label: t.nav.about },
-    { href: '/services', label: t.nav.services },
-    { href: '/contact', label: t.nav.contact },
+    { href: href('/about'), label: t.nav.about },
+    { href: href('/services'), label: t.nav.services },
+    { href: href('/projects'), label: t.nav.projects },
+    { href: href('/contact'), label: t.nav.contact },
   ];
 
   const contactLinks = [
@@ -42,7 +43,7 @@ export default function Footer() {
             <ul>
               {t.footer.serviceLinks.map((label) => (
                 <li key={label}>
-                  <Link href="/services">{label}</Link>
+                  <Link href={href('/services')}>{label}</Link>
                 </li>
               ))}
             </ul>

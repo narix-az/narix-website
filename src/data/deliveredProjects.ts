@@ -4,9 +4,30 @@
 
 export type Accent = 'orange' | 'pink' | 'violet' | 'blue' | 'lime' | 'yellow';
 
+/** Icons are drawn in `src/components/ui/ProjectIcon.tsx` — no external requests. */
+export type ProjectIconKey =
+  | 'check'
+  | 'cabin'
+  | 'document'
+  | 'graduation'
+  | 'pulse'
+  | 'code'
+  | 'spark'
+  | 'music'
+  | 'car'
+  | 'calculator'
+  | 'headset'
+  | 'bowl'
+  | 'cutlery'
+  | 'calendar'
+  | 'chart';
+
 export interface DeliveredProjectMeta {
   id: string;
-  logoUrl: string;
+  icon: ProjectIconKey;
+  /** `ecosystem` = Narix's own products and brands; `client` = work delivered for clients. */
+  group: 'ecosystem' | 'client';
+  /** Only for projects that are publicly reachable. */
   link?: string;
   accent: Accent;
   /** Spans two columns in the bento grid. */
@@ -19,66 +40,28 @@ export interface DeliveredProjectMeta {
 export const darkAccents: ReadonlySet<Accent> = new Set(['violet', 'blue']);
 
 export const deliveredProjects: DeliveredProjectMeta[] = [
-  {
-    id: 'inji',
-    logoUrl: 'https://api.iconify.design/mdi/checkbox-multiple-marked-circle-outline.svg',
-    link: 'https://inji.narix.az/',
-    accent: 'lime',
-    featured: true,
-    isNew: true,
-  },
-  {
-    id: 'chamanly',
-    logoUrl: 'https://api.iconify.design/mdi/home-group.svg',
-    link: 'https://chamanly.az/',
-    accent: 'orange',
-  },
-  {
-    id: 'bircv',
-    logoUrl: 'https://api.iconify.design/mdi/file-account-outline.svg',
-    link: 'https://bircv.az/',
-    accent: 'violet',
-  },
-  {
-    id: 'fintechauto',
-    logoUrl: 'https://api.iconify.design/mdi/car-electric.svg',
-    link: 'https://fintechauto.az/',
-    accent: 'blue',
-  },
-  {
-    id: 'maliyye',
-    logoUrl: 'https://api.iconify.design/mdi/calculator-variant.svg',
-    link: 'https://faizhesabla.az/',
-    accent: 'yellow',
-  },
-  {
-    id: 'ai-call-center',
-    logoUrl: 'https://api.iconify.design/mdi/headset.svg',
-    accent: 'pink',
-    featured: true,
-  },
-  {
-    id: 'go-sushi',
-    logoUrl: 'https://api.iconify.design/mdi/bowl-mix.svg',
-    link: 'https://go-sushi.pages.dev/',
-    accent: 'orange',
-  },
-  {
-    id: 'meta-sushi',
-    logoUrl: 'https://api.iconify.design/mdi/silverware-fork-knife.svg',
-    accent: 'lime',
-  },
-  {
-    id: 'reservation',
-    logoUrl: 'https://api.iconify.design/mdi/calendar-check.svg',
-    accent: 'violet',
-  },
-  {
-    id: 'sales-ai',
-    logoUrl: 'https://api.iconify.design/mdi/chart-line-variant.svg',
-    accent: 'yellow',
-  },
+  // ── Narix ecosystem ──
+  { id: 'chamanly', icon: 'cabin', group: 'ecosystem', link: 'https://chamanly.az/', accent: 'orange', featured: true },
+  { id: 'inji', icon: 'check', group: 'ecosystem', link: 'https://inji.narix.az/', accent: 'lime' },
+  { id: 'academy', icon: 'graduation', group: 'ecosystem', link: 'https://academy.narix.az/', accent: 'blue', isNew: true },
+  { id: 'aimonitor', icon: 'pulse', group: 'ecosystem', link: 'https://ai-monitor.app/', accent: 'violet', isNew: true },
+  { id: 'bircv', icon: 'document', group: 'ecosystem', link: 'https://bircv.az/', accent: 'pink' },
+  { id: 'narcode', icon: 'code', group: 'ecosystem', accent: 'yellow' },
+  { id: 'danisir', icon: 'spark', group: 'ecosystem', accent: 'blue' },
+  { id: 'narmelody', icon: 'music', group: 'ecosystem', accent: 'orange' },
+
+  // ── Client work ──
+  { id: 'fintechauto', icon: 'car', group: 'client', link: 'https://fintechauto.az/', accent: 'blue' },
+  { id: 'maliyye', icon: 'calculator', group: 'client', link: 'https://faizhesabla.az/', accent: 'yellow' },
+  { id: 'go-sushi', icon: 'bowl', group: 'client', link: 'https://go-sushi.pages.dev/', accent: 'orange' },
+  { id: 'ai-call-center', icon: 'headset', group: 'client', accent: 'pink', featured: true },
+  { id: 'meta-sushi', icon: 'cutlery', group: 'client', accent: 'lime' },
+  { id: 'reservation', icon: 'calendar', group: 'client', accent: 'violet' },
+  { id: 'sales-ai', icon: 'chart', group: 'client', accent: 'yellow' },
 ];
+
+export const ecosystemProjects = deliveredProjects.filter((p) => p.group === 'ecosystem');
+export const clientProjects = deliveredProjects.filter((p) => p.group === 'client');
 
 // Type preserved for component props / convenience.
 export type DeliveredProject = DeliveredProjectMeta;

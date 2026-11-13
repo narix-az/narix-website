@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRef, useState, type ReactNode, type MouseEvent } from 'react';
+import { useLanguage } from '@/i18n/LanguageProvider';
 import styles from './Button.module.css';
 
 type Variant = 'primary' | 'ghost' | 'gradient';
@@ -29,6 +30,8 @@ interface AsButtonProps extends BaseProps {
   type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
   disabled?: boolean;
+  /** Lets a form with several submit buttons tell which one was pressed. */
+  value?: string;
   external?: never;
 }
 
@@ -45,6 +48,7 @@ export default function Button(props: ButtonProps) {
     className = '',
   } = props;
 
+  const { href: localize } = useLanguage();
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement | null>(null);
   const [transform, setTransform] = useState('translate3d(0,0,0)');
 
@@ -96,7 +100,7 @@ export default function Button(props: ButtonProps) {
     return (
       <Link
         ref={ref as React.RefObject<HTMLAnchorElement>}
-        href={props.href}
+        href={localize(props.href)}
         className={cls}
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
@@ -111,6 +115,7 @@ export default function Button(props: ButtonProps) {
     <button
       ref={ref as React.RefObject<HTMLButtonElement>}
       type={buttonProps.type ?? 'button'}
+      value={buttonProps.value}
       onClick={buttonProps.onClick}
       disabled={buttonProps.disabled}
       className={cls}

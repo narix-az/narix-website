@@ -7,20 +7,23 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import LanguageSwitcher from './LanguageSwitcher';
-import { useT } from '@/i18n/LanguageProvider';
+import { useLanguage } from '@/i18n/LanguageProvider';
+import { parsePath } from '@/i18n/routes';
 import styles from './Navbar.module.css';
 
 export default function Navbar() {
   const pathname = usePathname();
-  const t = useT();
+  const { t, href } = useLanguage();
+  const current = parsePath(pathname ?? '/').path;
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { href: '/', label: t.nav.home },
-    { href: '/about', label: t.nav.about },
-    { href: '/services', label: t.nav.services },
-    { href: '/contact', label: t.nav.contact },
+    { path: '/', label: t.nav.home },
+    { path: '/services', label: t.nav.services },
+    { path: '/projects', label: t.nav.projects },
+    { path: '/about', label: t.nav.about },
+    { path: '/contact', label: t.nav.contact },
   ];
 
   useEffect(() => {
@@ -56,12 +59,13 @@ export default function Navbar() {
         <div className={styles.center}>
           <ul className={styles.navLinks}>
             {navLinks.map((link) => {
-              const active = pathname === link.href;
+              const active = current === link.path;
               return (
-                <li key={link.href}>
+                <li key={link.path}>
                   <Link
-                    href={link.href}
+                    href={href(link.path)}
                     className={`${styles.link} ${active ? styles.linkActive : ''}`}
+                    aria-current={active ? 'page' : undefined}
                   >
                     {link.label}
                     {active && (
@@ -116,7 +120,7 @@ export default function Navbar() {
             >
               {navLinks.map((link) => (
                 <motion.li
-                  key={link.href}
+                  key={link.path}
                   variants={{
                     hidden: { opacity: 0, y: 24 },
                     visible: {
@@ -126,7 +130,11 @@ export default function Navbar() {
                     },
                   }}
                 >
-                  <Link href={link.href} className={styles.mobileLink}>
+                  <Link
+                    href={href(link.path)}
+                    className={styles.mobileLink}
+                    aria-current={current === link.path ? 'page' : undefined}
+                  >
                     {link.label}
                   </Link>
                 </motion.li>
