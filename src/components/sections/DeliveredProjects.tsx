@@ -3,13 +3,7 @@
 import { useCallback, useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import {
-  clientProjects,
-  darkAccents,
-  deliveredProjects,
-  ecosystemProjects,
-  type DeliveredProjectMeta,
-} from '@/data/deliveredProjects';
+import { darkAccents, deliveredProjects, homeProjects, type DeliveredProjectMeta } from '@/data/deliveredProjects';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 import ProjectIcon from '@/components/ui/ProjectIcon';
@@ -19,8 +13,8 @@ import styles from './DeliveredProjects.module.css';
 
 interface DeliveredProjectsProps {
   /**
-   * `home` shows the Narix ecosystem with a link to the full list;
-   * `all` (the Projects page) shows the ecosystem and client work as two groups.
+   * `home` shows a selection with a link to the full list;
+   * `all` (the Projects page) shows every project under one heading.
    */
   variant?: 'home' | 'all';
 }
@@ -270,7 +264,7 @@ export default function DeliveredProjects({ variant = 'home' }: DeliveredProject
                 <p className="sec-desc">{t.delivered.desc}</p>
               </Reveal>
             </header>
-            {grid(ecosystemProjects)}
+            {grid(homeProjects)}
             <Reveal className={styles.more}>
               <Button href="/projects" variant="ghost" size="lg" iconRight={<ArrowIcon />}>
                 {t.common.allProjects}
@@ -279,11 +273,8 @@ export default function DeliveredProjects({ variant = 'home' }: DeliveredProject
           </>
         ) : (
           <>
-            {groupHead(t.delivered.ecosystemEyebrow, t.delivered.ecosystemTitle, t.delivered.ecosystemDesc)}
-            {grid(ecosystemProjects)}
-            <div className={styles.groupGap} />
-            {groupHead(t.delivered.clientsEyebrow, t.delivered.clientsTitle, t.delivered.clientsDesc)}
-            {grid(clientProjects)}
+            {groupHead(t.delivered.allEyebrow, t.delivered.allTitle, t.delivered.allDesc)}
+            {grid(deliveredProjects)}
           </>
         )}
       </div>

@@ -69,12 +69,9 @@ export interface Dictionary {
     desc: string;
     highlights: string;
     keyNumbers: string;
-    ecosystemEyebrow: string;
-    ecosystemTitle: string;
-    ecosystemDesc: string;
-    clientsEyebrow: string;
-    clientsTitle: string;
-    clientsDesc: string;
+    allEyebrow: string;
+    allTitle: string;
+    allDesc: string;
     projects: Record<string, ProjectContent>;
   };
   services: {
@@ -233,15 +230,12 @@ const en: Dictionary = {
     eyebrow: 'Projects',
     title: 'Products we build and run.',
     desc:
-      'The Narix ecosystem: our own products, live and used every day. What we learn running them goes into the work we do for clients.',
+      'Our own products and the work we have delivered for clients: live, and used every day.',
     highlights: 'Highlights',
     keyNumbers: 'Key numbers',
-    ecosystemEyebrow: 'Narix ecosystem',
-    ecosystemTitle: 'Our own products',
-    ecosystemDesc: 'Products and brands we design, build and operate ourselves.',
-    clientsEyebrow: 'Client work',
-    clientsTitle: 'Built for clients',
-    clientsDesc: 'Platforms, automation and AI systems delivered for businesses.',
+    allEyebrow: 'Projects',
+    allTitle: 'Our projects',
+    allDesc: 'Our own products and the platforms, automation and AI systems we have built for clients.',
     projects: {
       academy: {
         name: 'Narix Academy',
@@ -300,20 +294,6 @@ const en: Dictionary = {
           'Content in Azerbaijani',
         ],
         tags: ['Content', 'AI', 'Media'],
-      },
-      narmelody: {
-        name: 'narmelody',
-        category: 'Personalised AI music',
-        shortDescription:
-          'Songs created with AI and personalised for a person or an occasion.',
-        description:
-          'narmelody creates personalised music with the help of AI: a song made for one person, one story or one occasion.',
-        features: [
-          'Music generated with AI',
-          'Personalised to the person and the occasion',
-          'A gift that is made once, for one listener',
-        ],
-        tags: ['Music', 'AI', 'Personalisation'],
       },
       inji: {
         name: 'inji',
@@ -685,7 +665,7 @@ const en: Dictionary = {
     },
     projects: {
       eyebrow: 'Projects',
-      title: 'The Narix ecosystem and client work.',
+      title: 'What we have built.',
       desc:
         'Our own products, live and used every day, and the platforms and automation we have built for clients.',
     },
@@ -773,15 +753,12 @@ const az: Dictionary = {
     eyebrow: 'Layihələr',
     title: 'Qurduğumuz və idarə etdiyimiz məhsullar.',
     desc:
-      'Narix ekosistemi: öz məhsullarımız, canlıdır və hər gün istifadə olunur. Onları idarə edərkən öyrəndiklərimizi müştəri layihələrinə gətiririk.',
+      'Öz məhsullarımız və müştərilər üçün qurduqlarımız: canlıdır və hər gün istifadə olunur.',
     highlights: 'Əsas xüsusiyyətlər',
     keyNumbers: 'Əsas rəqəmlər',
-    ecosystemEyebrow: 'Narix ekosistemi',
-    ecosystemTitle: 'Öz məhsullarımız',
-    ecosystemDesc: 'Özümüz dizayn etdiyimiz, qurduğumuz və idarə etdiyimiz məhsul və brendlər.',
-    clientsEyebrow: 'Müştəri layihələri',
-    clientsTitle: 'Müştərilər üçün qurduqlarımız',
-    clientsDesc: 'Bizneslər üçün təhvil verdiyimiz platformalar, avtomatlaşdırma və AI sistemləri.',
+    allEyebrow: 'Layihələr',
+    allTitle: 'Layihələrimiz',
+    allDesc: 'Öz məhsullarımız və müştərilər üçün qurduğumuz platformalar, avtomatlaşdırma və AI sistemləri.',
     projects: {
       academy: {
         name: 'Narix Academy',
@@ -840,20 +817,6 @@ const az: Dictionary = {
           'Azərbaycan dilində məzmun',
         ],
         tags: ['Məzmun', 'AI', 'Media'],
-      },
-      narmelody: {
-        name: 'narmelody',
-        category: 'Fərdiləşdirilmiş AI musiqi',
-        shortDescription:
-          'AI vasitəsilə yaradılan, insana və ya hadisəyə görə fərdiləşdirilmiş mahnılar.',
-        description:
-          'narmelody süni intellektin köməyi ilə fərdiləşdirilmiş musiqi yaradır: bir insan, bir hekayə və ya bir hadisə üçün hazırlanmış mahnı.',
-        features: [
-          'AI ilə yaradılan musiqi',
-          'İnsana və hadisəyə görə fərdiləşdirmə',
-          'Bir dəfə, bir dinləyici üçün hazırlanan hədiyyə',
-        ],
-        tags: ['Musiqi', 'AI', 'Fərdiləşdirmə'],
       },
       inji: {
         name: 'inji',
@@ -1225,7 +1188,7 @@ const az: Dictionary = {
     },
     projects: {
       eyebrow: 'Layihələr',
-      title: 'Narix ekosistemi və müştəri layihələri.',
+      title: 'Qurduqlarımız.',
       desc:
         'Canlı olan və hər gün istifadə edilən öz məhsullarımız, həmçinin müştərilər üçün qurduğumuz platformalar və avtomatlaşdırma.',
     },

@@ -47,13 +47,6 @@ const paths: Record<ProjectIconKey, ReactElement> = {
       <path d="M19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z" />
     </>
   ),
-  music: (
-    <>
-      <path d="M9 18V6l11-2v12" />
-      <circle cx="6.5" cy="18" r="2.5" />
-      <circle cx="17.5" cy="16" r="2.5" />
-    </>
-  ),
   car: (
     <>
       <path d="M4 16v-3l2-5h12l2 5v3M3 16h18v2H3z" />

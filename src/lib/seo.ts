@@ -32,7 +32,7 @@ const COPY: Record<Lang, Record<PageKey, { title: string; description: string }>
     projects: {
       title: 'Layihələr',
       description:
-        'Narix ekosistemi və müştəri layihələri: Chamanly.az, inji, BirCV, Narix Academy, AI Monitor, nar.code, danisir.ai, narmelody və başqaları.',
+        'Layihələrimiz: Chamanly.az, inji, BirCV, Narix Academy, AI Monitor, nar.code, danisir.ai və başqaları.',
     },
     contact: {
       title: 'Əlaqə',
@@ -59,7 +59,7 @@ const COPY: Record<Lang, Record<PageKey, { title: string; description: string }>
     projects: {
       title: 'Projects',
       description:
-        'The Narix ecosystem and client work: Chamanly.az, inji, BirCV, Narix Academy, AI Monitor, nar.code, danisir.ai, narmelody and more.',
+        'Our projects: Chamanly.az, inji, BirCV, Narix Academy, AI Monitor, nar.code, danisir.ai and more.',
     },
     contact: {
       title: 'Contact',

@@ -42,11 +42,11 @@ public/brand          logo files exported from the brand kit
 
 ## Adding a project
 
-1. Add an entry to `src/data/deliveredProjects.ts` (`group: 'ecosystem'` for Narix's own products, `'client'` for client work; `link` only if it is publicly reachable).
+1. Add an entry to `src/data/deliveredProjects.ts` (`link` only if it is publicly reachable; the first eight are shown on the home page).
 2. Add its text under `delivered.projects[id]` in **both** dictionaries in `src/i18n/translations.ts`.
 3. If it needs a new icon, draw it in `src/components/ui/ProjectIcon.tsx`.
 
-The home page shows the ecosystem; `/projects` shows both groups.
+The home page shows the first eight; `/projects` shows all of them under one heading.
 
 ## Contact form
 
