@@ -22,7 +22,7 @@ const COPY: Record<Lang, Record<PageKey, { title: string; description: string }>
     about: {
       title: 'Haqqımızda',
       description:
-        'Narix — Bakıda mühəndis, dizayner və AI mütəxəssislərindən ibarət komanda. Öz məhsullarımızı qurur, eyni təcrübə ilə müştərilərimizin məhsullarını hazırlayırıq.',
+        'Narix — Bakıda mühəndis, dizayner və AI mütəxəssislərindən ibarət komanda. Rəqəmsal məhsulları dizayn edir, qurur və dəstəkləyirik: veb saytlar, tətbiqlər, AI avtomatlaşdırma və infrastruktur.',
     },
     services: {
       title: 'Xidmətlər',
@@ -49,7 +49,7 @@ const COPY: Record<Lang, Record<PageKey, { title: string; description: string }>
     about: {
       title: 'About',
       description:
-        'Narix is a team of engineers, designers and AI specialists in Baku. We build our own products and bring the same experience to the products we build for clients.',
+        'Narix is a team of engineers, designers and AI specialists in Baku. We design, build and maintain digital products: websites, apps, AI automation and infrastructure.',
     },
     services: {
       title: 'Services',

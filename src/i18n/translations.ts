@@ -228,14 +228,14 @@ const en: Dictionary = {
   },
   delivered: {
     eyebrow: 'Projects',
-    title: 'Products we build and run.',
+    title: 'Our projects.',
     desc:
-      'Our own products and the work we have delivered for clients: live, and used every day.',
+      'Platforms, apps and AI systems we have built: live, and used every day.',
     highlights: 'Highlights',
     keyNumbers: 'Key numbers',
     allEyebrow: 'Projects',
     allTitle: 'Our projects',
-    allDesc: 'Our own products and the platforms, automation and AI systems we have built for clients.',
+    allDesc: 'Platforms, apps and AI systems we have built.',
     projects: {
       academy: {
         name: 'Narix Academy',
@@ -243,7 +243,7 @@ const en: Dictionary = {
         shortDescription:
           'An interactive platform for learning manual QA and test automation through short lessons and real tasks.',
         description:
-          'Narix Academy is our learning platform for software testing. Students move from manual QA to test automation with Playwright in short lessons, each followed by a practical task, and pick up where they left off. Teachers add students to the platform and follow their progress.',
+          'Narix Academy is a learning platform for software testing. Students move from manual QA to test automation with Playwright in short lessons, each followed by a practical task, and pick up where they left off. Teachers add students to the platform and follow their progress.',
         features: [
           'Courses from manual QA to Playwright automation',
           'Short lessons with hands-on tasks',
@@ -273,11 +273,10 @@ const en: Dictionary = {
         shortDescription:
           'An education brand for software QA and test engineering.',
         description:
-          'nar.code is our education brand for software quality assurance and test engineering. It brings together teaching material and practice for people starting or growing a career in testing.',
+          'nar.code is an education brand for software quality assurance and test engineering. It brings together teaching material and practice for people starting or growing a career in testing.',
         features: [
           'Software QA and test engineering',
           'Teaching built on real testing practice',
-          'Works together with Narix Academy',
         ],
         tags: ['Education', 'QA', 'Testing'],
       },
@@ -287,7 +286,7 @@ const en: Dictionary = {
         shortDescription:
           'Content about artificial intelligence and technology, in clear language.',
         description:
-          'danisir.ai is our content brand about artificial intelligence and technology: what is new, how it works and how it can be used, explained in clear language.',
+          'danisir.ai is a content brand about artificial intelligence and technology: what is new, how it works and how it can be used, explained in clear language.',
         features: [
           'Artificial intelligence explained simply',
           'Technology news and how-tos',
@@ -540,7 +539,7 @@ const en: Dictionary = {
     titleStart: 'A small team that builds',
     titleAccent: 'products people actually use.',
     desc:
-      'Engineers, designers and AI specialists under one roof. We run our own products, so we know what it takes to launch one and to keep it alive afterwards.',
+      'Engineers, designers and AI specialists under one roof. We know what it takes to launch a product and to keep it alive afterwards.',
     pillars: [
       {
         label: 'Mission',
@@ -653,9 +652,9 @@ const en: Dictionary = {
   pages: {
     about: {
       eyebrow: 'About',
-      title: 'Builders who run their own products.',
+      title: 'A team that builds and looks after digital products.',
       desc:
-        'A small, experienced team of engineers, designers and AI specialists in Baku. We design, build and operate digital products, our own and our clients’.',
+        'A small, experienced team of engineers, designers and AI specialists in Baku. We design, build and maintain digital products.',
     },
     services: {
       eyebrow: 'Services',
@@ -667,7 +666,7 @@ const en: Dictionary = {
       eyebrow: 'Projects',
       title: 'What we have built.',
       desc:
-        'Our own products, live and used every day, and the platforms and automation we have built for clients.',
+        '',
     },
     contact: {
       eyebrow: 'Contact',
@@ -751,14 +750,14 @@ const az: Dictionary = {
   },
   delivered: {
     eyebrow: 'Layihələr',
-    title: 'Qurduğumuz və idarə etdiyimiz məhsullar.',
+    title: 'Layihələrimiz.',
     desc:
-      'Öz məhsullarımız və müştərilər üçün qurduqlarımız: canlıdır və hər gün istifadə olunur.',
+      'Qurduğumuz platformalar, tətbiqlər və AI sistemləri: canlıdır və hər gün istifadə olunur.',
     highlights: 'Əsas xüsusiyyətlər',
     keyNumbers: 'Əsas rəqəmlər',
     allEyebrow: 'Layihələr',
     allTitle: 'Layihələrimiz',
-    allDesc: 'Öz məhsullarımız və müştərilər üçün qurduğumuz platformalar, avtomatlaşdırma və AI sistemləri.',
+    allDesc: 'Qurduğumuz platformalar, tətbiqlər və AI sistemləri.',
     projects: {
       academy: {
         name: 'Narix Academy',
@@ -766,7 +765,7 @@ const az: Dictionary = {
         shortDescription:
           'Manual QA və test avtomatlaşdırmasını qısa dərslər və real tapşırıqlarla öyrədən interaktiv platforma.',
         description:
-          'Narix Academy proqram təminatının testi üzrə tədris platformamızdır. Tələbələr manual QA-dan Playwright ilə avtomatlaşdırmaya qədər qısa dərslərlə irəliləyir, hər dərsdən sonra praktiki tapşırıq yerinə yetirir və qaldığı yerdən davam edir. Tələbələri platformaya müəllim əlavə edir və irəliləyişi izləyir.',
+          'Narix Academy proqram təminatının testi üzrə tədris platformasıdır. Tələbələr manual QA-dan Playwright ilə avtomatlaşdırmaya qədər qısa dərslərlə irəliləyir, hər dərsdən sonra praktiki tapşırıq yerinə yetirir və qaldığı yerdən davam edir. Tələbələri platformaya müəllim əlavə edir və irəliləyişi izləyir.',
         features: [
           'Manual QA-dan Playwright avtomatlaşdırmasına qədər kurslar',
           'Qısa dərslər və praktiki tapşırıqlar',
@@ -796,11 +795,10 @@ const az: Dictionary = {
         shortDescription:
           'Software QA və test mühəndisliyi üzrə təhsil brendi.',
         description:
-          'nar.code proqram təminatının keyfiyyət təminatı və test mühəndisliyi üzrə təhsil brendimizdir. Test sahəsində karyeraya başlayan və ya onu inkişaf etdirən insanlar üçün tədris materialını və praktikanı bir araya gətirir.',
+          'nar.code proqram təminatının keyfiyyət təminatı və test mühəndisliyi üzrə təhsil brendidir. Test sahəsində karyeraya başlayan və ya onu inkişaf etdirən insanlar üçün tədris materialını və praktikanı bir araya gətirir.',
         features: [
           'Software QA və test mühəndisliyi',
           'Real test təcrübəsinə əsaslanan tədris',
-          'Narix Academy ilə birlikdə işləyir',
         ],
         tags: ['Təhsil', 'QA', 'Test'],
       },
@@ -810,7 +808,7 @@ const az: Dictionary = {
         shortDescription:
           'Süni intellekt və texnologiya haqqında aydın dildə məzmun.',
         description:
-          'danisir.ai süni intellekt və texnologiya haqqında məzmun brendimizdir: nə yenilik var, necə işləyir və necə istifadə etmək olar, aydın dildə izah olunur.',
+          'danisir.ai süni intellekt və texnologiya haqqında məzmun brendidir: nə yenilik var, necə işləyir və necə istifadə etmək olar, aydın dildə izah olunur.',
         features: [
           'Süni intellekt sadə dildə',
           'Texnologiya xəbərləri və bələdçilər',
@@ -1063,7 +1061,7 @@ const az: Dictionary = {
     titleStart: 'İnsanların həqiqətən istifadə etdiyi',
     titleAccent: 'məhsullar quran kiçik komandayıq.',
     desc:
-      'Mühəndislər, dizaynerlər və AI mütəxəssisləri bir dam altında. Öz məhsullarımızı idarə edirik, ona görə bir məhsulu buraxmağın və sonra yaşatmağın nə tələb etdiyini bilirik.',
+      'Mühəndislər, dizaynerlər və AI mütəxəssisləri bir dam altında. Bir məhsulu buraxmağın və sonra yaşatmağın nə tələb etdiyini bilirik.',
     pillars: [
       {
         label: 'Missiya',
@@ -1176,9 +1174,9 @@ const az: Dictionary = {
   pages: {
     about: {
       eyebrow: 'Haqqımızda',
-      title: 'Öz məhsullarını idarə edən qurucular.',
+      title: 'Rəqəmsal məhsulları quran və yaşadan komanda.',
       desc:
-        'Bakıda mühəndis, dizayner və AI mütəxəssislərindən ibarət kiçik, təcrübəli komanda. Rəqəmsal məhsulları dizayn edir, qurur və idarə edirik: həm özümüzünküləri, həm müştərilərimizinkiləri.',
+        'Bakıda mühəndis, dizayner və AI mütəxəssislərindən ibarət kiçik, təcrübəli komanda. Rəqəmsal məhsulları dizayn edir, qurur və dəstəkləyirik.',
     },
     services: {
       eyebrow: 'Xidmətlər',
@@ -1190,7 +1188,7 @@ const az: Dictionary = {
       eyebrow: 'Layihələr',
       title: 'Qurduqlarımız.',
       desc:
-        'Canlı olan və hər gün istifadə edilən öz məhsullarımız, həmçinin müştərilər üçün qurduğumuz platformalar və avtomatlaşdırma.',
+        '',
     },
     contact: {
       eyebrow: 'Əlaqə',
