@@ -503,9 +503,6 @@
   color: var(--muted);
 }
 
-.groupGap {
-  height: clamp(56px, 8vw, 104px);
-}
 
 .more {
   display: flex;
